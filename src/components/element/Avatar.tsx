@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/styles/tailwind-utils';
 import { BiometricAvatarProps } from '@/types/components';
 
 const BiometricAvatar = ({ src = '/profile.png', size = 128, className }: BiometricAvatarProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   return (
     <div className={cn("relative z-10 group", className)} style={{ width: size, height: size }}>
       
@@ -32,11 +34,25 @@ const BiometricAvatar = ({ src = '/profile.png', size = 128, className }: Biomet
         />
         
         <div className="relative w-full h-full overflow-hidden bg-background-secondary">
+          <div
+            className={cn(
+              "absolute inset-0 z-20 transition-opacity duration-500",
+              isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+            )}
+            style={{
+              background:
+                "linear-gradient(90deg, #0d0d0d 25%, #1a2e1e 50%, #0d0d0d 75%)",
+              backgroundSize: "200% 100%",
+              animation: isLoaded ? "none" : "avatar-shimmer 1.6s infinite",
+            }}
+          />
+
           <Image
             src={src}
             alt="System User Authorized"
             fill
             priority
+            onLoad={() => setIsLoaded(true)}
             className="object-cover grayscale brightness-90 contrast-125 opacity-70 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 ease-in-out"
             sizes={`${size}px`}
           />

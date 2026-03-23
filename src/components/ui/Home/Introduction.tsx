@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Button from "@/components/core/Button";
-import { Download, MessageCircle } from "lucide-react";
+import { ExternalLink, MessageCircle } from "lucide-react";
 import { routes } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import { openAsBlobInNewTab } from "@/utils/api";
@@ -34,17 +34,15 @@ const Introduction = () => {
         </h1>
 
         <p className="mt-6 text-[clamp(0.95rem,1.2vw,1.1rem)] text-text-secondary max-w-lg leading-relaxed font-normal opacity-90">
-          Hi! I am <span className="text-white font-bold hover:text-accent hover:underline cursor-pointer">Nofil Zahid</span>. A
-          passionate Software Engineer with experience in building
-          high-performance, scalable, and responsive web & mobile solutions.
+          Hi! I am <span className="text-white font-bold hover:text-accent hover:underline cursor-pointer">Nofil Zahid</span>. I design and build scalable SaaS products, focusing on performance, clean architecture, and solving real-world problems across web and mobile platforms.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Button
             onClick={handleDownloadCV}
           >
-            <Download size={16} className="group-hover:animate-bounce" />
-            <span className="relative z-10">Download CV</span>
+            <ExternalLink size={16} className="group-hover:animate-bounce" />
+            <span className="relative z-10">View CV</span>
           </Button>
           <Button
             onClick={handleContactMe}

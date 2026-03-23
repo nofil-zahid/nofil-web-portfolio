@@ -31,7 +31,7 @@ const Contact = () => {
         </p>
       </div>
 
-      <Button onClick={handleContactMe} className="shrink-0">
+      <Button onClick={handleContactMe} customClass="shrink-0">
         <Mail size={18} />
         Contact Me
       </Button>
