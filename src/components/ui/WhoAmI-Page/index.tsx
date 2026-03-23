@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Avatar from "@/components/element/Avatar";
 import SectionHeader from "@/components/shared/SectionHeader";
@@ -7,14 +8,26 @@ import { myYearsOfExperience } from "@/utils/date";
 import { SectionHeading } from "./SectionHeading";
 import { InfoCard } from "./InfoCard";
 
+const quotes = [
+  "The best systems solve real problems, not just technical ones.",
+  "Clean architecture scales. Messy code doesn’t.",
+  "Performance is not optional — it's a feature.",
+  "Good developers write code. Great developers design systems.",
+  "Simplicity is what makes systems truly powerful.",
+];
+
 export default function WhoAmI() {
+  const [quote] = useState(
+    () => quotes[Math.floor(Math.random() * quotes.length)]
+  );
+
   return (
     <section>
       <div className="grid lg:grid-cols-[1fr_auto] items-end mb-20 md:pr-30">
         <SectionHeader
           title="Who Am I?"
           tag="about-me"
-          description="I am a Full Stack developer. I specialize in building high-performance frontend ecosystems. I bridge the gap between complex backend logic and intuitive user experiences."
+          description="Full Stack Engineer specializing in scalable systems, API design, and building efficient solutions for real-world applications."
         />
 
         <motion.div
@@ -39,22 +52,16 @@ export default function WhoAmI() {
           viewport={{ once: true }}
         >
           <section>
-            <SectionHeading title="The Journey" subtitle="Background_Log" />
+            <SectionHeading title="Overview" subtitle="Profile_Summary" />
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p>
-                Started my journey in &nbsp;
-                <span className="text-white font-medium">2021</span> with a
-                curiosity for how the web works. What began as tweaking CSS for
-                fun evolved into a professional pursuit of software engineering.
+                I am a backend-focused Full Stack Engineer who delivers practical and efficient solutions for real-world applications. I take ownership of the systems I work on from development to deployment, approaching challenges with research, analysis, and hands-on implementation to build scalable and maintainable architectures.
               </p>
               <p>
-                Since then, I&apos;ve navigated through various tech stacks,
-                eventually finding my home in the
-                <span className="text-accent/80 font-mono">
-                  &nbsp;React & Next.js ecosystem
-                </span>
-                . I focus on creating products that are not just visually
-                striking, but structurally sound.
+                When a solution does not exist, I design it from the ground up by evaluating options, experimenting, and implementing the most effective approach. I focus on creating systems that are not only functional but also performant, reliable, and easy to extend.
+              </p>
+              <p>
+                Additionally, I have developed strong design skills to ensure that the user experience complements the backend logic, resulting in applications that are both powerful and intuitive.
               </p>
             </div>
           </section>
@@ -66,17 +73,15 @@ export default function WhoAmI() {
             />
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="bg-background-secondary/50 p-6 border border-white/5 rounded-xl hover:bg-accent/5 transition-colors">
-                <h4 className="text-white font-bold mb-2">Scalability First</h4>
+                <h4 className="text-white font-bold mb-2">Scalable by Design</h4>
                 <p className="text-xs text-text-secondary">
-                  Code should be built to grow. I prioritize modular
-                  architectures that dont crumble under new features.
+                  I build systems with growth in mind, focusing on clean architecture and modular design that can handle real-world complexity.
                 </p>
               </div>
               <div className="bg-background-secondary/50 p-6 border border-white/5 rounded-xl hover:bg-accent/5 transition-colors">
-                <h4 className="text-white font-bold mb-2">User Centric</h4>
+                <h4 className="text-white font-bold mb-2">Problem-Driven Development</h4>
                 <p className="text-xs text-text-secondary">
-                  Performance is a feature. If its slow or confusing, the code
-                  hasnt fulfilled its purpose.
+                  I focus on solving real problems, not just writing code but ensuring performance, usability, and long-term maintainability.
                 </p>
               </div>
             </div>
@@ -90,21 +95,17 @@ export default function WhoAmI() {
           viewport={{ once: true }}
         >
           <section className="bg-background-secondary/80 p-8 border border-white/5 rounded-2xl">
-            <SectionHeading title="System Specs" subtitle="Data_Overview" />
+            <SectionHeading title="Professional Overview" subtitle="Key Highlights" />
             <div className="grid grid-cols-2 gap-y-8 gap-x-4">
-              <InfoCard
-                label="Exp_Level"
-                value={`${myYearsOfExperience()} Years`}
-              />
-              <InfoCard label="Availability" value="Open for Work" />
+              <InfoCard label="Experience" value={`${myYearsOfExperience()} Years`} />
+              <InfoCard label="Availability" value="Open to Opportunities" />
               <InfoCard label="Location" value="Lahore, Pakistan" />
-              <InfoCard label="Current_Focus" value="Enterprise Apps" />
+              <InfoCard label="Focus Area" value="Enterprise & SaaS Applications" />
             </div>
           </section>
 
           <blockquote className="border-l-4 border-accent pl-6 py-4 italic text-white/60 font-mono text-sm leading-relaxed">
-            The most effective code is the code that eventually becomes
-            invisible, leaving only a seamless experience behind
+            {quote ?? 'loading philosophy...'}
             <footer className="mt-2 text-accent not-italic font-bold tracking-widest">
               — SYSTEM_MOTTO.txt
             </footer>
