@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { ChildrenProps } from "@/types/components";
 import Providers from "@/components/providers";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   variable: "--font-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
       >
         <Providers>
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>
