@@ -1,4 +1,3 @@
-import { GithubIcon, LinkedinIcon, TwitterIcon, MessageCircle } from "lucide-react";
 import { routes } from "./routes";
 
 export const navLinks = [
@@ -11,8 +10,8 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { name: "Github", href: "https://github.com/nofil-zahid", icon: GithubIcon },
-  { name: "Linkedin", href: "https://www.linkedin.com/in/nofil-zahid/", icon: LinkedinIcon },
-  { name: "Twitter", href: "https://x.com/nofil_zahid", icon: TwitterIcon },
-  { name: "Whatsapp", href: "https://wa.me/923092051143", icon: MessageCircle },
+  { name: "Github", href: "https://github.com/nofil-zahid" },
+  { name: "Linkedin", href: "https://www.linkedin.com/in/nofil-zahid/" },
+  { name: "Twitter", href: "https://x.com/nofil_zahid" },
+  { name: "Whatsapp", href: "https://wa.me/923092051143" },
 ];
