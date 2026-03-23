@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 import path from "path";
-import "./src/config/env";
+
+if (process.env.CI !== "true") {
+  require("./src/config/env");
+}
 
 const nextConfig: NextConfig = {
   /* config options here */
