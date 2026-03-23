@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nofil | System_Offline</title>
+    <style>
+      :root {
+        --background: #030712;
+        --foreground: #ffffff;
+        --accent: #0df259;
+        --border: rgba(13, 242, 89, 0.2);
+      }
+
+      body {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        background-color: var(--background);
+        color: var(--foreground);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent);
+        opacity: 0.1;
+        box-shadow: 0 0 15px var(--accent);
+        animation: scan 4s linear infinite;
+        z-index: 1;
+      }
+
+      @keyframes scan {
+        0% { top: -10%; }
+        100% { top: 110%; }
+      }
+
+      .container {
+        position: relative;
+        z-index: 10;
+        max-width: 500px;
+        background: rgba(13, 242, 89, 0.02);
+        border: 1px solid var(--border);
+        padding: 3.5rem 2rem;
+        backdrop-filter: blur(12px);
+        border-radius: 4px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .container::after {
+        content: "EXT_CONN_LOST";
+        position: absolute;
+        bottom: -20px;
+        right: 0;
+        font-size: 10px;
+        color: var(--accent);
+        opacity: 0.5;
+        letter-spacing: 2px;
+      }
+
+      .icon {
+        color: var(--accent);
+        margin-bottom: 2rem;
+        filter: drop-shadow(0 0 8px var(--accent));
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(0.95); }
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+        color: var(--accent);
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      button {
+        background-color: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 0.8rem 2rem;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      button:hover {
+        background-color: var(--accent);
+        color: #000;
+        box-shadow: 0 0 20px var(--accent);
+      }
+
+      .status-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #ff4b4b;
+        border-radius: 50%;
+        margin-right: 8px;
+        box-shadow: 0 0 8px #ff4b4b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg
+        class="icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="50"
+        height="50"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M1 1l22 22"></path>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+
+      <h1><span class="status-dot"></span>Link_Severed</h1>
+      <p>
+        Protocol_Error: Network_Interface_Down.<br>
+        Please verify hardware connection or local signal strength.
+      </p>
+
+      <button onclick="window.location.reload()">Re-Initialize_System</button>
+    </div>
+  </body>
+</html>
