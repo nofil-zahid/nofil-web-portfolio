@@ -16,7 +16,10 @@ const Topbar = () => {
 
   const handleHireMe = () => {
     if (pathname === routes.ui.contact) {
-      showToast({ type: 'info', text: 'Please fill the form to hire me.' });
+      showToast({
+        type: 'info',
+        text: 'You are already on the Contact page. Please contact me through the form to get in touch.',
+      });
       return;
     }
     router.push(routes.ui.contact);
