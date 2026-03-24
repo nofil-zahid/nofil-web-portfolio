@@ -8,7 +8,7 @@ export const Navbar = () => {
   const pathname = usePathname();
   return (
     <nav className="flex items-end">
-      {navLinks.map((link) => {
+      {navLinks.slice(1).map((link) => {
         const isActive = pathname === link.href;
         return (
           <Link
