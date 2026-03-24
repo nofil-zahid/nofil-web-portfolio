@@ -7,6 +7,7 @@ import SectionHeader from "@/components/shared/SectionHeader";
 import { myYearsOfExperience } from "@/utils/date";
 import { SectionHeading } from "./SectionHeading";
 import { InfoCard } from "./InfoCard";
+import { useResponsive } from "@/hooks/core/use-responsive";
 
 const quotes = [
   "The best systems solve real problems, not just technical ones.",
@@ -20,6 +21,8 @@ export default function WhoAmI() {
   const [quote] = useState(
     () => quotes[Math.floor(Math.random() * quotes.length)]
   );
+
+  const { isMobile } = useResponsive();
 
   return (
     <section>
@@ -38,7 +41,7 @@ export default function WhoAmI() {
         >
           <Avatar
             src="/profile.png"
-            size={280}
+            size={isMobile ? 240 : 260}
             className="shadow-[0_0_50px_-12px_rgba(13,242,89,0.3)]"
           />
         </motion.div>
@@ -94,9 +97,9 @@ export default function WhoAmI() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <section className="bg-background-secondary/80 p-8 border border-white/5 rounded-2xl">
+          <section className="bg-background-secondary/80 md:p-8 p-5 border border-white/5 rounded-2xl">
             <SectionHeading title="Professional Overview" subtitle="Key Highlights" />
-            <div className="grid grid-cols-2 gap-y-8 gap-x-4">
+            <div className="grid grid-cols-2 gap-y-8 gap-x-4 md:pr-0 pr-8">
               <InfoCard label="Experience" value={`${myYearsOfExperience()} Years`} />
               <InfoCard label="Availability" value="Open to Opportunities" />
               <InfoCard label="Location" value="Lahore, Pakistan" />

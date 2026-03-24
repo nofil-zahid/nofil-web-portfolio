@@ -8,20 +8,21 @@ const InputField: React.FC<InputFieldProps> = ({
   label, index, multiline = false, error, className = '', ...props
 }) => {
   const inputClasses = cn(
-    "w-full bg-transparent border-none py-3 text-lg text-gray-100",
+    "w-full bg-transparent border-none py-2 sm:py-3",
+    "text-sm sm:text-base font-mono tracking-wide text-gray-400",
     "placeholder:text-gray-500/50 focus:placeholder-accent/30",
     "focus:outline-none focus:ring-0",
     "transition-colors duration-300 terminal-cursor",
-    multiline && "resize-none min-h-[100px]"
+    multiline && "resize-none min-h-[80px] sm:min-h-[100px]"
   );
 
   return (
     <div className={cn("group relative w-full mb-10", className)}>
       <div className="flex items-center gap-2 mb-1">
-        <span className="text-xs font-mono font-bold text-accent/60 group-focus-within:text-accent">
+        <span className="text-[10px] sm:text-xs font-mono font-bold text-accent/60 group-focus-within:text-accent">
           {String(index).padStart(2, '0')}.
         </span>
-        <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 group-focus-within:text-accent">
+        <label className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 group-focus-within:text-accent">
           {label}
         </label>
       </div>

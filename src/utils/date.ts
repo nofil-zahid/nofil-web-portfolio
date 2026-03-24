@@ -10,7 +10,7 @@ export const formatDateRange = (startDate: Date, endDate: Date | null = null) =>
 };
 
 export const myYearsOfExperience = () => {
-  const startedYear = 2023;
+  const startedYear = 2024;
   const currentYear = Number(format(new Date(), "yyyy"));
   return currentYear - startedYear;
 };

@@ -42,8 +42,11 @@ export default function Sidebar() {
 
         <div
           className={`
-            text-text-secondary font-medium text-[clamp(0.8rem,1.5vw,1.25rem)] tracking-[clamp(0.15em,0.5vw,0.25em)]
+            text-text-secondary font-medium text-[clamp(0.8rem,1.5vw,1.25rem)]
+            tracking-[clamp(0.15em,0.5vw,0.25em)]
             md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap
+            transition-colors duration-200
+            active:text-accent active:scale-95 cursor-pointer
           `}
           onClick={() => router.push(routes.root)}
         >
@@ -114,22 +117,28 @@ export default function Sidebar() {
           animate="visible"
           variants={containerVariants}
         >
-          {socialLinks.map((link) => (
-            <motion.div key={link.name} variants={itemVariants}>
-              <Link
-                href={link.href}
-                target="_blank"
-                className="inline-block hover:text-accent transition-colors duration-200"
-              >
-                <motion.span
-                  whileHover={{ x: 5 }}
-                  className="flex items-center"
+          {socialLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <motion.div key={link.name} variants={itemVariants}>
+                <Link
+                  href={link.href}
+                  target="_blank"
+                  className="flex items-center gap-2 group transition-colors duration-200"
                 >
-                  {link.name}
-                </motion.span>
-              </Link>
-            </motion.div>
-          ))}
+                  <Icon
+                    className="w-4 h-4 text-text-secondary group-hover:text-accent transition-colors duration-200"
+                  />
+                  <motion.span
+                    whileHover={{ x: 5 }}
+                    className="text-text-secondary group-hover:text-accent transition-colors duration-200 font-mono"
+                  >
+                    {link.name}
+                  </motion.span>
+                </Link>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </aside>
     </motion.div>
