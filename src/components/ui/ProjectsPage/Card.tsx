@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { Folder, Code2, ExternalLink } from 'lucide-react';
+import { Code2, ExternalLink, Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Tooltip from '@/components/core/Tooltip';
 import { ProjectCardProps } from '@/types/components';
@@ -71,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           transition={{ duration: 0.2 }}
         >
           <div className="w-full h-40 bg-background-primary/20 flex items-center justify-center">
-            <Folder className="w-10 h-10 text-accent fill-accent/20 transition-all duration-300 group-hover:fill-accent/40" />
+            <Code className="w-10 h-10 text-accent fill-accent/20 transition-all duration-300 group-hover:fill-accent/40" />
           </div>
         </motion.div>
       )}

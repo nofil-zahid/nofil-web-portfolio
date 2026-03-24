@@ -8,7 +8,7 @@ import { TimelineProps } from "@/types/components";
 
 const Timeline: React.FC<TimelineProps> = ({ items }) => {
   return (
-    <section className="relative w-full max-w-[1400px] mx-auto px-[clamp(1rem,4vw,2rem)] py-[clamp(3rem,8vw,6rem)]">
+    <section className="relative w-full max-w-[1400px] mx-auto px-0 md:px-[clamp(1rem,4vw,2rem)] py-[clamp(3rem,8vw,6rem)]">
 
       <div className="absolute left-[calc(1.5rem)] md:left-1/2 top-0 bottom-0 w-[2px] bg-linear-to-b from-transparent via-accent/50 to-transparent md:-translate-x-1/2" />
 
