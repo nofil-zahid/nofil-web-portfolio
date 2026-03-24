@@ -1,9 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useResponsive } from '@/hooks/core/use-responsive';
 
 export default function NavigatorStatus() {
   const [hoveredUrl, setHoveredUrl] = useState<string | null>(null);
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
     const handleMouseOver = (e: MouseEvent) => {
@@ -26,7 +28,7 @@ export default function NavigatorStatus() {
   return (
     <div className="fixed bottom-4 right-4 z-9999 pointer-events-none">
       <AnimatePresence>
-        {hoveredUrl && (
+        {hoveredUrl && !isMobile && (
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
