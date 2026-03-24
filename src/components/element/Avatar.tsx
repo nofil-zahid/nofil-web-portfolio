@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/styles/tailwind-utils';
 import { BiometricAvatarProps } from '@/types/components';
+import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 
 const BiometricAvatar = ({ src = '/profile.png', size = 128, className }: BiometricAvatarProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const { state: isLoaded, enable } = useBooleanToggle(false);
   return (
     <div className={cn("relative z-10 group", className)} style={{ width: size, height: size }}>
       
@@ -40,8 +40,7 @@ const BiometricAvatar = ({ src = '/profile.png', size = 128, className }: Biomet
               isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
             )}
             style={{
-              background:
-                "linear-gradient(90deg, #0d0d0d 25%, #1a2e1e 50%, #0d0d0d 75%)",
+              background: "linear-gradient(90deg, #0d0d0d 25%, #1a2e1e 50%, #0d0d0d 75%)",
               backgroundSize: "200% 100%",
               animation: isLoaded ? "none" : "avatar-shimmer 1.6s infinite",
             }}
@@ -52,7 +51,7 @@ const BiometricAvatar = ({ src = '/profile.png', size = 128, className }: Biomet
             alt="System User Authorized"
             fill
             priority
-            onLoad={() => setIsLoaded(true)}
+            onLoad={() => enable()}
             className="object-cover grayscale brightness-90 contrast-125 opacity-70 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 ease-in-out"
             sizes={`${size}px`}
           />
@@ -74,7 +73,7 @@ const BiometricAvatar = ({ src = '/profile.png', size = 128, className }: Biomet
 
       </div>
 
-      <div className="absolute inset-0 bg-accent/5 blur-2xl -z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      {/* <div className="absolute inset-0 bg-accent/5 blur-2xl -z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" /> */}
     </div>
   );
 };
