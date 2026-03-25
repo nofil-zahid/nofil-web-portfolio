@@ -1,13 +1,15 @@
 'use client';
+import { useResponsive } from "@/hooks/core/use-responsive";
 import NextTopLoader from "nextjs-toploader";
 
 export default function TopLoader() {
+  const { isMobile } = useResponsive();
   return (
     <NextTopLoader
       color="#0df259"
       initialPosition={0.08}
       crawlSpeed={2000}
-      height={1}
+      height={isMobile ? 5 : 3}
       crawl={true}
       showSpinner={false}
       easing="ease-in-out"
