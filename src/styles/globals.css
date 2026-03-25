@@ -68,6 +68,28 @@ textarea:-webkit-autofill:focus {
   animation: scanline 8s linear infinite;
 }
 
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(95, 240, 126, 0.2);
+  border-radius: 10px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(95, 240, 126, 0.4);
+}
+
+.terminal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(95, 240, 126, 0.2) transparent;
+}
+
 @keyframes avatar-shimmer {
   0% {
     background-position: 200% center;
