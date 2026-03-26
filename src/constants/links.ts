@@ -15,5 +15,5 @@ export const socialLinks = [
   { name: "Github", href: "https://github.com/nofil-zahid", icon: Github },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/nofil-zahid/", icon: Linkedin },
   { name: "Twitter", href: "https://x.com/nofil_zahid", icon: Twitter },
-  { name: "Message", href: "https://wa.me/923092051143", icon: MessageCircle },
+  { name: "Whatsapp", href: "https://wa.me/923092051143", icon: MessageCircle },
 ];

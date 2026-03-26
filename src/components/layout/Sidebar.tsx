@@ -31,6 +31,7 @@ export default function Sidebar() {
           fixed z-40 flex items-center justify-between bg-background-secondary border-border-glow
           transition-all duration-300 top-0 left-0 right-0 h-[clamp(60px,8vw,70px)] px-6
           flex-row md:flex md:flex-col md:top-0 md:left-0 md:h-screen md:w-[clamp(60px,6vw,90px)] md:py-[clamp(1rem,3vh,2rem)] md:px-0
+          md:border-r
         `}
       >
         <button
@@ -100,7 +101,7 @@ export default function Sidebar() {
                       : "text-text-secondary group-hover:text-text-primary group-hover:translate-x-1"
                   )}
                 >
-                  {link.name}
+                  /{link.name}
                 </span>
 
                 {active && (

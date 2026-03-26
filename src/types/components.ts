@@ -55,6 +55,7 @@ export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElem
   index: string | number;
   multiline?: boolean;
   error?: string;
+  showCounter?: boolean;
 };
 
 export interface TimelineProps {
