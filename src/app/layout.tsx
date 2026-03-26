@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<ChildrenProps>) {
   return (
-    <html lang="en">
+    <html lang="en" className="no-scrollbar">
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
