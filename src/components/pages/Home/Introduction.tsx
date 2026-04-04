@@ -4,18 +4,29 @@ import Button from '@/components/core/Button';
 import { ExternalLink, MessageCircle } from 'lucide-react';
 import { routes } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
-import { openAsBlobInNewTab } from '@/utils/api';
+import { handleAsync, openAsBlobInNewTab } from '@/utils/api';
+import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 
 const Introduction = () => {
   const router = useRouter();
+  const { state: isCvLoading, enable: startCvLoading, disable: stopCvLoading } = useBooleanToggle();
 
   const handleContactMe = () => {
     router.push(routes.ui.contact);
   };
 
-  const handleDownloadCV = () => {
-    openAsBlobInNewTab('/cv3-nofil.pdf');
-  };
+  const handleDownloadCV = handleAsync(
+    () => {
+      startCvLoading();
+      return openAsBlobInNewTab('/cv3-nofil.pdf');
+    },
+    {
+      onError: (err) => {
+        console.error('Error opening CV:', err);
+      },
+      onFinally: stopCvLoading,
+    }
+  );
 
   return (
     <div className="flex flex-col items-start order-1">
@@ -32,14 +43,14 @@ const Introduction = () => {
         </h1>
 
         <p className="mt-6 text-[clamp(0.95rem,1.2vw,1.1rem)] text-text-secondary max-w-lg leading-relaxed font-normal opacity-90">
-          Hi! I am{' '}
+          Hi! I am&nbsp;
           <span className="text-white font-bold hover:text-accent hover:underline cursor-pointer">Nofil Zahid</span>. I
           design and build scalable SaaS products, focusing on performance, clean architecture, and solving real-world
           problems across web and mobile platforms.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Button onClick={handleDownloadCV}>
+          <Button onClick={handleDownloadCV} isLoading={isCvLoading}>
             <ExternalLink size={16} className="group-hover:animate-bounce" />
             <span className="relative z-10">View CV</span>
           </Button>

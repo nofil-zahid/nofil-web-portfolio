@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 import { ButtonProps } from '@/types/components';
 import { cn } from '@/styles/tailwind-utils';
 
@@ -32,7 +33,7 @@ const Button = ({ children, isLoading, disabled, customClass = '', ...props }: B
 
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-sm sm:text-base">loading…</span>
+          <Loader2 className="w-5 h-5 animate-spin" />
         </div>
       )}
     </button>
