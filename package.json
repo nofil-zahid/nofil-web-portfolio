@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0",
-    "format": "prettier . --write",
-    "format:check": "prettier . --check",
+    "lint": "eslint ./src --max-warnings=0",
+    "format": "prettier ./src --write",
+    "format:check": "prettier ./src --check",
     "type-check": "tsc --noEmit --incremental false"
   },
   "dependencies": {
