@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Fira_Code, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import { ChildrenProps } from '@/types/components';
 import Providers from '@/components/providers';
 
-const inter = Inter({
+const firaCode = Fira_Code({
   variable: '--font-sans',
   subsets: ['latin'],
 });
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<ChildrenProps>) {
   return (
     <html lang="en" className="no-scrollbar">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${firaCode.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
