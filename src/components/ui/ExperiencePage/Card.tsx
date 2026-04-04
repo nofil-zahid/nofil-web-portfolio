@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { MoveRight } from "lucide-react";
-import { ExperienceItem } from "@/types/model";
-import { formatDateRange } from "@/utils/date";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { MoveRight } from 'lucide-react';
+import { ExperienceItem } from '@/types/model';
+import { formatDateRange } from '@/utils/date';
 
-const ExperienceCard: React.FC<ExperienceItem> = ({
-  role,
-  company,
-  startDate,
-  endDate,
-  responsibilities,
-}) => {
+const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, endDate, responsibilities }) => {
   const dateRange = formatDateRange(startDate, endDate);
 
   return (
@@ -23,9 +17,7 @@ const ExperienceCard: React.FC<ExperienceItem> = ({
       className="w-full bg-background-secondary/80 border border-[#2a3c30] rounded-[clamp(1rem,2vw,1.5rem)] p-[clamp(1.2rem,3vw,2rem)] hover:border-[#5ff07e]/40 transition-colors"
     >
       <div className="mb-[clamp(1rem,3vw,1.5rem)]">
-        <h3 className="text-[clamp(1.1rem,3vw,1.7rem)] font-bold text-gray-100 mb-2">
-          {role}
-        </h3>
+        <h3 className="text-[clamp(1.1rem,3vw,1.7rem)] font-bold text-gray-100 mb-2">{role}</h3>
 
         <div className="flex flex-wrap items-center gap-[clamp(.5rem,2vw,1rem)]">
           <span className="px-3 py-1 rounded-md bg-accent/10 text-accent text-[clamp(.7rem,2vw,.9rem)] font-mono font-medium">
@@ -45,9 +37,7 @@ const ExperienceCard: React.FC<ExperienceItem> = ({
               <MoveRight size={16} />
             </span>
 
-            <p className="text-gray-300 leading-relaxed text-[clamp(.85rem,2.2vw,1.05rem)]">
-              {item}
-            </p>
+            <p className="text-gray-300 leading-relaxed text-[clamp(.85rem,2.2vw,1.05rem)]">{item}</p>
           </li>
         ))}
       </ul>

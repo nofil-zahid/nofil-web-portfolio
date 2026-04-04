@@ -1,7 +1,5 @@
-import ExpertisePage from "@/components/ui/SkillsPage";
+import ExpertisePage from '@/components/ui/SkillsPage';
 
 export default function Expertise() {
-  return (
-    <ExpertisePage />
-  )
+  return <ExpertisePage />;
 }

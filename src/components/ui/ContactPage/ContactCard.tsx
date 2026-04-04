@@ -1,8 +1,8 @@
-'use client'
-import { motion } from "framer-motion";
-import { Mail, MapPin, Terminal } from "lucide-react";
-import { socialLinks } from "@/constants/links";
-import { cn } from "@/styles/tailwind-utils";
+'use client';
+import { motion } from 'framer-motion';
+import { Mail, MapPin, Terminal } from 'lucide-react';
+import { socialLinks } from '@/constants/links';
+import { cn } from '@/styles/tailwind-utils';
 
 const ContactCard = () => {
   const email = 'chmnofilzahidofficial85p@gmail.com';
@@ -11,9 +11,9 @@ const ContactCard = () => {
     <div className="w-full">
       <motion.div
         className={cn(
-          "w-full bg-background-secondary/80 border border-[#2a3c30] font-sans shadow-2xl transition-all duration-300",
-          "rounded-[clamp(1.2rem,3vw,2.5rem)]",
-          "p-[clamp(1.2rem,4vw,2.5rem)]"
+          'w-full bg-background-secondary/80 border border-[#2a3c30] font-sans shadow-2xl transition-all duration-300',
+          'rounded-[clamp(1.2rem,3vw,2.5rem)]',
+          'p-[clamp(1.2rem,4vw,2.5rem)]',
         )}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -24,7 +24,6 @@ const ContactCard = () => {
         </h2>
 
         <div className="space-y-[clamp(1.2rem,4vw,2rem)]">
-          
           <div className="group/email flex items-center gap-[clamp(0.75rem,2vw,1.5rem)] min-w-0">
             <div className="shrink-0 p-[clamp(0.6rem,1.5vw,0.75rem)] rounded-xl bg-accent/5 border border-accent/10 group-hover/email:border-accent/40 transition-colors">
               <Mail className="w-[clamp(1.1rem,2vw,1.3rem)] h-[clamp(1.1rem,2vw,1.3rem)] text-accent" />
@@ -34,8 +33,8 @@ const ContactCard = () => {
               <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-gray-500 mb-0.5 truncate">
                 Direct Protocol
               </p>
-              <a 
-                href={`mailto:${email}`} 
+              <a
+                href={`mailto:${email}`}
                 className="relative text-[clamp(0.9rem,1.4vw,1.05rem)] text-gray-100 font-mono tracking-tighter flex items-center gap-1 min-w-0"
               >
                 <span className="text-accent/40 text-[9px] font-bold shrink-0 hidden sm:inline">mailto:</span>
@@ -65,20 +64,29 @@ const ContactCard = () => {
               <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-gray-500 mb-1.5">Social</p>
               <div className="flex flex-wrap gap-x-4 gap-y-2 text-[clamp(0.85rem,1.4vw,1rem)] text-gray-100">
                 {socialLinks.map((link) => (
-                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="group flex items-center font-mono transition-all">
-                    <span className="text-accent opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0 text-[0.8em]">[</span>
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center font-mono transition-all"
+                  >
+                    <span className="text-accent opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0 text-[0.8em]">
+                      [
+                    </span>
                     <span className="hover:text-accent transition-colors">{link.name}</span>
-                    <span className="text-accent opacity-0 group-hover:opacity-100 transition-all translate-x-1 group-hover:translate-x-0 text-[0.8em]">]</span>
+                    <span className="text-accent opacity-0 group-hover:opacity-100 transition-all translate-x-1 group-hover:translate-x-0 text-[0.8em]">
+                      ]
+                    </span>
                   </a>
                 ))}
               </div>
             </div>
           </div>
-
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
 export default ContactCard;

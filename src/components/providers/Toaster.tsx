@@ -18,5 +18,5 @@ export default function Toaster() {
       transition={Slide}
       toastClassName="border-border-glow shadow-2xl"
     />
-  )
+  );
 }

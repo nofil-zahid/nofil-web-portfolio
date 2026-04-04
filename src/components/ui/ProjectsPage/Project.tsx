@@ -4,4 +4,4 @@ export default function Project({ id }: { id: string }) {
       <p>Project: {id}</p>
     </div>
   );
-};
+}

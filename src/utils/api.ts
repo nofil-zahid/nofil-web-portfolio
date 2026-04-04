@@ -1,6 +1,6 @@
-import { AxiosError } from "axios";
-import { showToast } from "@/utils/toaster";
-import { ApiErrorHandlerParams, ApiResponse } from "@/types/api";
+import { AxiosError } from 'axios';
+import { showToast } from '@/utils/toaster';
+import { ApiErrorHandlerParams, ApiResponse } from '@/types/api';
 
 export const openAsBlobInNewTab = async (url: string) => {
   const response = await fetch(url, { method: 'GET', credentials: 'include' });
@@ -48,9 +48,7 @@ export const toBase64 = async (url: string) => {
   });
 };
 
-export const withApiErrorHandler = <T, A extends unknown[]>(
-  apiCall: (...args: A) => Promise<T>
-) => {
+export const withApiErrorHandler = <T, A extends unknown[]>(apiCall: (...args: A) => Promise<T>) => {
   return async (...args: A): Promise<T | ApiResponse<T>> => {
     try {
       const response = await apiCall(...args);
@@ -68,7 +66,7 @@ export const withApiErrorHandler = <T, A extends unknown[]>(
         error: {
           message: (error as ApiResponse<T>).message,
           statusCode: 500,
-        }
+        },
       };
     }
   };
@@ -89,7 +87,12 @@ const getAxiosErrorMessage = async (error: unknown): Promise<string> => {
   return Promise.resolve((error as ApiResponse).message || '');
 };
 
-export const apiErrorHandler = async ({ error, debugText = '', hideToast = false, detailedErr = false }: ApiErrorHandlerParams): Promise<string> => {
+export const apiErrorHandler = async ({
+  error,
+  debugText = '',
+  hideToast = false,
+  detailedErr = false,
+}: ApiErrorHandlerParams): Promise<string> => {
   let text: string = 'An unexpected error occurred ...';
 
   if (isAxiosError(error)) {
@@ -116,10 +119,7 @@ export const apiErrorHandler = async ({ error, debugText = '', hideToast = false
   }
 
   if (debugText.trim().length !== 0) {
-    console.error(
-      debugText,
-      detailedErr ? error : text,
-    );
+    console.error(debugText, detailedErr ? error : text);
   }
 
   return Promise.resolve(text);

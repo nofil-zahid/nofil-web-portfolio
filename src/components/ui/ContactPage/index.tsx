@@ -1,6 +1,6 @@
-import SectionHeader from "@/components/shared/SectionHeader";
-import ContactCard from "./ContactCard";
-import ContactForm from "./ContactForm";
+import SectionHeader from '@/components/shared/SectionHeader';
+import ContactCard from './ContactCard';
+import ContactForm from './ContactForm';
 
 export default function ContactPage() {
   return (

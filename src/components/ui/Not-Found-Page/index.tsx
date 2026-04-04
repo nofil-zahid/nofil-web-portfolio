@@ -7,20 +7,14 @@ export default function NotFound() {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center p-6 font-mono">
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
-        <div className="text-[20vw] font-bold text-accent select-none flex items-center justify-center h-full">
-          404
-        </div>
+        <div className="text-[20vw] font-bold text-accent select-none flex items-center justify-center h-full">404</div>
       </div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="z-10 text-center space-y-8"
-      >
-        <motion.div 
-          animate={{ 
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="z-10 text-center space-y-8">
+        <motion.div
+          animate={{
             rotate: [0, -10, 10, -10, 0],
-            scale: [1, 1.1, 1] 
+            scale: [1, 1.1, 1],
           }}
           transition={{ repeat: Infinity, duration: 4 }}
           className="inline-block p-4 rounded-full bg-red-500/10 border border-red-500/20"
@@ -47,20 +41,22 @@ export default function NotFound() {
             <p className="text-accent">$ run diagnostic --target:current_path</p>
             <p className="text-gray-400 font-mono">Searching database...</p>
             <p className="text-red-400 font-mono underline">[!] 0 nodes found at this address.</p>
-            <p className="text-gray-400">The path may have been encrypted, moved, or deleted by a higher-level administrator.</p>
+            <p className="text-gray-400">
+              The path may have been encrypted, moved, or deleted by a higher-level administrator.
+            </p>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center pt-4">
-          <Link 
+          <Link
             href="/"
             className="flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-bold hover:bg-primary/80 transition-all group"
           >
             <Home size={18} />
             RETURN_HOME
           </Link>
-          
-          <button 
+
+          <button
             onClick={() => window.location.reload()}
             className="flex items-center justify-center gap-2 px-8 py-3 border border-primary text-primary-foreground rounded-lg font-bold hover:bg-primary/80 transition-all"
           >
@@ -75,9 +71,7 @@ export default function NotFound() {
           <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
           CORE_TEMP: CRITICAL
         </div>
-        <div className="hidden md:block">
-          Uptime: 00:00:04:04
-        </div>
+        <div className="hidden md:block">Uptime: 00:00:04:04</div>
       </div>
     </div>
   );

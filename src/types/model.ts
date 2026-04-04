@@ -1,9 +1,9 @@
-import { LucideIcon } from "lucide-react";
+import { LucideIcon } from 'lucide-react';
 
 export interface FAQItem {
   question: string;
   answer: string;
-};
+}
 
 export interface ExperienceItem {
   role: string;
@@ -12,4 +12,4 @@ export interface ExperienceItem {
   endDate: Date | null;
   responsibilities: string[];
   icon?: LucideIcon;
-};
+}

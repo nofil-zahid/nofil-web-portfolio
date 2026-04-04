@@ -1,9 +1,9 @@
 'use client';
-import { bottomJawVariants, dotsVariants, topJawVariants } from "@/styles/motion-framer-utils";
-import { motion } from "framer-motion";
+import { bottomJawVariants, dotsVariants, topJawVariants } from '@/styles/motion-framer-utils';
+import { motion } from 'framer-motion';
 
 const PacManLoader = ({ size = 90 }: { size?: number }) => {
-  const accentColor = "var(--color-accent)"; 
+  const accentColor = 'var(--color-accent)';
 
   return (
     <div className="relative flex items-center justify-center h-40 w-full overflow-hidden">
@@ -15,7 +15,7 @@ const PacManLoader = ({ size = 90 }: { size?: number }) => {
           style={{
             width: 9,
             height: 9,
-            borderRadius: "50%",
+            borderRadius: '50%',
             marginTop: -4,
             backgroundColor: accentColor,
             boxShadow: `

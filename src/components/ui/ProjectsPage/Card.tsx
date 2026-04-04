@@ -11,8 +11,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   technologies,
   screenshotUrl,
-  repoUrl = "",
-  liveUrl = "",
+  repoUrl = '',
+  liveUrl = '',
   maxDescriptionLines = 3,
   maxTechTags = 4,
 }) => {
@@ -26,25 +26,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <div className="flex justify-end gap-4 mb-4">
         {repoUrl && (
-          <motion.a 
-            href={repoUrl} 
-            target="_blank" 
+          <motion.a
+            href={repoUrl}
+            target="_blank"
             rel="noopener noreferrer"
             whileHover={{ y: -2 }}
             className="hover:text-accent transition-colors"
           >
-            <Tooltip content="Repository URL"><Code2 size={22} /></Tooltip>
+            <Tooltip content="Repository URL">
+              <Code2 size={22} />
+            </Tooltip>
           </motion.a>
         )}
         {liveUrl && (
-          <motion.a 
-            href={liveUrl} 
-            target="_blank" 
+          <motion.a
+            href={liveUrl}
+            target="_blank"
             rel="noopener noreferrer"
             whileHover={{ y: -2 }}
             className="hover:text-accent transition-colors"
           >
-            <Tooltip content="Live URL"><ExternalLink size={22} /></Tooltip>
+            <Tooltip content="Live URL">
+              <ExternalLink size={22} />
+            </Tooltip>
           </motion.a>
         )}
       </div>
@@ -76,9 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </motion.div>
       )}
 
-      <h3 className="text-2xl font-bold text-text-primary mb-3 group-hover:text-accent transition-colors">
-        {title}
-      </h3>
+      <h3 className="text-2xl font-bold text-text-primary mb-3 group-hover:text-accent transition-colors">{title}</h3>
 
       <p className={`text-text-secondary leading-relaxed mb-6 grow pb-5 line-clamp-${maxDescriptionLines}`}>
         {description}

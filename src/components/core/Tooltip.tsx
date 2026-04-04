@@ -3,12 +3,7 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TooltipProps } from '@/types/components';
 
-const Tooltip: React.FC<TooltipProps> = ({
-  content,
-  children,
-  position = 'top',
-  delay = 200,
-}) => {
+const Tooltip: React.FC<TooltipProps> = ({ content, children, position = 'top', delay = 200 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 

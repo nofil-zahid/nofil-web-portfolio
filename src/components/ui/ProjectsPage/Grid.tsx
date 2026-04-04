@@ -1,8 +1,8 @@
 'use client';
-import { motion } from "framer-motion";
-import ProjectCard from "./Card";
-import { projects } from "@/constants/projects";
-import { containerVariants, itemVariants } from "@/styles/motion-framer-utils";
+import { motion } from 'framer-motion';
+import ProjectCard from './Card';
+import { projects } from '@/constants/projects';
+import { containerVariants, itemVariants } from '@/styles/motion-framer-utils';
 
 const ProjectsGrid = () => {
   return (

@@ -1,6 +1,6 @@
-import SectionHeader from "@/components/shared/SectionHeader";
-import FaqBody from "./Body";
-import ContactFooter from "./Contact";
+import SectionHeader from '@/components/shared/SectionHeader';
+import FaqBody from './Body';
+import ContactFooter from './Contact';
 
 export default function FaqPage() {
   return (

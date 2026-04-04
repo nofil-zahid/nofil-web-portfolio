@@ -1,5 +1,5 @@
-import WhoAmI from "@/components/ui/WhoAmI-Page";
+import WhoAmI from '@/components/ui/WhoAmI-Page';
 
 export default function WhoAmIPage() {
   return <WhoAmI />;
-};
+}

@@ -1,8 +1,8 @@
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
 export const formatDate = (date: Date | null) => {
-  if (!date) return "Present";
-  return format(date, "MMM yyyy");
+  if (!date) return 'Present';
+  return format(date, 'MMM yyyy');
 };
 
 export const formatDateRange = (startDate: Date, endDate: Date | null = null) => {
@@ -11,6 +11,6 @@ export const formatDateRange = (startDate: Date, endDate: Date | null = null) =>
 
 export const myYearsOfExperience = () => {
   const startedYear = 2024;
-  const currentYear = Number(format(new Date(), "yyyy"));
+  const currentYear = Number(format(new Date(), 'yyyy'));
   return currentYear - startedYear;
 };

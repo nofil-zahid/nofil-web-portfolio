@@ -34,17 +34,17 @@ This is a personal portfolio website designed to be fast, responsive, and aesthe
 
 ## 🚀 Tech Stack
 
-| Category | Technology | Description |
-|---|---|---|
-| **Framework** | [Next.js 16](https://nextjs.org/) | App Router, Server Components |
-| **UI Library** | [React 19](https://react.dev/) | Utilizing the newly stable React Compiler |
-| **Language** | [TypeScript 5](https://www.typescriptlang.org/) | Strict type safety |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Utility-first, responsive design |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/) | Polished UI transitions |
-| **Icons** | [Lucide React](https://lucide.dev/) | Beautifully crafted open-source icons |
-| **Email** | [EmailJS](https://www.emailjs.com/) | Client-side email sending without a backend |
-| **Validation** | [Zod](https://zod.dev/) | Runtime environment variable validation |
-| **Linting & Formatting** | [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) | Zero-warning policy code quality |
+| Category                 | Technology                                                       | Description                                 |
+| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------- |
+| **Framework**            | [Next.js 16](https://nextjs.org/)                                | App Router, Server Components               |
+| **UI Library**           | [React 19](https://react.dev/)                                   | Utilizing the newly stable React Compiler   |
+| **Language**             | [TypeScript 5](https://www.typescriptlang.org/)                  | Strict type safety                          |
+| **Styling**              | [Tailwind CSS v4](https://tailwindcss.com/)                      | Utility-first, responsive design            |
+| **Animations**           | [Framer Motion](https://www.framer.com/motion/)                  | Polished UI transitions                     |
+| **Icons**                | [Lucide React](https://lucide.dev/)                              | Beautifully crafted open-source icons       |
+| **Email**                | [EmailJS](https://www.emailjs.com/)                              | Client-side email sending without a backend |
+| **Validation**           | [Zod](https://zod.dev/)                                          | Runtime environment variable validation     |
+| **Linting & Formatting** | [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) | Zero-warning policy code quality            |
 
 ---
 
@@ -85,14 +85,14 @@ nofil-web-portfolio/
 
 ## 📜 Available Scripts
 
-| Command | Action |
-| :--- | :--- |
-| `npm run dev` | Boots up the local development server with Turbopack enabled. |
-| `npm run build` | Compiles the production build. |
-| `npm start` | Starts the Next.js production server (requires a build first). |
-| `npm run lint` | Analyzes code to find and report errors (zero warnings enforced). |
-| `npm run format` | Formats the entire codebase using Prettier. |
-| `npm run type-check` | Performs TypeScript type verification without emitting files. |
+| Command              | Action                                                            |
+| :------------------- | :---------------------------------------------------------------- |
+| `npm run dev`        | Boots up the local development server with Turbopack enabled.     |
+| `npm run build`      | Compiles the production build.                                    |
+| `npm start`          | Starts the Next.js production server (requires a build first).    |
+| `npm run lint`       | Analyzes code to find and report errors (zero warnings enforced). |
+| `npm run format`     | Formats the entire codebase using Prettier.                       |
+| `npm run type-check` | Performs TypeScript type verification without emitting files.     |
 
 ---
 

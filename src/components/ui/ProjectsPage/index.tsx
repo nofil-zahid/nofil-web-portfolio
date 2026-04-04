@@ -1,5 +1,5 @@
-import SectionHeader from "@/components/shared/SectionHeader";
-import ProjectsGrid from "./Grid";
+import SectionHeader from '@/components/shared/SectionHeader';
+import ProjectsGrid from './Grid';
 
 export default function ProjectPage() {
   return (

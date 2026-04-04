@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Accordion from '@/components/core/Accordion';
 import { faqData } from '@/constants/faq-data';
@@ -17,11 +17,7 @@ const Body = () => {
         className="w-full max-w-[clamp(520px,65vw,900px)]"
       >
         {faqData.map((item, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-          >
+          <motion.div key={index} variants={itemVariants} transition={{ duration: 0.45, ease: 'easeOut' }}>
             <Accordion
               question={item.question}
               answer={item.answer}

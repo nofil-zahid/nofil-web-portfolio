@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { SearchX, Database, ChevronLeft, ShieldAlert } from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { SearchX, Database, ChevronLeft, ShieldAlert } from 'lucide-react';
 
 interface ProjectNotFoundProps {
   requestedId?: string;
 }
 
 const ProjectNotFound: React.FC<ProjectNotFoundProps> = ({ requestedId }) => {
-  const TRACE_ID = "r95-0345-0384095843-0354-430";
+  const TRACE_ID = 'r95-0345-0384095843-0354-430';
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] px-6 py-12">
       <div className="relative mb-10">
@@ -38,10 +38,10 @@ const ProjectNotFound: React.FC<ProjectNotFoundProps> = ({ requestedId }) => {
         <p className="text-gray-400 leading-relaxed text-sm md:text-base">
           The project identifier &nbsp;
           <span className="text-accent font-mono bg-accent/5 px-2 py-0.5 rounded border border-accent/20">
-            {requestedId || "UNKNOWN_ID"}
+            {requestedId || 'UNKNOWN_ID'}
           </span>
-          &nbsp; could not be located in the current repository. The record
-          might be private, archived, or yet to be deployed.
+          &nbsp; could not be located in the current repository. The record might be private, archived, or yet to be
+          deployed.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -49,10 +49,7 @@ const ProjectNotFound: React.FC<ProjectNotFoundProps> = ({ requestedId }) => {
             href="/projects"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#16211a] border border-[#2a3c30] text-gray-300 hover:text-accent hover:border-accent/50 transition-all group"
           >
-            <ChevronLeft
-              size={18}
-              className="group-hover:-translate-x-1 transition-transform"
-            />
+            <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             BACK_TO_REGISTRY
           </Link>
 

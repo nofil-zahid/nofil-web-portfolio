@@ -2,7 +2,7 @@ import { toast, ToastOptions } from 'react-toastify';
 import { isClientSideComponent } from './general';
 import { ToastType } from '@/types/components';
 
-export const showToast = ({ text, type, position = "bottom-right" }: ToastType) => {
+export const showToast = ({ text, type, position = 'bottom-right' }: ToastType) => {
   if (!isClientSideComponent()) {
     return;
   }
@@ -17,7 +17,7 @@ export const showToast = ({ text, type, position = "bottom-right" }: ToastType) 
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
-    toastId: text, 
+    toastId: text,
   };
 
   if (type !== 'default' && toast[type]) {

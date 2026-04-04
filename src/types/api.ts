@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
 
 export interface ApiResponse<T = unknown> {
   success: boolean;
@@ -11,11 +11,11 @@ export interface ApiResponse<T = unknown> {
     statusCode: number;
   };
   stack?: string;
-};
+}
 
 export interface ApiErrorHandlerParams {
   error: ApiResponse | Error | AxiosError;
   debugText?: string;
   hideToast?: boolean;
   detailedErr?: boolean;
-};
+}

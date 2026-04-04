@@ -1,5 +1,5 @@
-import z, { ZodType } from "zod";
-import { notFound } from "next/navigation";
+import z, { ZodType } from 'zod';
+import { notFound } from 'next/navigation';
 
 interface withParamValidationOptions<T extends ZodType> {
   schema: T;
@@ -13,7 +13,7 @@ interface withRouteValidationProps {
 
 export function withParamValidation<T extends ZodType, P extends { validatedParam: z.infer<T> }>(
   WrappedComponent: React.ComponentType<P>,
-  { schema, paramKey }: withParamValidationOptions<T>
+  { schema, paramKey }: withParamValidationOptions<T>,
 ) {
   return async function ValidatedComponent(props: withRouteValidationProps) {
     const params = (await props.params) || {};
@@ -23,11 +23,6 @@ export function withParamValidation<T extends ZodType, P extends { validatedPara
       notFound();
     }
 
-    return (
-      <WrappedComponent
-        {...(props as unknown as P)}
-        validatedParam={parsed.data}
-      />
-    );
+    return <WrappedComponent {...(props as unknown as P)} validatedParam={parsed.data} />;
   };
 }

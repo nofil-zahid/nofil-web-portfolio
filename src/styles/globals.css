@@ -1,8 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
   --color-background-primary: #030f06;
   --color-background-secondary: #061a0a;
@@ -26,7 +27,8 @@ body {
   scroll-behavior: smooth;
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
 }
 
@@ -40,8 +42,8 @@ a, button {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus {
@@ -50,9 +52,9 @@ textarea:-webkit-autofill:focus {
   caret-color: #5ff07e;
 }
 
-.terminal-cursor { 
-  caret-shape: block !important; 
-  caret-color: #5ff07e !important; 
+.terminal-cursor {
+  caret-shape: block !important;
+  caret-color: #5ff07e !important;
 }
 
 @keyframes scanline {
@@ -113,19 +115,19 @@ textarea:-webkit-autofill:focus {
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
-  
+
   .text-section-title {
     font-size: 36px;
     font-weight: 600;
     line-height: 1.2;
   }
-  
+
   .text-body {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.6;
   }
-  
+
   .text-label {
     font-size: 14px;
     font-weight: 500;
@@ -161,8 +163,8 @@ textarea:-webkit-autofill:focus {
 
 .Toastify__toast {
   background: rgba(3, 7, 18, 0.9) !important;
-  border: 1px solid rgba(13, 242, 89, 0.2) !important; 
-  border-radius: 4px !important; 
+  border: 1px solid rgba(13, 242, 89, 0.2) !important;
+  border-radius: 4px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(8px);
   color: #ffffff !important;

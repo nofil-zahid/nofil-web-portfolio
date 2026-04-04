@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 type Step = {
   delay: number;
@@ -13,8 +13,8 @@ export function useSequenceDelay(steps: Step[]) {
 
     steps.forEach((step) => {
       totalDelay += step.delay;
-      const timer = setTimeout(() => { 
-        step.callback() 
+      const timer = setTimeout(() => {
+        step.callback();
       }, totalDelay);
       timers.current.push(timer);
     });
@@ -24,4 +24,4 @@ export function useSequenceDelay(steps: Step[]) {
       timers.current = [];
     };
   }, [steps]);
-};
+}

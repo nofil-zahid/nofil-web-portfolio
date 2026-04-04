@@ -1,4 +1,4 @@
-import { clientEnvSchema, Env, serverEnvSchema } from "../schema/env";
+import { clientEnvSchema, Env, serverEnvSchema } from '../schema/env';
 
 const clientEnv = {
   NEXT_PUBLIC_HOSTNAME: process.env.NEXT_PUBLIC_HOSTNAME,
@@ -11,15 +11,15 @@ const clientEnv = {
 
 let env = {} as Env;
 
-if (typeof window === "undefined") {
+if (typeof window === 'undefined') {
   const serverParsed = serverEnvSchema.safeParse(process.env);
   const clientParsed = clientEnvSchema.safeParse(clientEnv);
 
   if (!serverParsed.success || !clientParsed.success) {
-    console.error("❌ Invalid environment variables:");
+    console.error('❌ Invalid environment variables:');
     if (!serverParsed.success) console.error(serverParsed.error.format());
     if (!clientParsed.success) console.error(clientParsed.error.format());
-    throw new Error("Invalid server environment variables");
+    throw new Error('Invalid server environment variables');
   }
 
   env = { ...serverParsed.data, ...clientParsed.data };
@@ -27,7 +27,7 @@ if (typeof window === "undefined") {
   const clientParsed = clientEnvSchema.safeParse(clientEnv);
 
   if (!clientParsed.success) {
-    console.error("❌ Invalid client environment variables:");
+    console.error('❌ Invalid client environment variables:');
     console.error(clientParsed.error.format());
   }
 
@@ -37,7 +37,7 @@ if (typeof window === "undefined") {
 /**
  * Derived flags
  */
-const isProd = env?.NEXT_PUBLIC_NODE_ENV === "production";
+const isProd = env?.NEXT_PUBLIC_NODE_ENV === 'production';
 
 /**
  * Final export

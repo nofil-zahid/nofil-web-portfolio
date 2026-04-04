@@ -1,6 +1,6 @@
 'use client';
-import { stats } from '@/constants/stats-data'
-import { motion } from 'framer-motion'
+import { stats } from '@/constants/stats-data';
+import { motion } from 'framer-motion';
 
 const Stats = () => {
   return (
@@ -22,7 +22,7 @@ const Stats = () => {
         </motion.div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Stats
+export default Stats;

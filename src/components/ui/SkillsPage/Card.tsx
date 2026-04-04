@@ -1,38 +1,30 @@
-'use client'
-import { motion } from "framer-motion";
-import { SkillTag } from "./SkillTag";
-import { Database, Monitor, Server, ShieldCheck, Smartphone, Terminal, Workflow } from "lucide-react";
+'use client';
+import { motion } from 'framer-motion';
+import { SkillTag } from './SkillTag';
+import { Database, Monitor, Server, ShieldCheck, Smartphone, Terminal, Workflow } from 'lucide-react';
 
 const getCategoryIcon = (category: string) => {
   const cat = category.toLowerCase();
   switch (true) {
-    case cat.includes("frontend"):
+    case cat.includes('frontend'):
       return <Monitor size={40} />;
-    case cat.includes("backend"):
+    case cat.includes('backend'):
       return <Server size={40} />;
-    case cat.includes("database"):
+    case cat.includes('database'):
       return <Database size={40} />;
-    case cat.includes("mobile"):
+    case cat.includes('mobile'):
       return <Smartphone size={40} />;
-    case cat.includes("security"):
+    case cat.includes('security'):
       return <ShieldCheck size={40} />;
-    case cat.includes("tools"):
-    case cat.includes("devops"):
+    case cat.includes('tools'):
+    case cat.includes('devops'):
       return <Terminal size={40} />;
     default:
       return <Workflow size={40} />;
   }
 };
 
-export const ExpertiseCard = ({
-  category,
-  skills,
-  order,
-}: {
-  category: string;
-  skills: string[];
-  order: number;
-}) => (
+export const ExpertiseCard = ({ category, skills, order }: { category: string; skills: string[]; order: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +41,7 @@ export const ExpertiseCard = ({
     <div className="relative mb-6 md:mb-8 flex items-center gap-3">
       <div className="h-[24px] w-[3px] bg-accent shadow-[0_0_10px_var(--color-accent)] group-hover:h-[30px] transition-all duration-300" />
       <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter">
-        {category.replace(/([A-Z])/g, " $1").trim()}
+        {category.replace(/([A-Z])/g, ' $1').trim()}
       </h3>
     </div>
 

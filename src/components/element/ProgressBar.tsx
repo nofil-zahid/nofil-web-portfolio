@@ -1,5 +1,5 @@
-import { cn } from "@/styles/tailwind-utils";
-import { ProgressBarProps } from "@/types/components";
+import { cn } from '@/styles/tailwind-utils';
+import { ProgressBarProps } from '@/types/components';
 
 const ProgressBar = ({ progress }: ProgressBarProps) => {
   const TOTAL_SEGMENTS = 30;
@@ -12,10 +12,10 @@ const ProgressBar = ({ progress }: ProgressBarProps) => {
         <span>SECTOR_256</span>
       </div>
 
-      <div 
+      <div
         className="relative p-[1.5px] rounded-[3px] border border-accent/20"
         style={{
-          boxShadow: '0 0 15px -1px rgba(13, 242, 89, 0.2), inset 0 0 10px -2px rgba(13, 242, 89, 0.1)'
+          boxShadow: '0 0 15px -1px rgba(13, 242, 89, 0.2), inset 0 0 10px -2px rgba(13, 242, 89, 0.1)',
         }}
       >
         <div className="flex gap-[3.5px] w-full h-[40px]">
@@ -25,13 +25,11 @@ const ProgressBar = ({ progress }: ProgressBarProps) => {
               <div
                 key={i}
                 className={cn(
-                  "flex-1 rounded-[1.5px] relative overflow-hidden transition-all duration-300 ease-out",
-                  isActive 
-                    ? "bg-accent/90 shadow-[inset_0_0_8px_#b3fdb3]"
-                    : "bg-accent/3 border border-accent/10"
+                  'flex-1 rounded-[1.5px] relative overflow-hidden transition-all duration-300 ease-out',
+                  isActive ? 'bg-accent/90 shadow-[inset_0_0_8px_#b3fdb3]' : 'bg-accent/3 border border-accent/10',
                 )}
               >
-                <div 
+                <div
                   className="absolute inset-0 opacity-40 pointer-events-none"
                   style={{
                     backgroundImage: 'linear-gradient(0deg, rgba(0, 0, 0, 0.8) 50%, transparent 50%)',
@@ -39,9 +37,7 @@ const ProgressBar = ({ progress }: ProgressBarProps) => {
                     mixBlendMode: 'multiply',
                   }}
                 />
-                {isActive && (
-                  <div className="absolute inset-0 bg-accent/20 blur-[2.5px] -z-10" />
-                )}
+                {isActive && <div className="absolute inset-0 bg-accent/20 blur-[2.5px] -z-10" />}
               </div>
             );
           })}

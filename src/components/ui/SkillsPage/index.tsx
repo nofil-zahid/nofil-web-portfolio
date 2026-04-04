@@ -1,6 +1,6 @@
-import SectionHeader from "@/components/shared/SectionHeader";
-import { expertise } from "@/constants/expertise";
-import { ExpertiseCard } from "./Card";
+import SectionHeader from '@/components/shared/SectionHeader';
+import { expertise } from '@/constants/expertise';
+import { ExpertiseCard } from './Card';
 
 const SkillsPage = () => {
   return (
@@ -13,12 +13,7 @@ const SkillsPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {Object.entries(expertise).map(([category, skills], index) => (
-          <ExpertiseCard
-            key={category}
-            category={category}
-            skills={skills}
-            order={index}
-          />
+          <ExpertiseCard key={category} category={category} skills={skills} order={index} />
         ))}
       </div>
 

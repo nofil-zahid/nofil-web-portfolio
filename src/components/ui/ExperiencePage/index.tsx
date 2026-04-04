@@ -1,6 +1,6 @@
-import SectionHeader from "@/components/shared/SectionHeader";
-import Timeline from "./Timeline";
-import { experiences } from "@/constants/experiences-data";
+import SectionHeader from '@/components/shared/SectionHeader';
+import Timeline from './Timeline';
+import { experiences } from '@/constants/experiences-data';
 
 const Experience = () => {
   return (
