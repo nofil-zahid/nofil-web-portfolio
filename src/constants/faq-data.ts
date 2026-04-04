@@ -13,7 +13,7 @@ export const faqData: FAQItem[] = [
   {
     question: 'How do you approach code quality and testing?',
     answer:
-      'I keep my code clean and consistent by using TypeScript, ESLint, and tools like Prettier or Biome for formatting. I also use Husky and lint-staged to check code before every commit.',
+      'I write clean, maintainable code using TypeScript for type safety and [ESLint with Prettier] / [Biome] for consistent formatting. I use Husky and lint-staged to run checks before commits, and I write tests when needed to ensure functionality works correctly. CI pipelines help catch issues early before merging.',
   },
   {
     question: 'How do you write scalable and maintainable code?',

@@ -56,7 +56,7 @@ export default function WhoAmI() {
             <SectionHeading title="Overview" subtitle="Profile_Summary" />
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p>
-                I am a backend-focused Full Stack Engineer who delivers practical and efficient solutions for real-world
+                I am a backend-focused Full Stack Engineer, delivers practical and efficient solutions for real-world
                 applications. I take ownership of the systems I work on from development to deployment, approaching
                 challenges with research, analysis, and hands-on implementation to build scalable and maintainable
                 architectures.
