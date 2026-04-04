@@ -1,4 +1,4 @@
-import ExpertisePage from '@/components/ui/SkillsPage';
+import ExpertisePage from '@/components/pages/SkillsPage';
 
 export default function Expertise() {
   return <ExpertisePage />;

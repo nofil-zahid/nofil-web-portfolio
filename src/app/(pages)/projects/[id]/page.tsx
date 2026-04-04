@@ -1,4 +1,4 @@
-import Project from '@/components/ui/ProjectsPage/Project';
+import Project from '@/components/pages/ProjectsPage/Project';
 import { withParamValidation } from '@/components/hoc/with-route-validation';
 import { DynamicRoute } from '@/types/components';
 import { anyDynamicRouteSchema } from '@/schema/dynamic-route';

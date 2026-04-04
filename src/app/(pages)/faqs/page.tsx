@@ -1,4 +1,4 @@
-import FaqPage from '@/components/ui/FaqPage';
+import FaqPage from '@/components/pages/FaqPage';
 
 export default function FAQsPage() {
   return <FaqPage />;
