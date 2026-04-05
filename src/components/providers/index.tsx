@@ -15,9 +15,7 @@ export default function Providers({ children }: ChildrenProps) {
       <TopLoader />
       <Toaster />
       <LoadingProvider>
-        <ClickSparkProvider>
-          {children}
-        </ClickSparkProvider>
+        <ClickSparkProvider>{children}</ClickSparkProvider>
         <ServiceWorker />
         <NavigatorStatus />
       </LoadingProvider>

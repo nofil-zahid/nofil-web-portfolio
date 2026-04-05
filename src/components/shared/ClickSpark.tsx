@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useRef, useEffect, useCallback } from 'react';
 
 interface ClickSparkProps {
@@ -27,7 +27,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   duration = 400,
   easing = 'ease-out',
   extraScale = 1.0,
-  children
+  children,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
@@ -79,7 +79,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
           return t * (2 - t);
       }
     },
-    [easing]
+    [easing],
   );
 
   useEffect(() => {
@@ -145,7 +145,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
       x,
       y,
       angle: (2 * Math.PI * i) / sparkCount,
-      startTime: now
+      startTime: now,
     }));
 
     sparksRef.current.push(...newSparks);

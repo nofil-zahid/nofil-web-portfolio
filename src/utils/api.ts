@@ -125,22 +125,24 @@ export const apiErrorHandler = async ({
   return Promise.resolve(text);
 };
 
-export const handleAsync = (
-  fn: () => Promise<void>,
-  options?: {
-    onFinally?: () => void;
-    onError?: (error: unknown) => void;
-  }
-) => async () => {
-  try {
-    await fn();
-  } catch (err) {
-    if (options?.onError) {
-      options.onError(err);
-    } else {
-      console.error(err);
+export const handleAsync =
+  (
+    fn: () => Promise<void>,
+    options?: {
+      onFinally?: () => void;
+      onError?: (error: unknown) => void;
+    },
+  ) =>
+  async () => {
+    try {
+      await fn();
+    } catch (err) {
+      if (options?.onError) {
+        options.onError(err);
+      } else {
+        console.error(err);
+      }
+    } finally {
+      if (options?.onFinally) options.onFinally();
     }
-  } finally {
-    if (options?.onFinally) options.onFinally();
-  }
-};
+  };

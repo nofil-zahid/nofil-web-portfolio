@@ -25,7 +25,7 @@ const Introduction = () => {
         console.error('Error opening CV:', err);
       },
       onFinally: stopCvLoading,
-    }
+    },
   );
 
   return (
