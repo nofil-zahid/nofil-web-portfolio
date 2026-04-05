@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
-import { Menu, X, Code2 } from "lucide-react";
-import { useBooleanToggle } from "@/hooks/core/use-boolean-toggle";
-import { navLinks, socialLinks } from "@/constants/links";
-import { containerVariants, itemVariants } from "@/styles/motion-framer-utils";
-import { cn } from "@/styles/tailwind-utils";
-import { useInitialLoading } from "@/hooks/context/loading";
-import { useRouter } from "next/navigation";
-import { routes } from "@/constants/routes";
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { Menu, X, Code2 } from 'lucide-react';
+import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
+import { navLinks, socialLinks } from '@/constants/links';
+import { containerVariants, itemVariants } from '@/styles/motion-framer-utils';
+import { cn } from '@/styles/tailwind-utils';
+import { useInitialLoading } from '@/hooks/context/loading';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/constants/routes';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { state: isOpen, toggle } = useBooleanToggle();
-  
+
   const { hasLoaded } = useInitialLoading();
   if (!hasLoaded) return null;
 
@@ -24,7 +24,7 @@ export default function Sidebar() {
     <motion.div
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "circOut" }}
+      transition={{ duration: 0.8, ease: 'circOut' }}
     >
       <div
         className={`
@@ -54,19 +54,19 @@ export default function Sidebar() {
           Nofil Zahid
         </div>
 
-        <div className="text-accent text-xl"><Code2 onClick={() => router.push(routes.root)} /></div>
+        <div className="text-accent text-xl">
+          <Code2 onClick={() => router.push(routes.root)} />
+        </div>
       </div>
 
       <aside
         className={cn(
-          "fixed z-30 flex flex-col justify-between w-full h-screen",
-          "bg-background-primary text-text-primary border-r border-border-glow",
-          "transition-transform duration-300",
-          "px-[clamp(1.5rem,3vw,3rem)] py-[clamp(2rem,4vh,4rem)]",
-          "md:hidden md:w-[clamp(260px,30vw,340px)] md:h-screen",
-          isOpen
-            ? "translate-x-0 md:translate-x-[clamp(60px,6vw,90px)]"
-            : "-translate-x-full md:-translate-x-full"
+          'fixed z-30 flex flex-col justify-between w-full h-screen',
+          'bg-background-primary text-text-primary border-r border-border-glow',
+          'transition-transform duration-300',
+          'px-[clamp(1.5rem,3vw,3rem)] py-[clamp(2rem,4vh,4rem)]',
+          'md:hidden md:w-[clamp(260px,30vw,340px)] md:h-screen',
+          isOpen ? 'translate-x-0 md:translate-x-[clamp(60px,6vw,90px)]' : '-translate-x-full md:-translate-x-full',
         )}
       >
         <nav className="mt-16 flex flex-col gap-[clamp(1rem,3vh,2rem)] font-mono">
@@ -85,7 +85,7 @@ export default function Sidebar() {
                       layoutId="nav-indicator"
                       className="h-6 w-[2px] bg-accent shadow-[0_0_12px_rgba(13,242,89,0.8)]"
                       transition={{
-                        type: "spring",
+                        type: 'spring',
                         stiffness: 300,
                         damping: 30,
                       }}
@@ -95,18 +95,16 @@ export default function Sidebar() {
 
                 <span
                   className={cn(
-                    "text-[clamp(0.9rem,1.2vw,1.1rem)] uppercase tracking-widest transition-all duration-300",
+                    'text-[clamp(0.9rem,1.2vw,1.1rem)] uppercase tracking-widest transition-all duration-300',
                     active
-                      ? "text-accent translate-x-2"
-                      : "text-text-secondary group-hover:text-text-primary group-hover:translate-x-1"
+                      ? 'text-accent translate-x-2'
+                      : 'text-text-secondary group-hover:text-text-primary group-hover:translate-x-1',
                   )}
                 >
                   /{link.name}
                 </span>
 
-                {active && (
-                  <span className="absolute inset-0 -z-10 bg-accent/5 blur-xl rounded-full" />
-                )}
+                {active && <span className="absolute inset-0 -z-10 bg-accent/5 blur-xl rounded-full" />}
               </Link>
             );
           })}
@@ -127,9 +125,7 @@ export default function Sidebar() {
                   target="_blank"
                   className="flex items-center gap-2 group transition-colors duration-200"
                 >
-                  <Icon
-                    className="w-4 h-4 text-text-secondary group-hover:text-accent transition-colors duration-200"
-                  />
+                  <Icon className="w-4 h-4 text-text-secondary group-hover:text-accent transition-colors duration-200" />
                   <motion.span
                     whileHover={{ x: 5 }}
                     className="text-text-secondary group-hover:text-accent transition-colors duration-200 font-mono"

@@ -1,9 +1,9 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       return { width: window.innerWidth, height: window.innerHeight };
     }
     return { width: 0, height: 0 };
@@ -20,11 +20,11 @@ export const useScreenSize = () => {
 
     handleResize();
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(frameId);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

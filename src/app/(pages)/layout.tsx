@@ -1,7 +1,7 @@
-import { ChildrenProps } from "@/types/components";
-import Sidebar from "@/components/layout/Sidebar";
-import Navbar from "@/components/layout/Topbar";
-import Outlet from "@/components/layout/Outlet";
+import { ChildrenProps } from '@/types/components';
+import Sidebar from '@/components/layout/Sidebar';
+import Navbar from '@/components/layout/Topbar';
+import Outlet from '@/components/layout/Outlet';
 
 export default function PageLayout({ children }: ChildrenProps) {
   return (

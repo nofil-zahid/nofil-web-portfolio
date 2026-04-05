@@ -1,4 +1,4 @@
-import { Easing, Variants } from "framer-motion";
+import { Easing, Variants } from 'framer-motion';
 
 export const sectionContainer = {
   hidden: { opacity: 0 },
@@ -12,7 +12,7 @@ export const headerChildVariant: Variants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { type: "spring", damping: 12, stiffness: 100 },
+    transition: { type: 'spring', damping: 12, stiffness: 100 },
   },
   hidden: { opacity: 0, x: -5 },
 };
@@ -29,7 +29,7 @@ export const containerVariants = {
 
 export const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as Easing } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as Easing } },
 };
 
 export const topJawVariants = {
@@ -38,7 +38,7 @@ export const topJawVariants = {
     transition: {
       duration: 0.5,
       repeat: Infinity,
-      ease: "easeInOut" as Easing,
+      ease: 'easeInOut' as Easing,
     },
   },
 };
@@ -49,7 +49,7 @@ export const bottomJawVariants = {
     transition: {
       duration: 0.5,
       repeat: Infinity,
-      ease: "easeInOut" as Easing,
+      ease: 'easeInOut' as Easing,
     },
   },
 };
@@ -57,6 +57,6 @@ export const bottomJawVariants = {
 export const dotsVariants = {
   animate: {
     x: [0, -50],
-    transition: { duration: 0.5, repeat: Infinity, ease: "linear" as Easing },
+    transition: { duration: 0.5, repeat: Infinity, ease: 'linear' as Easing },
   },
 };

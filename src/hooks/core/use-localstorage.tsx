@@ -1,12 +1,12 @@
-import { useCallback } from "react";
-import { showToast } from "@/utils/toaster";
-import { envVars } from "@/config/env";
+import { useCallback } from 'react';
+import { showToast } from '@/utils/toaster';
+import { envVars } from '@/config/env';
 
 const safeJSONParser = (json: string | null) => {
   try {
     return json ? JSON.parse(json) : null;
   } catch (err) {
-    console.error("safeJSONParser: ", err);
+    console.error('safeJSONParser: ', err);
     return json;
   }
 };
@@ -18,8 +18,8 @@ export const useStorage = () => {
 
   const setItem = useCallback((key: string, value: unknown) => {
     if (!value) {
-      if (envVars.NEXT_PUBLIC_NODE_ENV === "development") {
-        showToast({ text: "Value is falsy", type: "warning" });
+      if (envVars.NEXT_PUBLIC_NODE_ENV === 'development') {
+        showToast({ text: 'Value is falsy', type: 'warning' });
       }
     }
     localStorage.setItem(key, JSON.stringify(value));

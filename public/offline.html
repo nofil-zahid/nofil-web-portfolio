@@ -26,7 +26,7 @@
       }
 
       body::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -40,8 +40,12 @@
       }
 
       @keyframes scan {
-        0% { top: -10%; }
-        100% { top: 110%; }
+        0% {
+          top: -10%;
+        }
+        100% {
+          top: 110%;
+        }
       }
 
       .container {
@@ -57,7 +61,7 @@
       }
 
       .container::after {
-        content: "EXT_CONN_LOST";
+        content: 'EXT_CONN_LOST';
         position: absolute;
         bottom: -20px;
         right: 0;
@@ -75,8 +79,15 @@
       }
 
       @keyframes pulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.6; transform: scale(0.95); }
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(0.95);
+        }
       }
 
       h1 {
@@ -155,7 +166,7 @@
 
       <h1><span class="status-dot"></span>Link_Severed</h1>
       <p>
-        Protocol_Error: Network_Interface_Down.<br>
+        Protocol_Error: Network_Interface_Down.<br />
         Please verify hardware connection or local signal strength.
       </p>
 

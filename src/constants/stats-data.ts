@@ -1,5 +1,5 @@
-import { myYearsOfExperience } from "@/utils/date";
-import { projects } from "./projects";
+import { myYearsOfExperience } from '@/utils/date';
+import { projects } from './projects';
 
 export const stats = [
   { label: 'Years of Experience', value: myYearsOfExperience() },
