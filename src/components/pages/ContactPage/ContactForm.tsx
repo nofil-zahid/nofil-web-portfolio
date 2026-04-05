@@ -80,6 +80,8 @@ const ContactForm = () => {
         value={form.name}
         onChange={handleChange}
         error={errors.name}
+        spellCheck={false}
+        autoComplete="off"
       />
       <InputField
         index="02"
@@ -89,6 +91,8 @@ const ContactForm = () => {
         value={form.email}
         onChange={handleChange}
         error={errors.email}
+        spellCheck={false}
+        autoComplete="off"
       />
       <InputField
         index="03"
@@ -101,6 +105,8 @@ const ContactForm = () => {
         error={errors.message}
         maxLength={MESSAGE_MAX_LENGTH}
         showCounter
+        spellCheck={false}
+        autoComplete="off"
       />
 
       <Button type="submit">
