@@ -6,6 +6,7 @@ import ServiceWorker from '../service-worker/ServiceWorker';
 import TopLoader from './TopLoader';
 import Toaster from './Toaster';
 import VercelAnalytics from './VercelAnalytics';
+import ClickSparkProvider from './CS-Provider';
 
 export default function Providers({ children }: ChildrenProps) {
   return (
@@ -14,7 +15,9 @@ export default function Providers({ children }: ChildrenProps) {
       <TopLoader />
       <Toaster />
       <LoadingProvider>
-        {children}
+        <ClickSparkProvider>
+          {children}
+        </ClickSparkProvider>
         <ServiceWorker />
         <NavigatorStatus />
       </LoadingProvider>
