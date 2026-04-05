@@ -1,5 +1,6 @@
 'use client';
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+import { motion, useSpring } from 'framer-motion';
 
 interface ClickSparkProps {
   sparkColor?: string;
@@ -29,10 +30,77 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   extraScale = 1.0,
   children,
 }) => {
+  // Spark State
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
   const startTimeRef = useRef<number | null>(null);
 
+  // Cursor State
+  const [mounted, setMounted] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Cursor Mount Effect
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  // Cursor Tracking Effect
+  useEffect(() => {
+    if (!mounted || window.matchMedia('(pointer: coarse)').matches) return;
+
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName.toLowerCase() === 'button' ||
+        target.tagName.toLowerCase() === 'a' ||
+        target.closest('button') ||
+        target.closest('a') ||
+        target.getAttribute('role') === 'button'
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    document.body.style.cursor = 'none';
+    const styleElement = document.createElement('style');
+    styleElement.id = 'custom-cursor-style';
+    styleElement.innerHTML = `
+      * {
+        cursor: none !important;
+      }
+    `;
+    document.head.appendChild(styleElement);
+
+    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mouseover', handleMouseOver);
+
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('mouseover', handleMouseOver);
+      document.body.style.cursor = 'auto';
+      const styleEl = document.getElementById('custom-cursor-style');
+      if (styleEl) styleEl.remove();
+    };
+  }, [mounted]);
+
+  const springConfig = { damping: 25, stiffness: 400 };
+  const cursorX = useSpring(mousePosition.x, springConfig);
+  const cursorY = useSpring(mousePosition.y, springConfig);
+
+  useEffect(() => {
+    cursorX.set(mousePosition.x);
+    cursorY.set(mousePosition.y);
+  }, [mousePosition, cursorX, cursorY]);
+
+  // Click Spark Canvas Effect
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -155,6 +223,33 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     <div className="relative w-full h-full" onClick={handleClick}>
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
       {children}
+      {mounted && !window.matchMedia('(pointer: coarse)').matches && (
+        <>
+          <motion.div
+            className="fixed top-0 left-0 w-10 h-10 rounded-full border-2 border-[#0df259] shadow-[0_0_15px_rgba(13,242,89,0.3)] pointer-events-none z-[9999]"
+            style={{
+              x: cursorX,
+              y: cursorY,
+              translateX: '-50%',
+              translateY: '-50%',
+            }}
+            animate={{
+              scale: isHovering ? 1.5 : 1,
+              backgroundColor: isHovering ? 'rgba(13, 242, 89, 0.15)' : 'rgba(13, 242, 89, 0)',
+            }}
+            transition={{ scale: { type: 'spring', ...springConfig }, backgroundColor: { duration: 0.2 } }}
+          />
+          <motion.div
+            className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#0df259] shadow-[0_0_10px_rgba(13,242,89,0.5)] pointer-events-none z-[10000]"
+            style={{
+              x: mousePosition.x,
+              y: mousePosition.y,
+              translateX: '-50%',
+              translateY: '-50%',
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };
