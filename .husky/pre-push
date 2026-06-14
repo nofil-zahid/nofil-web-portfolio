@@ -1,3 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 echo "Check for unstaged changes..."
 if [ -n "$(git status --porcelain)" ]; then
   echo "Push blocked: Working tree is not clean."

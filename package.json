@@ -14,11 +14,11 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
-      "npm run format:write",
-      "npm run lint"
+      "prettier --write",
+      "eslint --max-warnings=0 --fix"
     ],
     "src/**/*.{json,css}": [
-      "npm run format:write"
+      "prettier --write"
     ]
   },
   "dependencies": {
