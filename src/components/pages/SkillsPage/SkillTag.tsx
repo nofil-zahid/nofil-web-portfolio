@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { motion } from 'framer-motion';
 import { cn } from '@/styles/tailwind-utils';
@@ -15,8 +15,16 @@ const getSkillIcon = (name: string) => {
   if (n.includes('redux') || n.includes('state')) return <Cpu size={14} className="text-accent" />;
   if (n.includes('slate')) return <Type size={14} className="text-accent" />;
   if (n.includes('rest') || n.includes('api')) return <Code2 size={14} className="text-accent" />;
-  if (n.includes('websocket') || n.includes('web sockets') || n.includes('websocket')) return <Wifi size={14} className="text-accent" />;
-  if (n.includes('multi-tenant') || n.includes('monolith') || n.includes('micro') || n.includes('scalable') || n.includes('architecture')) return <Server size={14} className="text-accent" />;
+  if (n.includes('websocket') || n.includes('web sockets') || n.includes('websocket'))
+    return <Wifi size={14} className="text-accent" />;
+  if (
+    n.includes('multi-tenant') ||
+    n.includes('monolith') ||
+    n.includes('micro') ||
+    n.includes('scalable') ||
+    n.includes('architecture')
+  )
+    return <Server size={14} className="text-accent" />;
   return <Terminal size={14} className="text-accent" />;
 };
 
@@ -40,12 +48,12 @@ export const SkillTag = ({ name, icon, index }: { name: string; icon?: string; i
   >
     <span className="opacity-80 group-hover:opacity-100 transition-opacity">
       {icon ? (
-        <Image 
-          src={routes.ui.icons(icon)} 
-          height={14} 
-          width={14} 
-          alt={`${name} icon`} 
-          className="h-3.5 w-3.5 object-contain" 
+        <Image
+          src={routes.ui.icons(icon)}
+          height={14}
+          width={14}
+          alt={`${name} icon`}
+          className="h-3.5 w-3.5 object-contain"
           unoptimized
         />
       ) : (

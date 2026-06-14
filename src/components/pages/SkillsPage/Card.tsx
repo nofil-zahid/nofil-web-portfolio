@@ -5,7 +5,15 @@ import { SkillTag } from './SkillTag';
 import { routes } from '@/constants/routes';
 import Image from 'next/image';
 
-export const ExpertiseCard = ({ category, skills, order }: { category: string; skills: { name: string; icon?: string }[]; order: number }) => (
+export const ExpertiseCard = ({
+  category,
+  skills,
+  order,
+}: {
+  category: string;
+  skills: { name: string; icon?: string }[];
+  order: number;
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
