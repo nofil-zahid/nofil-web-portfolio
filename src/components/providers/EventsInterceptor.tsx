@@ -6,12 +6,18 @@ import { ChildrenProps } from '@/types/components';
 export const EventsInterceptor: React.FC<ChildrenProps> = ({ children }) => {
   const handleCopy = (e: ClipboardEvent) => {
     const selection = window.getSelection()?.toString() || '';
+    const url = window.location.origin;
     if (!selection) return;
     e.preventDefault();
-    const prefixText = `[Copied from Nofil's portfolio]:`;
+    const prefixText = `[Nofil's Portfolio]`;
     const modifiedText = `${prefixText} ${selection}`;
     e.clipboardData?.setData('text/plain', modifiedText);
-    e.clipboardData?.setData('text/html', `<span style="color: #f00;">${prefixText}</span> ${selection}`);
+    e.clipboardData?.setData(
+      'text/html',
+      `<span style="color: #2563eb; font-weight: 500;">
+        ${prefixText}
+      </span> ${selection} <br /> <span style="color: #2563eb;">${url}</span>`,
+    );
   };
 
   useDocumentEvent('copy', handleCopy);
