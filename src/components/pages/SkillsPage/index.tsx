@@ -16,11 +16,6 @@ const SkillsPage = () => {
           <ExpertiseCard key={category} category={category} skills={skills} order={index} />
         ))}
       </div>
-
-      {/* <div className="mt-20 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between gap-4 text-gray-600 font-mono text-[9px] tracking-[0.3em] uppercase">
-        <p>Verified_Capabilities_Sync: OK</p>
-        <p>Access_Level: Authorized_Developer</p>
-      </div> */}
     </section>
   );
 };

@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/styles/tailwind-utils';
-import { Code2, Cpu, Layers, Palette, Terminal, Zap, Type } from 'lucide-react';
+import { Code2, Cpu, Layers, Palette, Server, Terminal, Type, Wifi, Zap } from 'lucide-react';
+import { routes } from '@/constants/routes';
+import Image from 'next/image';
 
 const getSkillIcon = (name: string) => {
   const n = name.toLowerCase();
@@ -12,10 +14,21 @@ const getSkillIcon = (name: string) => {
   if (n.includes('tailwind') || n.includes('css')) return <Palette size={14} className="text-accent" />;
   if (n.includes('redux') || n.includes('state')) return <Cpu size={14} className="text-accent" />;
   if (n.includes('slate')) return <Type size={14} className="text-accent" />;
+  if (n.includes('rest') || n.includes('api')) return <Code2 size={14} className="text-accent" />;
+  if (n.includes('websocket') || n.includes('web sockets') || n.includes('websocket'))
+    return <Wifi size={14} className="text-accent" />;
+  if (
+    n.includes('multi-tenant') ||
+    n.includes('monolith') ||
+    n.includes('micro') ||
+    n.includes('scalable') ||
+    n.includes('architecture')
+  )
+    return <Server size={14} className="text-accent" />;
   return <Terminal size={14} className="text-accent" />;
 };
 
-export const SkillTag = ({ name, index }: { name: string; index: number }) => (
+export const SkillTag = ({ name, icon, index }: { name: string; icon?: string; index: number }) => (
   <motion.span
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +46,20 @@ export const SkillTag = ({ name, index }: { name: string; index: number }) => (
       'transition-all duration-300 cursor-default select-none shadow-sm hover:border-accent/40',
     )}
   >
-    <span className="opacity-80 group-hover:opacity-100 transition-opacity">{getSkillIcon(name)}</span>
+    <span className="opacity-80 group-hover:opacity-100 transition-opacity">
+      {icon ? (
+        <Image
+          src={routes.ui.icons(icon)}
+          height={14}
+          width={14}
+          alt={`${name} icon`}
+          className="h-3.5 w-3.5 object-contain"
+          unoptimized
+        />
+      ) : (
+        getSkillIcon(name)
+      )}
+    </span>
     {name}
   </motion.span>
 );
