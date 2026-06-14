@@ -10,7 +10,7 @@
     "format:write": "prettier ./src --write",
     "format:check": "prettier ./src --check",
     "type-check": "tsc --noEmit --incremental false",
-    "prepare": "husky"
+    "prepare": "husky && husky install"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
@@ -45,7 +45,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "husky": "^9.1.7",
+    "husky": "^8.0.0",
     "lint-staged": "^16.4.0",
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
