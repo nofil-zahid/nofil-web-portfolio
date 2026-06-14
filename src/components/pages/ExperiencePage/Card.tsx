@@ -4,10 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MoveRight } from 'lucide-react';
 import { ExperienceItem } from '@/types/model';
-import { formatDateRange } from '@/utils/date';
+import { formatDateRange, calculateDuration } from '@/utils/date'; // Assuming you add it here
 
 const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, endDate, responsibilities }) => {
   const dateRange = formatDateRange(startDate, endDate);
+  const duration = calculateDuration(startDate, endDate || new Date());
 
   return (
     <motion.div
@@ -19,14 +20,16 @@ const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, en
       <div className="mb-[clamp(1rem,3vw,1.5rem)]">
         <h3 className="mb-2 text-[clamp(1.1rem,3vw,1.7rem)] font-bold text-gray-100">{role}</h3>
 
-        <div className="flex flex-wrap items-center gap-[clamp(.5rem,2vw,1rem)]">
-          <span className="bg-accent/10 text-accent rounded-md px-3 py-1 font-mono text-[clamp(.7rem,2vw,.9rem)] font-medium">
-            {dateRange}
-          </span>
-
+        <div className="flex flex-col items-start gap-2">
           <span className="text-accent text-[clamp(.7rem,2vw,.95rem)] font-bold tracking-[0.15em] uppercase">
             {company}
           </span>
+
+          <div className="bg-accent/10 text-accent flex items-center gap-2 rounded-md px-3 py-1 font-mono text-[clamp(.7rem,2vw,.9rem)] font-medium">
+            <span>{dateRange}</span>
+            <span className="text-accent/50 font-sans text-xs">|</span>
+            <span className="font-sans tracking-wide text-gray-400">{duration}</span>
+          </div>
         </div>
       </div>
 
