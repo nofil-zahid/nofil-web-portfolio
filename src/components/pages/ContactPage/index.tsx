@@ -11,11 +11,11 @@ export default function ContactPage() {
         align="left"
         tag="Contact"
       />
-      <div className="flex flex-col-reverse lg:flex-row gap-[clamp(3rem,8vw,6rem)] items-start mt-[clamp(2rem,5vh,4rem)]">
-        <div className="flex-1 w-full order-2 lg:order-1">
+      <div className="mt-[clamp(2rem,5vh,4rem)] flex flex-col-reverse items-start gap-[clamp(3rem,8vw,6rem)] lg:flex-row">
+        <div className="order-2 w-full flex-1 lg:order-1">
           <ContactForm />
         </div>
-        <div className="w-full lg:w-[clamp(350px,30vw,420px)] sticky top-24 order-1 lg:order-2">
+        <div className="sticky top-24 order-1 w-full lg:order-2 lg:w-[clamp(350px,30vw,420px)]">
           <ContactCard />
         </div>
       </div>

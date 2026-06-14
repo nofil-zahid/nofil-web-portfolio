@@ -220,13 +220,13 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full" onClick={handleClick}>
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+    <div className="relative h-full w-full" onClick={handleClick}>
+      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0" />
       {children}
       {mounted && !window.matchMedia('(pointer: coarse)').matches && (
         <>
           <motion.div
-            className="fixed top-0 left-0 w-10 h-10 rounded-full border-2 border-[#0df259] shadow-[0_0_15px_rgba(13,242,89,0.3)] pointer-events-none z-[9999]"
+            className="pointer-events-none fixed top-0 left-0 z-[9999] h-10 w-10 rounded-full border-2 border-[#0df259] shadow-[0_0_15px_rgba(13,242,89,0.3)]"
             style={{
               x: cursorX,
               y: cursorY,
@@ -240,7 +240,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
             transition={{ scale: { type: 'spring', ...springConfig }, backgroundColor: { duration: 0.2 } }}
           />
           <motion.div
-            className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#0df259] shadow-[0_0_10px_rgba(13,242,89,0.5)] pointer-events-none z-[10000]"
+            className="pointer-events-none fixed top-0 left-0 z-[10000] h-2 w-2 rounded-full bg-[#0df259] shadow-[0_0_10px_rgba(13,242,89,0.5)]"
             style={{
               x: mousePosition.x,
               y: mousePosition.y,

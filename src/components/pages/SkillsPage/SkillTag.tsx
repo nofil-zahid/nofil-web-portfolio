@@ -40,13 +40,13 @@ export const SkillTag = ({ name, icon, index }: { name: string; icon?: string; i
     }}
     className={cn(
       'flex items-center gap-2.5',
-      'text-[13px] md:text-[14px] font-medium text-accent/90',
-      'px-4 py-2 border border-accent/20 rounded-lg',
+      'text-accent/90 text-[13px] font-medium md:text-[14px]',
+      'border-accent/20 rounded-lg border px-4 py-2',
       'bg-[#0a1a12]/60 backdrop-blur-sm',
-      'transition-all duration-300 cursor-default select-none shadow-sm hover:border-accent/40',
+      'hover:border-accent/40 cursor-default shadow-sm transition-all duration-300 select-none',
     )}
   >
-    <span className="opacity-80 group-hover:opacity-100 transition-opacity">
+    <span className="opacity-80 transition-opacity group-hover:opacity-100">
       {icon ? (
         <Image
           src={routes.ui.icons(icon)}

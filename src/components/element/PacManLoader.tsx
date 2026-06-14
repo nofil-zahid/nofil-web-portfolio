@@ -6,7 +6,7 @@ const PacManLoader = ({ size = 90 }: { size?: number }) => {
   const accentColor = 'var(--color-accent)';
 
   return (
-    <div className="relative flex items-center justify-center h-40 w-full overflow-hidden">
+    <div className="relative flex h-40 w-full items-center justify-center overflow-hidden">
       <div className="relative" style={{ width: size, height: size }}>
         <motion.div
           variants={dotsVariants}
@@ -44,7 +44,7 @@ const PacManLoader = ({ size = 90 }: { size?: number }) => {
         <motion.div
           variants={bottomJawVariants}
           animate="animate"
-          className="absolute bottom-0 right-5 origin-top shadow-[0_4px_15px_rgba(13,242,89,0.3)]"
+          className="absolute right-5 bottom-0 origin-top shadow-[0_4px_15px_rgba(13,242,89,0.3)]"
           style={{
             width: size,
             height: size / 2,

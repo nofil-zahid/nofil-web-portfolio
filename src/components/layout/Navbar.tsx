@@ -15,14 +15,14 @@ export const Navbar = () => {
             key={link.href}
             href={link.href}
             className={cn(
-              'relative px-6 py-3 text-xs font-mono tracking-tighter transition-all duration-300 flex items-center gap-2 group',
-              'border-t border-r border-l border-transparent rounded-t-lg',
+              'group relative flex items-center gap-2 px-6 py-3 font-mono text-xs tracking-tighter transition-all duration-300',
+              'rounded-t-lg border-t border-r border-l border-transparent',
               isActive
-                ? 'bg-background-primary text-accent border-border-glow translate-y-px z-10'
+                ? 'bg-background-primary text-accent border-border-glow z-10 translate-y-px'
                 : 'text-text-secondary hover:text-text-primary hover:bg-background-secondary/50',
             )}
           >
-            <span className={cn('opacity-40 group-hover:opacity-100 transition-opacity', isActive && 'opacity-100')}>
+            <span className={cn('opacity-40 transition-opacity group-hover:opacity-100', isActive && 'opacity-100')}>
               _
             </span>
             {link.name}

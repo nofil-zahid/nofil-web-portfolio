@@ -26,15 +26,15 @@ const Topbar = () => {
   };
 
   return (
-    <div className="hidden md:flex fixed top-0 left-[clamp(60px,6vw,90px)] right-0 z-40 h-[clamp(60px,8vw,70px)] bg-background-secondary backdrop-blur-md border-b border-border-glow items-end px-[clamp(1.5rem,3vw,2.5rem)] justify-between">
+    <div className="bg-background-secondary border-border-glow fixed top-0 right-0 left-[clamp(60px,6vw,90px)] z-40 hidden h-[clamp(60px,8vw,70px)] items-end justify-between border-b px-[clamp(1.5rem,3vw,2.5rem)] backdrop-blur-md md:flex">
       <div className="mb-4">
         <Breadcrumb />
       </div>
       <div className="flex items-end gap-1">
         <Navbar />
 
-        <div className="flex items-center gap-4 mb-2 ml-6">
-          <div className="h-4 w-px bg-border-glow" />
+        <div className="mb-2 ml-6 flex items-center gap-4">
+          <div className="bg-border-glow h-4 w-px" />
           <Button onClick={handleHireMe} customClass="h-8 text-[10px] uppercase tracking-widest px-4">
             <span>./hire_me</span>
           </Button>

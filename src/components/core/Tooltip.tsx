@@ -40,10 +40,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children, position = 'top', 
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.85 }}
             transition={{ duration: 0.2 }}
-            className={`
-              absolute z-50 whitespace-nowrap px-3 py-1 rounded-md text-sm bg-background-primary text-text-secondary shadow-lg
-              ${positionClasses[position]}
-            `}
+            className={`bg-background-primary text-text-secondary absolute z-50 rounded-md px-3 py-1 text-sm whitespace-nowrap shadow-lg ${positionClasses[position]} `}
           >
             {content}
           </motion.div>

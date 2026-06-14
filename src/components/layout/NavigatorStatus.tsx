@@ -26,16 +26,16 @@ export default function NavigatorStatus() {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 z-9999 pointer-events-none">
+    <div className="pointer-events-none fixed right-4 bottom-4 z-9999">
       <AnimatePresence>
         {hoveredUrl && !isMobile && (
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -10 }}
-            className="bg-[#16211a] border border-[#2a3c30] px-3 py-1 rounded-md shadow-2xl"
+            className="rounded-md border border-[#2a3c30] bg-[#16211a] px-3 py-1 shadow-2xl"
           >
-            <p className="text-[10px] font-mono text-[#5ff07e] tracking-widest">
+            <p className="font-mono text-[10px] tracking-widest text-[#5ff07e]">
               <span className="opacity-50">READY_TO_NAVIGATE:</span> {hoveredUrl}
             </p>
           </motion.div>

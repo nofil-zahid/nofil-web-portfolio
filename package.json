@@ -14,11 +14,11 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
+      "prettier ./src --write",
       "eslint --max-warnings=0 --fix"
     ],
     "src/**/*.{json,css}": [
-      "prettier --write"
+      "prettier ./src --write"
     ]
   },
   "dependencies": {

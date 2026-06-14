@@ -5,11 +5,11 @@ const TermLogEntry = ({ text, active }: { text: string; active: boolean }) => {
   return (
     <div
       className={cn(
-        'text-[9px] md:text-[11px] font-mono transition-all duration-500 flex gap-2 md:gap-4 items-center',
-        active ? 'opacity-100 text-accent translate-x-0' : 'opacity-0 -translate-x-2',
+        'flex items-center gap-2 font-mono text-[9px] transition-all duration-500 md:gap-4 md:text-[11px]',
+        active ? 'text-accent translate-x-0 opacity-100' : '-translate-x-2 opacity-0',
       )}
     >
-      <span className="opacity-30 shrink-0">[{stamp}]</span>
+      <span className="shrink-0 opacity-30">[{stamp}]</span>
       <span className="truncate">
         {active ? <span className="mr-1 inline-block animate-pulse">»</span> : ''} {text}
       </span>
