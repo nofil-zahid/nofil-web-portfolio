@@ -2,16 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { SkillTag } from './SkillTag';
-import { routes } from '@/constants/routes';
-import Image from 'next/image';
+import { CategoryIcon } from './Icons';
+import { TExpertiseCategory, TExpertiseIcon, TExpertiseName } from '@/constants/expertise';
 
 export const ExpertiseCard = ({
   category,
   skills,
   order,
 }: {
-  category: string;
-  skills: { name: string; icon?: string }[];
+  category: TExpertiseCategory;
+  skills: readonly { name: string; icon?: TExpertiseIcon }[];
   order: number;
 }) => (
   <motion.div
@@ -22,18 +22,7 @@ export const ExpertiseCard = ({
     className="group bg-background-secondary/40 hover:border-accent/20 relative overflow-hidden rounded-2xl border border-white/5 p-6 backdrop-blur-sm transition-colors duration-500 md:p-8"
   >
     <div className="absolute -top-1 -right-1 p-2 opacity-5 transition-opacity duration-500 group-hover:opacity-10">
-      {skills && skills[0] && skills[0].icon ? (
-        <Image
-          src={routes.ui.icons(skills[0].icon)}
-          alt={`${category} icon`}
-          className="object-contain opacity-70 grayscale filter"
-          height={60}
-          width={60}
-          unoptimized
-        />
-      ) : (
-        <span className="text-accent font-mono text-[60px] leading-none font-black uppercase select-none">.</span>
-      )}
+      <CategoryIcon category={category} />
     </div>
 
     <div className="relative mb-6 flex items-center gap-3 md:mb-8">
@@ -45,7 +34,7 @@ export const ExpertiseCard = ({
 
     <div className="relative z-10 flex flex-wrap gap-3">
       {skills.map((skill, index) => (
-        <SkillTag key={skill.name} name={skill.name} icon={skill.icon} index={index} />
+        <SkillTag key={skill.name} name={skill.name as TExpertiseName} icon={skill.icon} index={index} />
       ))}
     </div>
   </motion.div>

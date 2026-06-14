@@ -1,5 +1,5 @@
 import SectionHeader from '@/components/shared/SectionHeader';
-import { expertise } from '@/constants/expertise';
+import { expertise, TExpertiseCategory } from '@/constants/expertise';
 import { ExpertiseCard } from './Card';
 
 const SkillsPage = () => {
@@ -13,7 +13,7 @@ const SkillsPage = () => {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {Object.entries(expertise).map(([category, skills], index) => (
-          <ExpertiseCard key={category} category={category} skills={skills} order={index} />
+          <ExpertiseCard key={category} order={index} category={category as TExpertiseCategory} skills={skills} />
         ))}
       </div>
     </section>
