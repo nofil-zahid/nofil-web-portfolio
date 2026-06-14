@@ -41,4 +41,8 @@ export const expertise = {
     { name: 'Vercel', icon: 'vercel' },
     { name: 'Github Actions', icon: 'githubactions' },
   ],
-};
+} as const;
+
+export type TExpertiseCategory = keyof typeof expertise;
+export type TExpertiseName = (typeof expertise)[TExpertiseCategory][number]['name'];
+export type TExpertiseIcon = Extract<(typeof expertise)[TExpertiseCategory][number], { icon: string }>['icon'];
