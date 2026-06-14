@@ -8,6 +8,7 @@ export const routes = Object.freeze({
     contact: '/contact-me',
     expertise: '/expertise',
     experience: '/experience',
+    icons: (slug: string) => `https://cdn.simpleicons.org/${slug}`,
   },
   api: {
     health: '/api/health',
