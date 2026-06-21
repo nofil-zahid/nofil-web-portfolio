@@ -18,12 +18,12 @@ const Contact = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: 0.1, duration: 0.5 }}
-      className="w-full max-w-3xl mx-auto mt-12 p-8 rounded-2xl border border-border-glow bg-background-secondary flex flex-col md:flex-row items-center justify-between gap-8 hover:border-accent/40 transition-colors"
+      className="border-border-glow bg-background-secondary hover:border-accent/40 mx-auto mt-12 flex w-full max-w-3xl flex-col items-center justify-between gap-8 rounded-2xl border p-8 transition-colors md:flex-row"
     >
       <div className="text-center md:text-left">
-        <h3 className="text-xl font-bold text-text-primary mb-2">Still have questions?</h3>
+        <h3 className="text-text-primary mb-2 text-xl font-bold">Still have questions?</h3>
 
-        <p className="text-text-secondary text-sm md:text-base max-w-[400px]">
+        <p className="text-text-secondary max-w-[400px] text-sm md:text-base">
           If you couldnt find what you were looking for, feel free to reach out directly.
         </p>
       </div>

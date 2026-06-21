@@ -52,7 +52,7 @@ const InitialLoader = ({ onFinished }: InitialLoaderProps) => {
             y: -24,
             transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
           }}
-          className="fixed inset-0 z-[9999] bg-background-primary flex flex-col items-center justify-center overflow-hidden font-mono p-4 md:p-8"
+          className="bg-background-primary fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden p-4 font-mono md:p-8"
         >
           {/* Scanline sweep on exit */}
           {isExiting && (
@@ -60,7 +60,7 @@ const InitialLoader = ({ onFinished }: InitialLoaderProps) => {
               initial={{ top: '-4px' }}
               animate={{ top: '110%' }}
               transition={{ duration: 0.55, ease: 'linear' }}
-              className="absolute left-0 w-full h-[2px] bg-accent/60 z-50 shadow-[0_0_12px_#0df259] pointer-events-none"
+              className="bg-accent/60 pointer-events-none absolute left-0 z-50 h-[2px] w-full shadow-[0_0_12px_#0df259]"
               style={{ position: 'absolute' }}
             />
           )}
@@ -79,35 +79,35 @@ const InitialLoader = ({ onFinished }: InitialLoaderProps) => {
             className={cn(
               'w-full max-w-5xl',
               'p-6 md:p-12',
-              'bg-background-secondary/50 border border-border-glow rounded-2xl md:rounded-3xl',
-              'backdrop-blur-md z-10 relative',
+              'bg-background-secondary/50 border-border-glow rounded-2xl border md:rounded-3xl',
+              'relative z-10 backdrop-blur-md',
             )}
           >
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 md:mb-12 gap-4">
+            <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end md:mb-12">
               <div className="w-full">
-                <h1 className="text-[clamp(1.1rem,6vw,2.5rem)] font-black text-accent tracking-tight leading-tight">
+                <h1 className="text-accent text-[clamp(1.1rem,6vw,2.5rem)] leading-tight font-black tracking-tight">
                   Setup In Progress .....
-                  <span className="animate-pulse inline-block w-[1ch] h-[0.6em] bg-accent ml-1 md:ml-2 shadow-[0_0_15px_#0df259]" />
+                  <span className="bg-accent ml-1 inline-block h-[0.6em] w-[1ch] animate-pulse shadow-[0_0_15px_#0df259] md:ml-2" />
                 </h1>
-                <p className="text-accent/40 text-[8px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] mt-1 md:mt-2">
+                <p className="text-accent/40 mt-1 text-[8px] tracking-[0.2em] md:mt-2 md:text-[10px] md:tracking-[0.3em]">
                   NODE_ID: 0x9F22 | portfolio-version: {KERNEL_VERSION}
                 </p>
               </div>
 
               <div className="flex items-baseline sm:text-right">
-                <span className="text-3xl md:text-5xl font-black text-white tabular-nums">{Math.round(progress)}</span>
+                <span className="text-3xl font-black text-white tabular-nums md:text-5xl">{Math.round(progress)}</span>
                 <span className="text-accent ml-1 text-sm md:text-xl">%</span>
               </div>
             </div>
 
             <div className="mb-6 md:mb-8">
-              <div className="flex justify-between items-center mb-2">
-                <p className="text-[8px] md:text-[10px] text-text-secondary uppercase tracking-widest">
+              <div className="mb-2 flex items-center justify-between">
+                <p className="text-text-secondary text-[8px] tracking-widest uppercase md:text-[10px]">
                   Current_Process
                 </p>
-                <p className="text-[8px] text-accent/20 font-mono hidden md:block">ADDR_0x004F2</p>
+                <p className="text-accent/20 hidden font-mono text-[8px] md:block">ADDR_0x004F2</p>
               </div>
-              <p className="text-accent font-bold truncate text-xs md:text-base border-b border-accent/10 pb-2">
+              <p className="text-accent border-accent/10 truncate border-b pb-2 text-xs font-bold md:text-base">
                 {currentProcess}
               </p>
             </div>
@@ -118,15 +118,15 @@ const InitialLoader = ({ onFinished }: InitialLoaderProps) => {
 
             <div
               className={cn(
-                'mt-8 md:mt-12 p-4 md:p-6',
-                'border border-border-glow bg-background-primary/50 rounded-xl',
-                'h-40 md:h-52 overflow-hidden',
-                'flex flex-col-reverse relative',
+                'mt-8 p-4 md:mt-12 md:p-6',
+                'border-border-glow bg-background-primary/50 rounded-xl border',
+                'h-40 overflow-hidden md:h-52',
+                'relative flex flex-col-reverse',
               )}
             >
-              <div className="absolute inset-0 bg-linear-to-t from-background-primary/80 to-transparent pointer-events-none z-10" />
+              <div className="from-background-primary/80 pointer-events-none absolute inset-0 z-10 bg-linear-to-t to-transparent" />
 
-              <div className="space-y-2 relative z-0">
+              <div className="relative z-0 space-y-2">
                 <TermLogEntry text="Initializing application..." active={true} />
                 <TermLogEntry text="Preparing interface..." active={progress > 15} />
                 <TermLogEntry text="Loading components..." active={progress > 40} />

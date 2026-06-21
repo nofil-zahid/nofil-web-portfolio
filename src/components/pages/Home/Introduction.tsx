@@ -29,7 +29,7 @@ const Introduction = () => {
   );
 
   return (
-    <div className="flex flex-col items-start order-1">
+    <div className="order-1 flex flex-col items-start">
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
@@ -39,23 +39,23 @@ const Introduction = () => {
           <span className="text-accent text-[clamp(2.5rem,9vw,5.5rem)] drop-shadow-[0_0_12px_rgba(13,242,89,0.25)]">
             Full Stack
           </span>
-          <span className="text-white text-[clamp(2.5rem,9vw,5.5rem)]">Software Engineer</span>
+          <span className="text-[clamp(2.5rem,9vw,5.5rem)] text-white">Software Engineer</span>
         </h1>
 
-        <p className="mt-6 text-[clamp(0.95rem,1.2vw,1.1rem)] text-text-secondary max-w-lg leading-relaxed font-normal opacity-90">
+        <p className="text-text-secondary mt-6 max-w-lg text-[clamp(0.95rem,1.2vw,1.1rem)] leading-relaxed font-normal opacity-90">
           Hi! I am&nbsp;
-          <span className="text-white font-bold hover:text-accent hover:underline cursor-pointer">Nofil Zahid</span>. I
+          <span className="hover:text-accent cursor-pointer font-bold text-white hover:underline">Nofil Zahid</span>. I
           design and build scalable SaaS products, focusing on performance, clean architecture, and solving real-world
           problems across web and mobile platforms.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
           <Button onClick={handleDownloadCV} isLoading={isCvLoading}>
             <ExternalLink size={16} className="group-hover:animate-bounce" />
             <span className="relative z-10">View CV</span>
           </Button>
           <Button onClick={handleContactMe}>
-            <MessageCircle size={16} className="group-hover:scale-110 transition-transform" />
+            <MessageCircle size={16} className="transition-transform group-hover:scale-110" />
             <span className="relative z-10">Contact Me</span>
           </Button>
         </div>

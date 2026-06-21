@@ -62,3 +62,8 @@ coverage/
 # Docker
 # ===============================
 docker-compose.override.yml
+
+# ===============================
+# Type declarations
+# ===============================
+next-env.d.ts

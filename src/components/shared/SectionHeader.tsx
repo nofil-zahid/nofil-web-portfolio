@@ -16,8 +16,8 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        'max-w-3xl w-full flex flex-col mb-14 group',
-        isCenter ? 'items-center text-center mx-auto' : 'items-start text-left',
+        'group mb-14 flex w-full max-w-3xl flex-col',
+        isCenter ? 'mx-auto items-center text-center' : 'items-start text-left',
         className,
       )}
     >
@@ -27,15 +27,15 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex items-center font-mono mb-6"
+          className="mb-6 flex items-center font-mono"
         >
-          <span className="text-accent text-[9px] font-bold mr-2 opacity-40 select-none">ID_</span>
-          <div className="flex bg-accent/5 border-l border-accent/60 px-2.5 py-1 backdrop-blur-sm">
+          <span className="text-accent mr-2 text-[9px] font-bold opacity-40 select-none">ID_</span>
+          <div className="bg-accent/5 border-accent/60 flex border-l px-2.5 py-1 backdrop-blur-sm">
             {tag.split('').map((char, index) => (
               <motion.span
                 key={index}
                 variants={headerChildVariant}
-                className="text-[10px] font-bold tracking-[0.2em] uppercase text-accent/90"
+                className="text-accent/90 text-[10px] font-bold tracking-[0.2em] uppercase"
               >
                 {char}
               </motion.span>
@@ -48,23 +48,23 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
       <div className={cn('relative mb-4', isCenter ? 'w-full' : 'w-fit')}>
         <h1
           className={cn(
-            'text-[clamp(1.75rem,4vw,2.75rem)] font-bold tracking-tight leading-[1.1] text-text-primary uppercase',
-            "before:content-['>'] before:text-accent/20 before:mr-3 before:text-[0.5em] before:font-mono before:align-middle",
+            'text-text-primary text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.1] font-bold tracking-tight uppercase',
+            "before:text-accent/20 before:mr-3 before:align-middle before:font-mono before:text-[0.5em] before:content-['>']",
           )}
         >
           {title}
         </h1>
         <div
           className={cn(
-            'h-px mt-1.5 bg-linear-to-r from-accent/30 via-accent/5 to-transparent',
-            isCenter ? 'w-24 mx-auto' : 'w-16',
+            'from-accent/30 via-accent/5 mt-1.5 h-px bg-linear-to-r to-transparent',
+            isCenter ? 'mx-auto w-24' : 'w-16',
           )}
         />
       </div>
 
-      <div className={cn('relative flex gap-3 mt-1', isCenter ? 'flex-col items-center' : 'flex-row items-start')}>
+      <div className={cn('relative mt-1 flex gap-3', isCenter ? 'flex-col items-center' : 'flex-row items-start')}>
         {!isCenter && (
-          <div className="flex flex-col text-[9px] font-mono text-accent/15 select-none pt-1.5 border-r border-white/5 pr-3">
+          <div className="text-accent/15 flex flex-col border-r border-white/5 pt-1.5 pr-3 font-mono text-[9px] select-none">
             <span>ln</span>
             <span>01</span>
           </div>
@@ -72,7 +72,7 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
 
         <p
           className={cn(
-            'text-[clamp(0.95rem,1.2vw,1.125rem)] leading-relaxed text-text-secondary max-w-xl font-normal opacity-80',
+            'text-text-secondary max-w-xl text-[clamp(0.95rem,1.2vw,1.125rem)] leading-relaxed font-normal opacity-80',
             isCenter ? 'text-center' : 'text-left',
           )}
         >

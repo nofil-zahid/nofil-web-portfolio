@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo -e "\e[1;32m$(date '+%Y-%m-%d %H:%M:%S') [pre-push] Checking for unstaged changes...\e[0m"
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Push blocked: Working tree is not clean."
+  git status --short
+  exit 1
+fi
+
+echo -e "\e[1;32m$(date '+%Y-%m-%d %H:%M:%S') [pre-push] Running lint...\e[0m"
+npm run lint
+
+echo -e "\e[1;32m$(date '+%Y-%m-%d %H:%M:%S') [pre-push] Running type check...\e[0m"
+npx tsc --noEmit
+
+echo -e "\e[1;32m$(date '+%Y-%m-%d %H:%M:%S') [pre-push] Building project...\e[0m"
+npm run build

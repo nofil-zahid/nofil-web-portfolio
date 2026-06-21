@@ -10,7 +10,7 @@ const ProjectsGrid = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-[repeat(auto-fit,minmax(clamp(260px,28vw,340px),1fr))] gap-[clamp(1rem,2vw,1.6rem)] w-full"
+      className="grid w-full grid-cols-[repeat(auto-fit,minmax(clamp(260px,28vw,340px),1fr))] gap-[clamp(1rem,2vw,1.6rem)]"
     >
       {projects.map((project, index) => (
         <motion.div key={index} variants={itemVariants}>

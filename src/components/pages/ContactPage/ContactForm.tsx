@@ -111,7 +111,7 @@ const ContactForm = () => {
 
       <Button type="submit">
         Initialize Send
-        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+        <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
       </Button>
     </form>
   );

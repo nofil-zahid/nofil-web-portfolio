@@ -9,7 +9,7 @@ import { useState } from 'react';
 const Body = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
-    <section className="w-full flex justify-center px-[clamp(1rem,4vw,2rem)]">
+    <section className="flex w-full justify-center px-[clamp(1rem,4vw,2rem)]">
       <motion.div
         initial="hidden"
         animate="visible"

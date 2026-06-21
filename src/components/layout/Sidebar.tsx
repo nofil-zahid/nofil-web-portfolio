@@ -27,28 +27,17 @@ export default function Sidebar() {
       transition={{ duration: 0.8, ease: 'circOut' }}
     >
       <div
-        className={`
-          fixed z-40 flex items-center justify-between bg-background-secondary border-border-glow
-          transition-all duration-300 top-0 left-0 right-0 h-[clamp(60px,8vw,70px)] px-6
-          flex-row md:flex md:flex-col md:top-0 md:left-0 md:h-screen md:w-[clamp(60px,6vw,90px)] md:py-[clamp(1rem,3vh,2rem)] md:px-0
-          md:border-r
-        `}
+        className={`bg-background-secondary border-border-glow fixed top-0 right-0 left-0 z-40 flex h-[clamp(60px,8vw,70px)] flex-row items-center justify-between px-6 transition-all duration-300 md:top-0 md:left-0 md:flex md:h-screen md:w-[clamp(60px,6vw,90px)] md:flex-col md:border-r md:px-0 md:py-[clamp(1rem,3vh,2rem)]`}
       >
         <button
           onClick={() => toggle()}
-          className="md:hidden text-[clamp(1.5rem,2vw,2rem)] text-accent hover:scale-110 transition cursor-pointer"
+          className="text-accent cursor-pointer text-[clamp(1.5rem,2vw,2rem)] transition hover:scale-110 md:hidden"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         <div
-          className={`
-            text-text-secondary font-medium text-[clamp(0.8rem,1.5vw,1.25rem)]
-            tracking-[clamp(0.15em,0.5vw,0.25em)]
-            md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap
-            transition-colors duration-200
-            active:text-accent active:scale-95 cursor-pointer
-          `}
+          className={`text-text-secondary active:text-accent cursor-pointer text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap`}
           onClick={() => router.push(routes.root)}
         >
           Nofil Zahid
@@ -61,11 +50,11 @@ export default function Sidebar() {
 
       <aside
         className={cn(
-          'fixed z-30 flex flex-col justify-between w-full h-screen',
-          'bg-background-primary text-text-primary border-r border-border-glow',
+          'fixed z-30 flex h-screen w-full flex-col justify-between',
+          'bg-background-primary text-text-primary border-border-glow border-r',
           'transition-transform duration-300',
           'px-[clamp(1.5rem,3vw,3rem)] py-[clamp(2rem,4vh,4rem)]',
-          'md:hidden md:w-[clamp(260px,30vw,340px)] md:h-screen',
+          'md:hidden md:h-screen md:w-[clamp(260px,30vw,340px)]',
           isOpen ? 'translate-x-0 md:translate-x-[clamp(60px,6vw,90px)]' : '-translate-x-full md:-translate-x-full',
         )}
       >
@@ -79,11 +68,11 @@ export default function Sidebar() {
                 onClick={() => toggle()}
                 className="group relative flex items-center py-1 transition-colors duration-300"
               >
-                <div className="absolute -left-6 flex items-center justify-center w-4">
+                <div className="absolute -left-6 flex w-4 items-center justify-center">
                   {active && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="h-6 w-[2px] bg-accent shadow-[0_0_12px_rgba(13,242,89,0.8)]"
+                      className="bg-accent h-6 w-[2px] shadow-[0_0_12px_rgba(13,242,89,0.8)]"
                       transition={{
                         type: 'spring',
                         stiffness: 300,
@@ -95,7 +84,7 @@ export default function Sidebar() {
 
                 <span
                   className={cn(
-                    'text-[clamp(0.9rem,1.2vw,1.1rem)] uppercase tracking-widest transition-all duration-300',
+                    'text-[clamp(0.9rem,1.2vw,1.1rem)] tracking-widest uppercase transition-all duration-300',
                     active
                       ? 'text-accent translate-x-2'
                       : 'text-text-secondary group-hover:text-text-primary group-hover:translate-x-1',
@@ -104,14 +93,14 @@ export default function Sidebar() {
                   /{link.name}
                 </span>
 
-                {active && <span className="absolute inset-0 -z-10 bg-accent/5 blur-xl rounded-full" />}
+                {active && <span className="bg-accent/5 absolute inset-0 -z-10 rounded-full blur-xl" />}
               </Link>
             );
           })}
         </nav>
 
         <motion.div
-          className="flex flex-col gap-3 text-sm text-text-secondary"
+          className="text-text-secondary flex flex-col gap-3 text-sm"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -123,12 +112,12 @@ export default function Sidebar() {
                 <Link
                   href={link.href}
                   target="_blank"
-                  className="flex items-center gap-2 group transition-colors duration-200"
+                  className="group flex items-center gap-2 transition-colors duration-200"
                 >
-                  <Icon className="w-4 h-4 text-text-secondary group-hover:text-accent transition-colors duration-200" />
+                  <Icon className="text-text-secondary group-hover:text-accent h-4 w-4 transition-colors duration-200" />
                   <motion.span
                     whileHover={{ x: 5 }}
-                    className="text-text-secondary group-hover:text-accent transition-colors duration-200 font-mono"
+                    className="text-text-secondary group-hover:text-accent font-mono transition-colors duration-200"
                   >
                     {link.name}
                   </motion.span>

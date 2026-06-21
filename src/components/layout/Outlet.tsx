@@ -9,7 +9,7 @@ const Outlet = ({ children }: ChildrenProps) => {
       initial={{ y: 40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.4, ease: 'backOut' }}
-      className="mt-6 md:mt-10 max-w-7xl mx-auto px-6 py-8"
+      className="mx-auto mt-6 max-w-7xl px-6 py-8 md:mt-10"
     >
       {children}
     </motion.div>

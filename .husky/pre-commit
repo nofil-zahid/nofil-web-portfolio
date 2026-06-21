@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo -e "\e[1;36m$(date '+%Y-%m-%d %H:%M:%S') [pre-commit] Checking code quality before commit...\e[0m"
+npx lint-staged

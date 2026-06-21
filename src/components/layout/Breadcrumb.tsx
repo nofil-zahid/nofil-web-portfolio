@@ -15,9 +15,9 @@ const Breadcrumb = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
     >
-      <div className="flex items-center font-mono text-green-500/80 overflow-x-auto whitespace-nowrap">
+      <div className="flex items-center overflow-x-auto font-mono whitespace-nowrap text-green-500/80">
         <span
-          className="mr-1 text-[clamp(0.75rem,2vw,1rem)] cursor-pointer hover:text-green-500 hover:underline transition-all"
+          className="mr-1 cursor-pointer text-[clamp(0.75rem,2vw,1rem)] transition-all hover:text-green-500 hover:underline"
           onClick={() => router.push(routes.root)}
         >
           root@nofil-web-portfolio:~$
@@ -31,7 +31,7 @@ const Breadcrumb = () => {
               <span
                 className={cn(
                   'cursor-pointer transition-all duration-200',
-                  'hover:text-text-primary hover:underline underline-offset-4 decoration-accent/30',
+                  'hover:text-text-primary decoration-accent/30 underline-offset-4 hover:underline',
                   pathname === urlPath ? 'text-text-primary font-medium' : 'text-text-secondary',
                 )}
                 onClick={() => pathname !== urlPath && router.push(urlPath)}

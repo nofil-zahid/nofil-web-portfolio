@@ -1,8 +1,8 @@
 export const InfoCard = ({ label, value }: { label: string; value: string }) => (
-  <div className="border-l border-white/10 pl-4 py-2 hover:border-accent/50 transition-colors group">
-    <p className="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-500 font-bold group-hover:text-accent/70">
+  <div className="hover:border-accent/50 group border-l border-white/10 py-2 pl-4 transition-colors">
+    <p className="group-hover:text-accent/70 text-[9px] font-bold tracking-widest text-gray-500 uppercase sm:text-[10px]">
       {label}
     </p>
-    <p className="text-sm sm:text-base text-text-primary font-mono font-medium">{value}</p>
+    <p className="text-text-primary font-mono text-sm font-medium sm:text-base">{value}</p>
   </div>
 );

@@ -9,8 +9,8 @@ const Accordion = ({ question, answer, isOpen, onClick }: AccordionProps) => {
       layout
       transition={{ layout: { duration: 0.25 } }}
       className={cn(
-        'border rounded-[clamp(0.75rem,1vw,1rem)] mb-[clamp(0.75rem,1.5vw,1.25rem)]',
-        'transition-colors overflow-hidden bg-background-secondary border-border-glow',
+        'mb-[clamp(0.75rem,1.5vw,1.25rem)] rounded-[clamp(0.75rem,1vw,1rem)] border',
+        'bg-background-secondary border-border-glow overflow-hidden transition-colors',
         'hover:border-accent/40',
       )}
     >
@@ -18,18 +18,18 @@ const Accordion = ({ question, answer, isOpen, onClick }: AccordionProps) => {
         type="button"
         onClick={onClick}
         className={cn(
-          'w-full flex items-center justify-between text-left group cursor-pointer',
+          'group flex w-full cursor-pointer items-center justify-between text-left',
           'px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.9rem,1.8vw,1.4rem)]',
         )}
       >
-        <span className="font-sans font-semibold tracking-tight text-text-primary text-[clamp(0.95rem,1.2vw,1.125rem)]">
+        <span className="text-text-primary font-sans text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold tracking-tight">
           {question}
         </span>
 
         <motion.div
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ duration: 0.2 }}
-          className="shrink-0 text-accent ml-[clamp(0.75rem,1vw,1rem)]"
+          className="text-accent ml-[clamp(0.75rem,1vw,1rem)] shrink-0"
         >
           {isOpen ? <X size={20} /> : <Plus size={20} />}
         </motion.div>
@@ -45,8 +45,8 @@ const Accordion = ({ question, answer, isOpen, onClick }: AccordionProps) => {
           <motion.div layout className="px-[clamp(1rem,2vw,1.5rem)] pb-[clamp(1rem,2vw,1.5rem)]">
             <p
               className={cn(
-                'font-sans leading-relaxed text-text-secondary text-[clamp(0.9rem,1.05vw,1rem)]',
-                'pt-[clamp(0.75rem,1.5vw,1rem)] border-t border-border-glow',
+                'text-text-secondary font-sans text-[clamp(0.9rem,1.05vw,1rem)] leading-relaxed',
+                'border-border-glow border-t pt-[clamp(0.75rem,1.5vw,1rem)]',
               )}
             >
               {answer}

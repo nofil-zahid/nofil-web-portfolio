@@ -3,8 +3,8 @@ import Stats from './Stats';
 
 const Home = () => {
   return (
-    <section className="flex flex-col justify-center min-h-[70vh]">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center z-10 w-full">
+    <section className="flex min-h-[70vh] flex-col justify-center">
+      <div className="z-10 grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
         <Introduction />
         <Stats />
       </div>
