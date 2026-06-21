@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "Checking code quality before commit..."
+echo "$(date '+%Y-%m-%d %H:%M:%S') [pre-commit] Checking code quality before commit..."
 npx lint-staged
