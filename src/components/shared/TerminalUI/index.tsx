@@ -1,19 +1,30 @@
+'use client';
+
 import { useState, useRef, useEffect } from 'react';
 import ExecutionResult from './ExecutionResult';
 import BlinkingCursor from '@/components/element/BlinkingCursor';
+import { getStoredFS, saveFS } from '@/lib/file-system';
+import { FileNode } from '@/lib/file-system/type';
 
 export interface TerminalEntry {
   command: string;
   timestamp: string;
+  currentPath: string[];
 }
 
 export default function TerminalUI() {
   const [terminalInput, setTerminalInput] = useState<string>('');
   const [terminalHistory, setTerminalHistory] = useState<TerminalEntry[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [fileSystem, setFileSystem] = useState<FileNode>(getStoredFS);
+  const [currentPath, setCurrentPath] = useState<string[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    saveFS(fileSystem);
+  }, [fileSystem]);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -21,8 +32,16 @@ export default function TerminalUI() {
     }
   }, [terminalHistory, isProcessing, terminalInput]);
 
+  // Global key listener for auto-focus and Ctrl+L hotkey
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // Ctrl + L or Ctrl + Shift + L -> Clear screen
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
+        e.preventDefault();
+        setTerminalHistory([]);
+        return;
+      }
+
       if (e.altKey || e.ctrlKey || e.metaKey || document.activeElement === inputRef.current) {
         return;
       }
@@ -58,10 +77,12 @@ export default function TerminalUI() {
     });
 
     setTimeout(() => {
-      setTerminalHistory((prev) => [...prev, { command: trimmed, timestamp }]);
+      setTerminalHistory((prev) => [...prev, { command: trimmed, timestamp, currentPath: [...currentPath] }]);
       setIsProcessing(false);
-    }, 300);
+    }, 150);
   };
+
+  const pathString = `~${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
 
   return (
     <div
@@ -85,7 +106,7 @@ export default function TerminalUI() {
         <div className="text-accent/40 text-xs">Initializing Secure Environment Connection...</div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-accent font-bold">$&gt;</span>
+            <span className="text-accent font-bold">{pathString} $&gt;</span>
             <span className="text-text-primary">systemctl status profile-core</span>
           </div>
           <div className="text-accent mt-1 pl-4 text-xs font-semibold">
@@ -95,14 +116,23 @@ export default function TerminalUI() {
             Type <span className="text-accent font-bold">&lsquo;help&lsquo;</span> to view available shell commands.
           </div>
         </div>
+
         {terminalHistory.map((entry, index) => (
           <div key={index} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <span className="text-accent font-bold">$&gt;</span>
+              <span className="text-accent font-bold">
+                ~{entry.currentPath.length > 0 ? '/' + entry.currentPath.join('/') : ''} $&gt;
+              </span>
               <span className="text-text-primary">{entry.command}</span>
               <span className="text-text-secondary ml-auto text-[10px] opacity-40">[{entry.timestamp}]</span>
             </div>
-            <ExecutionResult command={entry.command} />
+            <ExecutionResult
+              command={entry.command}
+              fileSystem={fileSystem}
+              setFileSystem={setFileSystem}
+              currentPath={entry.currentPath}
+              setCurrentPath={setCurrentPath}
+            />
           </div>
         ))}
 
@@ -114,7 +144,7 @@ export default function TerminalUI() {
         )}
 
         <div className="relative mt-2 flex items-center gap-2">
-          <span className="text-accent font-bold">$&gt;</span>
+          <span className="text-accent font-bold">{pathString} $&gt;</span>
 
           <div className="relative flex flex-1 items-center">
             <input
