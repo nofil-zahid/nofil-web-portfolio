@@ -12,6 +12,7 @@ import { useInitialLoading } from '@/hooks/context/loading';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import TerminalUI from '../shared/TerminalUI';
+import { Activity } from 'react';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -28,7 +29,6 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Sidebar Navigation Strip Container */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -36,7 +36,6 @@ export default function Sidebar() {
         className={cn(
           'bg-background-secondary border-border-glow fixed top-0 right-0 left-0 z-50 flex h-[clamp(60px,8vw,70px)] flex-row items-center justify-between px-6 transition-all duration-300',
           'md:top-0 md:left-0 md:flex md:h-screen md:w-[clamp(60px,6vw,90px)] md:flex-col md:border-r md:px-0 md:py-[clamp(1rem,3vh,2rem)]',
-          // Desktop Only: Slide the core tab alongside the layout transition when terminal triggers
           isTerminalOpen && 'md:translate-x-[95vw]',
         )}
       >
@@ -76,9 +75,8 @@ export default function Sidebar() {
         <div className="block w-5 md:hidden" />
       </motion.div>
 
-      {/* Desktop Terminal Flyout Drawer Layer (70% width) */}
       <AnimatePresence>
-        {isTerminalOpen && (
+        <Activity mode={isTerminalOpen ? 'visible' : 'hidden'}>
           <motion.div
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
@@ -88,11 +86,9 @@ export default function Sidebar() {
           >
             <TerminalUI />
           </motion.div>
-        )}
+        </Activity>
       </AnimatePresence>
 
-      {/* Standard Drawer (Mobile Dropdown View Overlay) */}
-      {/* CHANGED: z-30 replaced with z-45 to safely layer completely above the Topbar (z-40) */}
       <aside
         className={cn(
           'fixed z-45 flex h-screen w-full flex-col justify-between',
