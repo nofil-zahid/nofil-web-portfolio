@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, SyntheticEvent } from 'react';
 import ExecutionResult from './ExecutionResult';
 import BlinkingCursor from '@/components/element/BlinkingCursor';
 import { getStoredFS, saveFS } from '@/lib/file-system';
@@ -14,6 +14,7 @@ export interface TerminalEntry {
 
 export default function TerminalUI() {
   const [terminalInput, setTerminalInput] = useState<string>('');
+  const [cursorPosition, setCursorPosition] = useState<number>(0); // Tracks real caret index
   const [terminalHistory, setTerminalHistory] = useState<TerminalEntry[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [fileSystem, setFileSystem] = useState<FileNode>(getStoredFS);
@@ -32,10 +33,17 @@ export default function TerminalUI() {
     }
   }, [terminalHistory, isProcessing, terminalInput]);
 
+  // Sync cursor index whenever user clicks or moves selection inside input
+  const syncCursorPosition = (e?: SyntheticEvent<HTMLInputElement>) => {
+    const target = e?.currentTarget || inputRef.current;
+    if (target && typeof target.selectionStart === 'number') {
+      setCursorPosition(target.selectionStart);
+    }
+  };
+
   // Global key listener for auto-focus and Ctrl+L hotkey
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      // Ctrl + L or Ctrl + Shift + L -> Clear screen
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
         e.preventDefault();
         setTerminalHistory([]);
@@ -60,6 +68,7 @@ export default function TerminalUI() {
     if (!trimmed || isProcessing) return;
 
     setTerminalInput('');
+    setCursorPosition(0);
 
     if (trimmed.toLowerCase() === 'clear') {
       setTerminalHistory([]);
@@ -84,10 +93,17 @@ export default function TerminalUI() {
 
   const pathString = `~${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
 
+  // Split string at current selection index for absolute visual accuracy
+  const textBeforeCursor = terminalInput.slice(0, cursorPosition);
+  const textAfterCursor = terminalInput.slice(cursorPosition);
+
   return (
     <div
       className="relative flex h-full w-full flex-col overflow-hidden bg-[#030f06] p-6 font-mono select-none md:p-10"
-      onClick={() => inputRef.current?.focus()}
+      onClick={() => {
+        inputRef.current?.focus();
+        setTimeout(syncCursorPosition, 0);
+      }}
     >
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0df259_1px,transparent_1px),linear-gradient(to_bottom,#0df259_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.02]" />
 
@@ -143,10 +159,12 @@ export default function TerminalUI() {
           </div>
         )}
 
+        {/* Input Container with Dynamic Caret Synchronization */}
         <div className="relative mt-2 flex items-center gap-2">
           <span className="text-accent font-bold">{pathString} $&gt;</span>
 
           <div className="relative flex flex-1 items-center">
+            {/* Real Input element */}
             <input
               ref={inputRef}
               type="text"
@@ -156,18 +174,29 @@ export default function TerminalUI() {
               disabled={isProcessing}
               autoComplete="off"
               spellCheck="false"
-              onChange={(e) => setTerminalInput(e.target.value)}
+              onChange={(e) => {
+                setTerminalInput(e.target.value);
+                syncCursorPosition(e);
+              }}
+              onClick={syncCursorPosition}
+              onKeyUp={syncCursorPosition}
+              onSelect={syncCursorPosition}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleEnterCommand(terminalInput);
+                } else {
+                  // Small delay ensures selectionStart updates after keydown resolves
+                  setTimeout(syncCursorPosition, 0);
                 }
               }}
               className="text-text-primary absolute inset-0 z-10 w-full border-none bg-transparent font-mono text-sm caret-transparent outline-none"
             />
 
+            {/* Visual Mirror with Dynamic BlinkingCursor Positioning */}
             <div className="text-text-primary pointer-events-none flex items-center font-mono text-sm">
-              <span className="whitespace-pre">{terminalInput}</span>
+              <span className="whitespace-pre">{textBeforeCursor}</span>
               <BlinkingCursor />
+              <span className="whitespace-pre">{textAfterCursor}</span>
             </div>
           </div>
         </div>
