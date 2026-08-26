@@ -6,9 +6,10 @@ import { socialLinks } from '@/constants/links';
 import { cn } from '@/styles/tailwind-utils';
 import { copyToClipboard } from '@/utils/clipboard';
 import { showToast } from '@/utils/toaster';
+import { CONTACT, PROFILE } from '@/constants/profile';
 
 const ContactCard = () => {
-  const email = 'nofilzahid.se@gmail.com';
+  const email = CONTACT.email;
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -78,7 +79,7 @@ const ContactCard = () => {
             </div>
             <div>
               <p className="mb-0.5 text-[10px] font-medium tracking-[0.2em] text-gray-500 uppercase">Location</p>
-              <p className="text-[clamp(0.9rem,1.4vw,1.05rem)] font-medium text-gray-100">Lahore, Pakistan</p>
+              <p className="text-[clamp(0.9rem,1.4vw,1.05rem)] font-medium text-gray-100">{PROFILE.location}</p>
             </div>
           </div>
 
