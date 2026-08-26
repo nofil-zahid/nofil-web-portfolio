@@ -1,11 +1,31 @@
 'use client';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Terminal } from 'lucide-react';
+import { Mail, MapPin, Terminal, Copy, Check } from 'lucide-react';
 import { socialLinks } from '@/constants/links';
 import { cn } from '@/styles/tailwind-utils';
+import { copyToClipboard } from '@/utils/clipboard';
+import { showToast } from '@/utils/toaster';
+import { CONTACT, PROFILE } from '@/constants/profile';
 
 const ContactCard = () => {
-  const email = 'chmnofilzahidofficial85p@gmail.com';
+  const email = CONTACT.email;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      const success = await copyToClipboard(email);
+      if (success) {
+        setCopied(true);
+        showToast({ text: 'EMAIL COPIED TO CLIPBOARD', type: 'success' });
+        setTimeout(() => setCopied(false), 2000);
+      } else {
+        showToast({ text: 'FAILED TO COPY EMAIL', type: 'error' });
+      }
+    } catch {
+      showToast({ text: 'FAILED TO COPY EMAIL', type: 'error' });
+    }
+  };
 
   return (
     <div className="w-full">
@@ -33,16 +53,23 @@ const ContactCard = () => {
               <p className="mb-0.5 truncate text-[10px] font-medium tracking-[0.2em] text-gray-500 uppercase">
                 Direct Protocol
               </p>
-              <a
-                href={`mailto:${email}`}
-                className="relative flex min-w-0 items-center gap-1 font-mono text-[clamp(0.9rem,1.4vw,1.05rem)] tracking-tighter text-gray-100"
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="relative flex min-w-0 cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-left font-mono text-[clamp(0.9rem,1.4vw,1.05rem)] tracking-tighter text-gray-100 focus:outline-none"
+                title="Click to copy email address"
               >
-                <span className="text-accent/40 hidden shrink-0 text-[9px] font-bold sm:inline">mailto:</span>
-                <span className="relative block flex-1 truncate">
-                  {email}
+                <span className="text-accent/40 hidden shrink-0 text-[9px] font-bold sm:inline">copy:</span>
+                <span className="relative flex flex-1 items-center gap-2 truncate">
+                  <span className="truncate">{email}</span>
+                  {copied ? (
+                    <Check className="text-accent h-3.5 w-3.5 shrink-0 animate-pulse" />
+                  ) : (
+                    <Copy className="group-hover/email:text-accent h-3.5 w-3.5 shrink-0 text-gray-500 opacity-0 transition-colors group-hover/email:opacity-100" />
+                  )}
                   <span className="bg-accent absolute -bottom-1 left-0 h-px w-0 shadow-[0_0_8px_#5ff07e] transition-all duration-300 group-hover/email:w-full" />
                 </span>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -52,7 +79,7 @@ const ContactCard = () => {
             </div>
             <div>
               <p className="mb-0.5 text-[10px] font-medium tracking-[0.2em] text-gray-500 uppercase">Location</p>
-              <p className="text-[clamp(0.9rem,1.4vw,1.05rem)] font-medium text-gray-100">Lahore, Pakistan</p>
+              <p className="text-[clamp(0.9rem,1.4vw,1.05rem)] font-medium text-gray-100">{PROFILE.location}</p>
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { cn } from '@/styles/tailwind-utils';
 import { routes } from '@/constants/routes';
+import { TERMINAL_PROMPT } from '@/constants/terminal';
 
 const Breadcrumb = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const Breadcrumb = () => {
           className="mr-1 cursor-pointer text-[clamp(0.75rem,2vw,1rem)] transition-all hover:text-green-500 hover:underline"
           onClick={() => router.push(routes.root)}
         >
-          root@nofil-web-portfolio:~$
+          {TERMINAL_PROMPT}
         </span>
 
         {segments.map((segment, index) => {
