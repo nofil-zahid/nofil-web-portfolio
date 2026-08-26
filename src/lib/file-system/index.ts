@@ -1,6 +1,8 @@
 import { FileNode } from './type';
+import { generateUserTxt, generateContactTxt, generateProjectsTxt } from '@/constants/profile';
+import { projects } from '@/constants/projects';
 
-const FS_STORAGE_KEY = 'terminal_fs_v1';
+const FS_STORAGE_KEY = 'terminal_fs_v2';
 
 export const INITIAL_FS: FileNode = {
   name: '~',
@@ -10,19 +12,19 @@ export const INITIAL_FS: FileNode = {
       name: 'user.txt',
       type: 'file',
       isReadOnly: true,
-      content: `[USER PROFILE]\nName: Full-Stack Developer\nSpecialization: Modern Web Systems, Frontend Engineering & Performance`,
+      content: generateUserTxt(),
     },
     'projects.txt': {
       name: 'projects.txt',
       type: 'file',
       isReadOnly: true,
-      content: `[SYSTEM PROJECTS]\n• Portfolio Architecture (Next.js 15, Tailwind CSS v4)\n• Multi-tenant Core Systems`,
+      content: generateProjectsTxt(projects),
     },
     'contact.txt': {
       name: 'contact.txt',
       type: 'file',
       isReadOnly: true,
-      content: `[COMMUNICATION ENDPOINTS]\nEmail: available on request\nStatus: Open for opportunities`,
+      content: generateContactTxt(),
     },
   },
 };
@@ -51,33 +53,36 @@ export const resolvePath = (
   currentPath: string[],
   targetPathStr: string,
 ): { node: FileNode | null; path: string[]; parent: FileNode | null; name: string } => {
-  const pathSegments = targetPathStr.startsWith('/')
+  if (targetPathStr === '~' || targetPathStr === '') {
+    return { node: root, path: [], parent: null, name: '~' };
+  }
+
+  const rawSegments = targetPathStr.startsWith('/')
     ? targetPathStr.split('/').filter(Boolean)
     : [...currentPath, ...targetPathStr.split('/').filter(Boolean)];
 
-  let current = root;
-  let parent: FileNode | null = null;
-  const resolvedPath: string[] = [];
-
-  for (let i = 0; i < pathSegments.length; i++) {
-    const segment = pathSegments[i];
-    if (segment === '.') continue;
-    if (segment === '..') {
-      if (resolvedPath.length > 0) {
-        resolvedPath.pop();
-      }
-      continue;
+  const normalizedSegments: string[] = [];
+  for (const seg of rawSegments) {
+    if (seg === '.' || seg === '') continue;
+    if (seg === '..') {
+      normalizedSegments.pop();
+    } else {
+      normalizedSegments.push(seg);
     }
-
-    if (current.type !== 'directory' || !current.children || !current.children[segment]) {
-      return { node: null, path: [], parent: null, name: segment };
-    }
-
-    parent = current;
-    current = current.children[segment];
-    resolvedPath.push(segment);
   }
 
-  const name = resolvedPath.length > 0 ? resolvedPath[resolvedPath.length - 1] : '~';
-  return { node: current, path: resolvedPath, parent, name };
+  let current: FileNode = root;
+  let parent: FileNode | null = null;
+
+  for (let i = 0; i < normalizedSegments.length; i++) {
+    const seg = normalizedSegments[i];
+    if (current.type !== 'directory' || !current.children || !current.children[seg]) {
+      return { node: null, path: [], parent: null, name: seg };
+    }
+    parent = current;
+    current = current.children[seg];
+  }
+
+  const name = normalizedSegments.length > 0 ? normalizedSegments[normalizedSegments.length - 1] : '~';
+  return { node: current, path: normalizedSegments, parent, name };
 };

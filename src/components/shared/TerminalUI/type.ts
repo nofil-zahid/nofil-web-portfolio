@@ -1,10 +1,16 @@
+import { ReactNode } from 'react';
 import { FileNode } from '@/lib/file-system/type';
-import { Dispatch, SetStateAction } from 'react';
 
-export interface ExecutionResultProps {
+export interface TerminalEntry {
+  id: string;
   command: string;
-  fileSystem: FileNode;
-  setFileSystem: Dispatch<SetStateAction<FileNode>>;
+  timestamp: string;
   currentPath: string[];
-  setCurrentPath: Dispatch<SetStateAction<string[]>>;
+  output: ReactNode;
+}
+
+export interface CommandExecutionResult {
+  output: ReactNode;
+  updatedFs?: FileNode;
+  updatedPath?: string[];
 }

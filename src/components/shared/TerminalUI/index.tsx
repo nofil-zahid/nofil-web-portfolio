@@ -1,24 +1,22 @@
 'use client';
 
 import { useState, useRef, useEffect, SyntheticEvent } from 'react';
-import ExecutionResult from './ExecutionResult';
+import { executeTerminalCommand } from './ExecutionResult';
 import BlinkingCursor from '@/components/element/BlinkingCursor';
 import { getStoredFS, saveFS } from '@/lib/file-system';
 import { FileNode } from '@/lib/file-system/type';
-
-export interface TerminalEntry {
-  command: string;
-  timestamp: string;
-  currentPath: string[];
-}
+import { TerminalEntry } from './type';
 
 export default function TerminalUI() {
   const [terminalInput, setTerminalInput] = useState<string>('');
-  const [cursorPosition, setCursorPosition] = useState<number>(0); // Tracks real caret index
+  const [cursorPosition, setCursorPosition] = useState<number>(0);
   const [terminalHistory, setTerminalHistory] = useState<TerminalEntry[]>([]);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [fileSystem, setFileSystem] = useState<FileNode>(getStoredFS);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number | null>(null);
+  const [savedDraft, setSavedDraft] = useState<string>('');
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -33,11 +31,16 @@ export default function TerminalUI() {
     }
   }, [terminalHistory, isProcessing, terminalInput]);
 
-  // Sync cursor index whenever user clicks or moves selection inside input
   const syncCursorPosition = (e?: SyntheticEvent<HTMLInputElement>) => {
     const target = e?.currentTarget || inputRef.current;
     if (target && typeof target.selectionStart === 'number') {
       setCursorPosition(target.selectionStart);
+    }
+  };
+
+  const syncCaret = () => {
+    if (inputRef.current && typeof inputRef.current.selectionStart === 'number') {
+      setCursorPosition(inputRef.current.selectionStart);
     }
   };
 
@@ -50,10 +53,24 @@ export default function TerminalUI() {
         return;
       }
 
-      if (e.altKey || e.ctrlKey || e.metaKey || document.activeElement === inputRef.current) {
+      // Ignore when modifiers are active or already focused
+      if (e.altKey || e.ctrlKey || e.metaKey) {
         return;
       }
 
+      // Always focus the terminal input when any key is pressed
+      if (document.activeElement !== inputRef.current) {
+        inputRef.current?.focus();
+      }
+
+      // Prevent page scroll for ArrowUp/ArrowDown when not focused
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        // Let the input's onKeyDown handle history navigation
+        return;
+      }
+
+      // For normal character keys and Backspace, ensure focus (already handled above)
       if (e.key.length === 1 || e.key === 'Backspace') {
         inputRef.current?.focus();
       }
@@ -67,8 +84,11 @@ export default function TerminalUI() {
     const trimmed = rawCommand.trim();
     if (!trimmed || isProcessing) return;
 
+    setCommandHistory((prev) => [...prev, trimmed]);
     setTerminalInput('');
     setCursorPosition(0);
+    setHistoryIndex(null);
+    setSavedDraft('');
 
     if (trimmed.toLowerCase() === 'clear') {
       setTerminalHistory([]);
@@ -85,24 +105,100 @@ export default function TerminalUI() {
       hour12: false,
     });
 
+    const currentPathSnapshot = [...currentPath];
+
     setTimeout(() => {
-      setTerminalHistory((prev) => [...prev, { command: trimmed, timestamp, currentPath: [...currentPath] }]);
+      const result = executeTerminalCommand(trimmed, fileSystem, currentPathSnapshot);
+
+      if (result.updatedFs) {
+        setFileSystem(result.updatedFs);
+      }
+      if (result.updatedPath !== undefined) {
+        setCurrentPath(result.updatedPath);
+      }
+
+      setTerminalHistory((prev) => [
+        ...prev,
+        {
+          id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+          command: trimmed,
+          timestamp,
+          currentPath: currentPathSnapshot,
+          output: result.output,
+        },
+      ]);
       setIsProcessing(false);
-    }, 150);
+    }, 80);
+  };
+
+  const handleHistoryNavigation = (direction: 'up' | 'down') => {
+    if (commandHistory.length === 0) return;
+
+    if (direction === 'up') {
+      if (historyIndex === null) {
+        setSavedDraft(terminalInput);
+        const nextIdx = commandHistory.length - 1;
+        setHistoryIndex(nextIdx);
+        const cmd = commandHistory[nextIdx];
+        setTerminalInput(cmd);
+        setCursorPosition(cmd.length);
+        requestAnimationFrame(() => {
+          inputRef.current?.setSelectionRange(cmd.length, cmd.length);
+        });
+      } else if (historyIndex > 0) {
+        const nextIdx = historyIndex - 1;
+        setHistoryIndex(nextIdx);
+        const cmd = commandHistory[nextIdx];
+        setTerminalInput(cmd);
+        setCursorPosition(cmd.length);
+        requestAnimationFrame(() => {
+          inputRef.current?.setSelectionRange(cmd.length, cmd.length);
+        });
+      } else {
+        // At the top of history (oldest command)
+        const cmd = commandHistory[0];
+        setTerminalInput(cmd);
+        setCursorPosition(cmd.length);
+        requestAnimationFrame(() => {
+          inputRef.current?.setSelectionRange(cmd.length, cmd.length);
+        });
+      }
+    } else if (direction === 'down') {
+      if (historyIndex !== null) {
+        if (historyIndex < commandHistory.length - 1) {
+          const nextIdx = historyIndex + 1;
+          setHistoryIndex(nextIdx);
+          const cmd = commandHistory[nextIdx];
+          setTerminalInput(cmd);
+          setCursorPosition(cmd.length);
+          requestAnimationFrame(() => {
+            inputRef.current?.setSelectionRange(cmd.length, cmd.length);
+          });
+        } else {
+          // At the bottom of history (restore user uncommitted draft)
+          setHistoryIndex(null);
+          setTerminalInput(savedDraft);
+          setCursorPosition(savedDraft.length);
+          requestAnimationFrame(() => {
+            inputRef.current?.setSelectionRange(savedDraft.length, savedDraft.length);
+          });
+        }
+      }
+    }
   };
 
   const pathString = `~${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
 
-  // Split string at current selection index for absolute visual accuracy
   const textBeforeCursor = terminalInput.slice(0, cursorPosition);
-  const textAfterCursor = terminalInput.slice(cursorPosition);
+  const currentChar = terminalInput[cursorPosition] ?? '';
+  const textAfterCursor = terminalInput.slice(cursorPosition + 1);
 
   return (
     <div
       className="relative flex h-full w-full flex-col overflow-hidden bg-[#030f06] p-6 font-mono select-none md:p-10"
       onClick={() => {
         inputRef.current?.focus();
-        setTimeout(syncCursorPosition, 0);
+        requestAnimationFrame(syncCaret);
       }}
     >
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0df259_1px,transparent_1px),linear-gradient(to_bottom,#0df259_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.02]" />
@@ -133,8 +229,8 @@ export default function TerminalUI() {
           </div>
         </div>
 
-        {terminalHistory.map((entry, index) => (
-          <div key={index} className="flex flex-col gap-1">
+        {terminalHistory.map((entry) => (
+          <div key={entry.id} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">
                 ~{entry.currentPath.length > 0 ? '/' + entry.currentPath.join('/') : ''} $&gt;
@@ -142,13 +238,7 @@ export default function TerminalUI() {
               <span className="text-text-primary">{entry.command}</span>
               <span className="text-text-secondary ml-auto text-[10px] opacity-40">[{entry.timestamp}]</span>
             </div>
-            <ExecutionResult
-              command={entry.command}
-              fileSystem={fileSystem}
-              setFileSystem={setFileSystem}
-              currentPath={entry.currentPath}
-              setCurrentPath={setCurrentPath}
-            />
+            {entry.output}
           </div>
         ))}
 
@@ -159,12 +249,12 @@ export default function TerminalUI() {
           </div>
         )}
 
-        {/* Input Container with Dynamic Caret Synchronization */}
+        {/* Input Container with Pixel-Perfect Caret Alignment */}
         <div className="relative mt-2 flex items-center gap-2">
           <span className="text-accent font-bold">{pathString} $&gt;</span>
 
           <div className="relative flex flex-1 items-center">
-            {/* Real Input element */}
+            {/* Native transparent input for input handling & selection */}
             <input
               ref={inputRef}
               type="text"
@@ -176,7 +266,7 @@ export default function TerminalUI() {
               spellCheck="false"
               onChange={(e) => {
                 setTerminalInput(e.target.value);
-                syncCursorPosition(e);
+                setCursorPosition(e.target.selectionStart ?? e.target.value.length);
               }}
               onClick={syncCursorPosition}
               onKeyUp={syncCursorPosition}
@@ -184,19 +274,30 @@ export default function TerminalUI() {
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleEnterCommand(terminalInput);
+                } else if (e.key === 'ArrowUp') {
+                  e.preventDefault();
+                  handleHistoryNavigation('up');
+                } else if (e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  handleHistoryNavigation('down');
                 } else {
-                  // Small delay ensures selectionStart updates after keydown resolves
-                  setTimeout(syncCursorPosition, 0);
+                  requestAnimationFrame(syncCaret);
                 }
               }}
-              className="text-text-primary absolute inset-0 z-10 w-full border-none bg-transparent font-mono text-sm caret-transparent outline-none"
+              className="absolute inset-0 z-10 w-full border-none bg-transparent font-mono text-sm text-transparent caret-transparent outline-none select-none"
             />
 
-            {/* Visual Mirror with Dynamic BlinkingCursor Positioning */}
-            <div className="text-text-primary pointer-events-none flex items-center font-mono text-sm">
-              <span className="whitespace-pre">{textBeforeCursor}</span>
-              <BlinkingCursor />
-              <span className="whitespace-pre">{textAfterCursor}</span>
+            {/* Visual Mirror with Terminal Block Caret */}
+            <div className="pointer-events-none flex items-center font-mono text-sm">
+              <span className="text-text-primary whitespace-pre">{textBeforeCursor}</span>
+              {currentChar ? (
+                <span className="bg-accent inline-block min-w-[1ch] text-center font-bold whitespace-pre text-[#030f06]">
+                  {currentChar === ' ' ? '\u00A0' : currentChar}
+                </span>
+              ) : (
+                <BlinkingCursor />
+              )}
+              <span className="text-text-primary whitespace-pre">{textAfterCursor}</span>
             </div>
           </div>
         </div>
