@@ -74,9 +74,9 @@ const ContactForm = () => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <InputField
         index="01"
-        label="Name"
+        label="Your Name"
         name="name"
-        placeholder="Nabeegh"
+        placeholder="e.g. Nabeegh"
         value={form.name}
         onChange={handleChange}
         error={errors.name}
@@ -85,9 +85,9 @@ const ContactForm = () => {
       />
       <InputField
         index="02"
-        label="Email"
+        label="Your Email"
         name="email"
-        placeholder="subhan@example.com"
+        placeholder="e.g. subhan@example.com"
         value={form.email}
         onChange={handleChange}
         error={errors.email}
@@ -96,10 +96,10 @@ const ContactForm = () => {
       />
       <InputField
         index="03"
-        label="Message"
+        label="Your Message"
         name="message"
         multiline
-        placeholder="Tell me about your project or the opportunity you have in mind..."
+        placeholder="e.g. I would like to discuss a potential collaboration..."
         value={form.message}
         onChange={handleChange}
         error={errors.message}
