@@ -1,17 +1,21 @@
 'use client';
+
 import z from 'zod';
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import emailJs from '@emailjs/browser';
 import Button from '@/components/core/Button';
 import InputField from '@/components/core/InputField';
 import { ContactFormValues, contactSchema, MESSAGE_MAX_LENGTH } from '@/schema/form';
 import { showToast } from '@/utils/toaster';
 import { envVars } from '@/config/env';
+import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 
 const ContactForm = () => {
   const [form, setForm] = useState<ContactFormValues>({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const { state: isSubmitting, enable: startSubmitting, disable: stopSubmitting } = useBooleanToggle();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -39,6 +43,7 @@ const ContactForm = () => {
   };
 
   const handleSendEmail = async () => {
+    startSubmitting();
     try {
       const res = await emailJs.send(
         envVars.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
@@ -56,18 +61,21 @@ const ContactForm = () => {
       console.error(error);
       showToast({ type: 'error', text: 'Failed to send email !' });
     } finally {
+      stopSubmitting();
       setErrors({});
     }
   };
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     const result = contactSchema.safeParse(form);
     if (!result.success) {
       handleError(result);
       return;
     }
-    handleSendEmail();
+    await handleSendEmail();
   };
 
   return (
@@ -80,6 +88,7 @@ const ContactForm = () => {
         value={form.name}
         onChange={handleChange}
         error={errors.name}
+        disabled={isSubmitting}
         spellCheck={false}
         autoComplete="off"
       />
@@ -91,6 +100,7 @@ const ContactForm = () => {
         value={form.email}
         onChange={handleChange}
         error={errors.email}
+        disabled={isSubmitting}
         spellCheck={false}
         autoComplete="off"
       />
@@ -103,16 +113,28 @@ const ContactForm = () => {
         value={form.message}
         onChange={handleChange}
         error={errors.message}
+        disabled={isSubmitting}
         maxLength={MESSAGE_MAX_LENGTH}
         showCounter
         spellCheck={false}
         autoComplete="off"
       />
 
-      <Button type="submit">
-        Initialize Send
-        <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-      </Button>
+      <div className="flex w-full justify-start pt-2">
+        <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting} customClass="w-full sm:w-auto">
+          {isSubmitting ? (
+            <>
+              Sending...
+              <Loader2 size={18} className="animate-spin" />
+            </>
+          ) : (
+            <>
+              Initialize Send
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </>
+          )}
+        </Button>
+      </div>
     </form>
   );
 };

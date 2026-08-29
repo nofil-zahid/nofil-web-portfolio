@@ -29,11 +29,12 @@ const Introduction = () => {
   );
 
   return (
-    <div className="order-1 flex flex-col items-start">
+    <div className="order-1 flex w-full flex-col items-center text-center lg:items-start lg:text-left">
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="flex flex-col items-center lg:items-start"
       >
         <h1 className="flex flex-col leading-[0.9] font-black tracking-tighter uppercase select-none">
           <span className="text-accent text-[clamp(2.5rem,9vw,5.5rem)] drop-shadow-[0_0_12px_rgba(13,242,89,0.25)]">
@@ -49,12 +50,12 @@ const Introduction = () => {
           problems across web and mobile platforms.
         </p>
 
-        <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
-          <Button onClick={handleDownloadCV} isLoading={isCvLoading}>
+        <div className="mt-10 flex w-full flex-col gap-4 sm:flex-row lg:w-auto">
+          <Button onClick={handleDownloadCV} isLoading={isCvLoading} customClass="w-full sm:w-1/2 lg:w-auto">
             <ExternalLink size={16} className="group-hover:animate-bounce" />
             <span className="relative z-10">View CV</span>
           </Button>
-          <Button onClick={handleContactMe}>
+          <Button onClick={handleContactMe} customClass="w-full sm:w-1/2 lg:w-auto">
             <MessageCircle size={16} className="transition-transform group-hover:scale-110" />
             <span className="relative z-10">Contact Me</span>
           </Button>

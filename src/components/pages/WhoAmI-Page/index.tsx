@@ -17,7 +17,7 @@ export default function WhoAmI() {
 
   return (
     <section>
-      <div className="mb-20 grid items-end md:pr-30 lg:grid-cols-[1fr_auto]">
+      <div className="mb-20 grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:pr-30">
         <SectionHeader
           title="Who Am I?"
           tag="about-me"
@@ -28,7 +28,7 @@ export default function WhoAmI() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="flex justify-center md:justify-start"
+          className="flex justify-center justify-self-center lg:justify-end lg:justify-self-end"
         >
           <Avatar
             src="/profile.png"
