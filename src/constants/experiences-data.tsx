@@ -8,6 +8,7 @@ export const experiences: ExperienceItem[] = [
     company: 'STACK360',
     startDate: new Date(2025, 6),
     endDate: null,
+    website: 'https://stack360.co/',
     responsibilities: [
       'Designed and implemented a multi-tenant SaaS architecture using Next.js and Express.js.',
       'Implemented PostgreSQL multi-schema strategy for tenant data isolation and scalable routing.',
@@ -19,6 +20,7 @@ export const experiences: ExperienceItem[] = [
   {
     role: 'MERN Stack Developer',
     company: 'Directorate of Information Technology, GCUL',
+    website: 'https://gcu.edu.pk/directorate-IT.php',
     startDate: new Date(2023, 10),
     endDate: new Date(2025, 6),
     responsibilities: [
