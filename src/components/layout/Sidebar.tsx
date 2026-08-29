@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, SquareTerminal } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 import { navLinks, socialLinks } from '@/constants/links';
 import { cn } from '@/styles/tailwind-utils';
@@ -22,7 +22,6 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Sidebar Navigation Rail & Terminal Drawer Container */}
       <motion.div
         initial={false}
         animate={{
@@ -49,39 +48,34 @@ export default function Sidebar() {
           Nofil Zahid
         </div>
 
-        {/* Terminal Action Trigger */}
         <button
           onClick={() => toggleTerminal()}
           className={cn(
-            'group relative hidden cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-2.5 py-2 font-mono text-xs transition-all duration-300 md:flex',
+            'group border-accent bg-accent text-background-primary relative hidden h-8 w-8 cursor-pointer items-center justify-center rounded-md border font-mono transition-all duration-300 active:scale-95 md:flex',
             isTerminalOpen
-              ? 'border-accent bg-accent/10 text-accent shadow-[0_0_15px_rgba(13,242,89,0.25)]'
-              : 'text-text-secondary hover:border-accent/40 hover:text-accent border-[#2a3c30] bg-[#061a0a]/60 hover:shadow-[0_0_12px_rgba(13,242,89,0.15)]',
+              ? 'shadow-[0_0_20px_rgba(13,242,89,0.35)] hover:shadow-[0_0_25px_rgba(13,242,89,0.5)]'
+              : 'hover:shadow-[0_0_20px_rgba(13,242,89,0.35)]',
           )}
           aria-label={isTerminalOpen ? 'Close Terminal' : 'Open Terminal'}
+          title={isTerminalOpen ? 'Close Terminal (ESC)' : 'Open Terminal'}
         >
           {isTerminalOpen ? (
-            <>
-              <X size={16} className="text-accent transition-transform duration-300 group-hover:rotate-90" />
-              <span className="text-[10px] font-bold tracking-wider uppercase">ESC</span>
-            </>
+            <X size={16} className="transition-transform duration-300 group-hover:rotate-90" />
           ) : (
-            <>
-              <SquareTerminal size={18} className="transition-transform group-hover:scale-105" />
-              <span className="text-accent/80 group-hover:text-accent text-[10px] font-bold tracking-tight">&gt;_</span>
-            </>
+            <div className="flex items-center -space-x-1 font-mono text-xs font-black">
+              <ChevronRight size={15} strokeWidth={3} className="transition-transform group-hover:translate-x-0.5" />
+              <span className="text-[10px] font-bold">_</span>
+            </div>
           )}
         </button>
 
         <div className="block w-5 md:hidden" />
 
-        {/* Terminal View attached directly to the moving Rail */}
         <div className="bg-background-primary border-border-glow absolute top-0 right-full h-screen w-[calc(100vw-clamp(60px,6vw,90px))] border-r">
-          <TerminalUI />
+          <TerminalUI isOpen={isTerminalOpen} />
         </div>
       </motion.div>
 
-      {/* Dimmed Background Overlay */}
       <AnimatePresence>
         {isTerminalOpen && (
           <motion.div
@@ -95,7 +89,6 @@ export default function Sidebar() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Navigation Drawer */}
       <aside
         className={cn(
           'fixed z-45 flex h-screen w-full flex-col justify-between',
