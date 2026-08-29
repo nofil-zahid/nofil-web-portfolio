@@ -7,7 +7,7 @@ import { getStoredFS, saveFS } from '@/lib/file-system';
 import { FileNode } from '@/lib/file-system/type';
 import { TerminalEntry } from './type';
 
-export default function TerminalUI() {
+export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
   const [terminalInput, setTerminalInput] = useState<string>('');
   const [cursorPosition, setCursorPosition] = useState<number>(0);
   const [terminalHistory, setTerminalHistory] = useState<TerminalEntry[]>([]);
@@ -44,8 +44,10 @@ export default function TerminalUI() {
     }
   };
 
-  // Global key listener for auto-focus and Ctrl+L hotkey
+  // Global key listener for auto-focus and Ctrl+L hotkey — only active when terminal is open
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
         e.preventDefault();
@@ -78,7 +80,7 @@ export default function TerminalUI() {
 
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, []);
+  }, [isOpen]);
 
   const handleEnterCommand = (rawCommand: string) => {
     const trimmed = rawCommand.trim();
