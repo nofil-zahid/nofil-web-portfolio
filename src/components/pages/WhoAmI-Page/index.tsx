@@ -8,34 +8,27 @@ import { myYearsOfExperience } from '@/utils/date';
 import { SectionHeading } from './SectionHeading';
 import { InfoCard } from './InfoCard';
 import { useResponsive } from '@/hooks/core/use-responsive';
-
-const quotes = [
-  'The best systems solve real problems, not just technical ones.',
-  'Clean architecture scales. Messy code doesn’t.',
-  "Performance is not optional — it's a feature.",
-  'Good developers write code. Great developers design systems.',
-  'Simplicity is what makes systems truly powerful.',
-];
+import { ABOUT, PROFILE } from '@/constants/profile';
 
 export default function WhoAmI() {
-  const [quote] = useState(() => quotes[Math.floor(Math.random() * quotes.length)]);
+  const [quote] = useState(() => ABOUT.quotes[Math.floor(Math.random() * ABOUT.quotes.length)]);
 
   const { isMobile } = useResponsive();
 
   return (
     <section>
-      <div className="mb-20 grid items-end md:pr-30 lg:grid-cols-[1fr_auto]">
+      <div className="mb-20 grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:pr-30">
         <SectionHeader
           title="Who Am I?"
           tag="about-me"
-          description="Full Stack Engineer specializing in scalable systems, API design, and building efficient solutions for real-world applications."
+          description={`${PROFILE.title} specializing in ${PROFILE.specialization.toLowerCase()}, and building efficient solutions for real-world applications.`}
         />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="flex justify-center md:justify-start"
+          className="flex justify-center justify-self-center lg:justify-end lg:justify-self-end"
         >
           <Avatar
             src="/profile.png"
@@ -55,41 +48,24 @@ export default function WhoAmI() {
           <section>
             <SectionHeading title="Overview" subtitle="Profile_Summary" />
             <div className="text-text-secondary space-y-4 leading-relaxed">
-              <p>
-                I am a backend-focused Full Stack Engineer, delivers practical and efficient solutions for real-world
-                applications. I take ownership of the systems I work on from development to deployment, approaching
-                challenges with research, analysis, and hands-on implementation to build scalable and maintainable
-                architectures.
-              </p>
-              <p>
-                When a solution does not exist, I design it from the ground up by evaluating options, experimenting, and
-                implementing the most effective approach. I focus on creating systems that are not only functional but
-                also performant, reliable, and easy to extend.
-              </p>
-              <p>
-                Additionally, I have developed strong design skills to ensure that the user experience complements the
-                backend logic, resulting in applications that are both powerful and intuitive.
-              </p>
+              {ABOUT.summary.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
             </div>
           </section>
 
           <section>
             <SectionHeading title="Development Philosophy" subtitle="Protocol_Approach" />
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="bg-background-secondary/50 hover:bg-accent/5 rounded-xl border border-white/5 p-6 transition-colors">
-                <h4 className="mb-2 font-bold text-white">Scalable by Design</h4>
-                <p className="text-text-secondary text-xs">
-                  I build systems with growth in mind, focusing on clean architecture and modular design that can handle
-                  real-world complexity.
-                </p>
-              </div>
-              <div className="bg-background-secondary/50 hover:bg-accent/5 rounded-xl border border-white/5 p-6 transition-colors">
-                <h4 className="mb-2 font-bold text-white">Problem-Driven Development</h4>
-                <p className="text-text-secondary text-xs">
-                  I focus on solving real problems, not just writing code but ensuring performance, usability, and
-                  long-term maintainability.
-                </p>
-              </div>
+              {ABOUT.philosophy.map((item) => (
+                <div
+                  key={item.title}
+                  className="bg-background-secondary/50 hover:bg-accent/5 rounded-xl border border-white/5 p-6 transition-colors"
+                >
+                  <h4 className="mb-2 font-bold text-white">{item.title}</h4>
+                  <p className="text-text-secondary text-xs">{item.description}</p>
+                </div>
+              ))}
             </div>
           </section>
         </motion.div>
@@ -104,9 +80,9 @@ export default function WhoAmI() {
             <SectionHeading title="Professional Overview" subtitle="Key Highlights" />
             <div className="grid grid-cols-2 gap-x-4 gap-y-8 pr-8 md:pr-0">
               <InfoCard label="Experience" value={`${myYearsOfExperience()} Years`} />
-              <InfoCard label="Availability" value="Open to Opportunities" />
-              <InfoCard label="Location" value="Lahore, Pakistan" />
-              <InfoCard label="Focus Area" value="Enterprise & SaaS Applications" />
+              <InfoCard label="Availability" value={PROFILE.availability} />
+              <InfoCard label="Location" value={PROFILE.location} />
+              <InfoCard label="Focus Area" value={PROFILE.focusArea} />
             </div>
           </section>
 

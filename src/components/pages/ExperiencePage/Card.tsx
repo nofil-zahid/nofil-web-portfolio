@@ -5,8 +5,9 @@ import { motion } from 'framer-motion';
 import { MoveRight } from 'lucide-react';
 import { ExperienceItem } from '@/types/model';
 import { formatDateRange, calculateDuration } from '@/utils/date'; // Assuming you add it here
+import Link from 'next/link';
 
-const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, endDate, responsibilities }) => {
+const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, endDate, responsibilities, website }) => {
   const dateRange = formatDateRange(startDate, endDate);
   const duration = calculateDuration(startDate, endDate || new Date());
 
@@ -21,9 +22,13 @@ const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, en
         <h3 className="mb-2 text-[clamp(1.1rem,3vw,1.7rem)] font-bold text-gray-100">{role}</h3>
 
         <div className="flex flex-col items-start gap-2">
-          <span className="text-accent text-[clamp(.7rem,2vw,.95rem)] font-bold tracking-[0.15em] uppercase">
+          <Link
+            href={website ?? '#'}
+            target="_blank"
+            className="text-accent text-[clamp(.7rem,2vw,.95rem)] font-bold tracking-[0.15em] uppercase hover:underline"
+          >
             {company}
-          </span>
+          </Link>
 
           <div className="bg-accent/10 text-accent flex items-center gap-2 rounded-md px-3 py-1 font-mono text-[clamp(.7rem,2vw,.9rem)] font-medium">
             <span>{dateRange}</span>

@@ -1,61 +1,108 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-import { Menu, X, Code2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 import { navLinks, socialLinks } from '@/constants/links';
-import { containerVariants, itemVariants } from '@/styles/motion-framer-utils';
 import { cn } from '@/styles/tailwind-utils';
 import { useInitialLoading } from '@/hooks/context/loading';
-import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
+import TerminalUI from '../shared/TerminalUI';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { state: isOpen, toggle } = useBooleanToggle();
+  const { state: isTerminalOpen, toggle: toggleTerminal } = useBooleanToggle();
 
   const { hasLoaded } = useInitialLoading();
   if (!hasLoaded) return null;
 
   return (
-    <motion.div
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: 'circOut' }}
-    >
-      <div
-        className={`bg-background-secondary border-border-glow fixed top-0 right-0 left-0 z-40 flex h-[clamp(60px,8vw,70px)] flex-row items-center justify-between px-6 transition-all duration-300 md:top-0 md:left-0 md:flex md:h-screen md:w-[clamp(60px,6vw,90px)] md:flex-col md:border-r md:px-0 md:py-[clamp(1rem,3vh,2rem)]`}
+    <>
+      <motion.div
+        initial={false}
+        animate={{
+          x: isTerminalOpen ? 'calc(100vw - clamp(60px, 6vw, 90px))' : 0,
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 32 }}
+        className={cn(
+          'bg-background-secondary border-border-glow fixed top-0 right-0 left-0 z-50 flex h-[clamp(60px,8vw,70px)] flex-row items-center justify-between px-6 transition-colors duration-300',
+          'md:top-0 md:left-0 md:flex md:h-screen md:w-[clamp(60px,6vw,90px)] md:flex-col md:border-r md:px-0 md:py-[clamp(1rem,3vh,2rem)]',
+        )}
       >
         <button
           onClick={() => toggle()}
           className="text-accent cursor-pointer text-[clamp(1.5rem,2vw,2rem)] transition hover:scale-110 md:hidden"
+          aria-label="Toggle Navigation"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         <div
-          className={`text-text-secondary active:text-accent cursor-pointer text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap`}
+          className="text-text-secondary active:text-accent cursor-pointer text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap"
           onClick={() => router.push(routes.root)}
         >
           Nofil Zahid
         </div>
 
-        <div className="text-accent text-xl">
-          <Code2 onClick={() => router.push(routes.root)} />
+        <button
+          onClick={() => toggleTerminal()}
+          className={cn(
+            'group relative hidden h-8 w-8 cursor-pointer items-center justify-center rounded-md border font-mono transition-all duration-300 active:scale-95 md:flex',
+            'border-accent bg-accent text-background-primary',
+            'hover:bg-background-primary hover:text-accent',
+            isTerminalOpen
+              ? 'shadow-[0_0_20px_rgba(13,242,89,0.35)] hover:shadow-[0_0_25px_rgba(13,242,89,0.5)]'
+              : 'hover:shadow-[0_0_20px_rgba(13,242,89,0.35)]',
+          )}
+          aria-label={isTerminalOpen ? 'Close Terminal' : 'Open Terminal'}
+          title={isTerminalOpen ? 'Close Terminal (ESC)' : 'Open Terminal'}
+        >
+          {isTerminalOpen ? (
+            <X size={16} className="text-current transition-transform duration-300 group-hover:rotate-90" />
+          ) : (
+            <div className="flex items-center -space-x-1 font-mono text-xs font-black text-current">
+              <ChevronRight
+                size={15}
+                strokeWidth={3}
+                className="text-current transition-transform group-hover:translate-x-0.5"
+              />
+              <span className="text-[10px] font-bold text-current">_</span>
+            </div>
+          )}
+        </button>
+
+        <div className="block w-5 md:hidden" />
+
+        <div className="bg-background-primary border-border-glow absolute top-0 right-full h-screen w-[calc(100vw-clamp(60px,6vw,90px))] border-r">
+          <TerminalUI isOpen={isTerminalOpen} />
         </div>
-      </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {isTerminalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            onClick={() => toggleTerminal()}
+            className="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm md:block"
+          />
+        )}
+      </AnimatePresence>
 
       <aside
         className={cn(
-          'fixed z-30 flex h-screen w-full flex-col justify-between',
+          'fixed z-45 flex h-screen w-full flex-col justify-between',
           'bg-background-primary text-text-primary border-border-glow border-r',
           'transition-transform duration-300',
           'px-[clamp(1.5rem,3vw,3rem)] py-[clamp(2rem,4vh,4rem)]',
-          'md:hidden md:h-screen md:w-[clamp(260px,30vw,340px)]',
-          isOpen ? 'translate-x-0 md:translate-x-[clamp(60px,6vw,90px)]' : '-translate-x-full md:-translate-x-full',
+          'md:hidden',
+          isOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
         <nav className="mt-16 flex flex-col gap-[clamp(1rem,3vh,2rem)] font-mono">
@@ -99,34 +146,26 @@ export default function Sidebar() {
           })}
         </nav>
 
-        <motion.div
-          className="text-text-secondary flex flex-col gap-3 text-sm"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
+        <div className="text-text-secondary flex flex-col gap-3 text-sm">
           {socialLinks.map((link) => {
             const Icon = link.icon;
             return (
-              <motion.div key={link.name} variants={itemVariants}>
+              <div key={link.name}>
                 <Link
                   href={link.href}
                   target="_blank"
                   className="group flex items-center gap-2 transition-colors duration-200"
                 >
                   <Icon className="text-text-secondary group-hover:text-accent h-4 w-4 transition-colors duration-200" />
-                  <motion.span
-                    whileHover={{ x: 5 }}
-                    className="text-text-secondary group-hover:text-accent font-mono transition-colors duration-200"
-                  >
+                  <span className="text-text-secondary group-hover:text-accent font-mono transition-colors duration-200">
                     {link.name}
-                  </motion.span>
+                  </span>
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </aside>
-    </motion.div>
+    </>
   );
 }

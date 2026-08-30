@@ -12,4 +12,5 @@ export interface ExperienceItem {
   endDate: Date | null;
   responsibilities: string[];
   icon?: LucideIcon;
+  website?: string;
 }
