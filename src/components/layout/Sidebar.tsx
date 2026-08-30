@@ -51,7 +51,9 @@ export default function Sidebar() {
         <button
           onClick={() => toggleTerminal()}
           className={cn(
-            'group border-accent bg-accent text-background-primary relative hidden h-8 w-8 cursor-pointer items-center justify-center rounded-md border font-mono transition-all duration-300 active:scale-95 md:flex',
+            'group relative hidden h-8 w-8 cursor-pointer items-center justify-center rounded-md border font-mono transition-all duration-300 active:scale-95 md:flex',
+            'border-accent bg-accent text-background-primary',
+            'hover:bg-background-primary hover:text-accent',
             isTerminalOpen
               ? 'shadow-[0_0_20px_rgba(13,242,89,0.35)] hover:shadow-[0_0_25px_rgba(13,242,89,0.5)]'
               : 'hover:shadow-[0_0_20px_rgba(13,242,89,0.35)]',
@@ -60,11 +62,15 @@ export default function Sidebar() {
           title={isTerminalOpen ? 'Close Terminal (ESC)' : 'Open Terminal'}
         >
           {isTerminalOpen ? (
-            <X size={16} className="transition-transform duration-300 group-hover:rotate-90" />
+            <X size={16} className="text-current transition-transform duration-300 group-hover:rotate-90" />
           ) : (
-            <div className="flex items-center -space-x-1 font-mono text-xs font-black">
-              <ChevronRight size={15} strokeWidth={3} className="transition-transform group-hover:translate-x-0.5" />
-              <span className="text-[10px] font-bold">_</span>
+            <div className="flex items-center -space-x-1 font-mono text-xs font-black text-current">
+              <ChevronRight
+                size={15}
+                strokeWidth={3}
+                className="text-current transition-transform group-hover:translate-x-0.5"
+              />
+              <span className="text-[10px] font-bold text-current">_</span>
             </div>
           )}
         </button>
