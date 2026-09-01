@@ -206,7 +206,7 @@ const CyberCursor: React.FC<CyberCursorProps> = ({
         <>
           {/* Outer Trailing Reticle */}
           <motion.div
-            className="pointer-events-none fixed top-0 left-0 z-[9999] flex h-9 w-9 items-center justify-center"
+            className="pointer-events-none fixed top-0 left-0 z-9999 flex h-9 w-9 items-center justify-center"
             style={{
               x: cursorX,
               y: cursorY,
@@ -243,7 +243,7 @@ const CyberCursor: React.FC<CyberCursorProps> = ({
 
           {/* Inner Sharp Crosshair */}
           <motion.div
-            className="text-accent pointer-events-none fixed top-0 left-0 z-[10000] flex h-4 w-4 items-center justify-center"
+            className="text-accent pointer-events-none fixed top-0 left-0 z-10000 flex h-4 w-4 items-center justify-center"
             style={{
               x: mousePosition.x,
               y: mousePosition.y,

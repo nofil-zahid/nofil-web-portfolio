@@ -119,7 +119,7 @@ export default function Sidebar() {
                   {active && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="bg-accent h-6 w-[2px] shadow-[0_0_12px_rgba(13,242,89,0.8)]"
+                      className="bg-accent h-6 w-0.5 shadow-[0_0_12px_rgba(13,242,89,0.8)]"
                       transition={{
                         type: 'spring',
                         stiffness: 300,

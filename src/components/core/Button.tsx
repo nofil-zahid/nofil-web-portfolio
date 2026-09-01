@@ -6,7 +6,7 @@ const Button = ({ children, isLoading, disabled, customClass = '', ...props }: B
   return (
     <button
       className={cn(
-        'group border-accent bg-accent text-background-primary hover:bg-background-primary hover:text-accent relative flex min-w-[140px] items-center justify-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-bold whitespace-nowrap transition-all hover:shadow-[0_0_20px_rgba(13,242,89,0.35)] active:scale-95 disabled:pointer-events-none disabled:opacity-60 disabled:hover:shadow-none sm:min-w-[110px] sm:px-6 sm:py-3 sm:text-base',
+        'group border-accent bg-accent text-background-primary hover:bg-background-primary hover:text-accent relative flex min-w-35 items-center justify-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-bold whitespace-nowrap transition-all hover:shadow-[0_0_20px_rgba(13,242,89,0.35)] active:scale-95 disabled:pointer-events-none disabled:opacity-60 disabled:hover:shadow-none sm:min-w-27.5 sm:px-6 sm:py-3 sm:text-base',
         customClass,
       )}
       type="button"

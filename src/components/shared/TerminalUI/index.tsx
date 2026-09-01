@@ -6,6 +6,7 @@ import BlinkingCursor from '@/components/element/BlinkingCursor';
 import { getStoredFS, saveFS } from '@/lib/file-system';
 import { FileNode } from '@/lib/file-system/type';
 import { TerminalEntry } from './type';
+import { TERMINAL_PROMPT } from '@/constants/terminal';
 
 export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
   const [terminalInput, setTerminalInput] = useState<string>('');
@@ -189,7 +190,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
     }
   };
 
-  const pathString = `~${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
+  const pathString = `${TERMINAL_PROMPT}${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
 
   const textBeforeCursor = terminalInput.slice(0, cursorPosition);
   const currentChar = terminalInput[cursorPosition] ?? '';
@@ -197,13 +198,13 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
 
   return (
     <div
-      className="relative flex h-full w-full flex-col overflow-hidden bg-[#030f06] p-6 font-mono select-none md:p-10"
+      className="bg-background-primary relative flex h-full w-full flex-col overflow-hidden p-6 font-mono select-none md:p-10"
       onClick={() => {
         inputRef.current?.focus();
         requestAnimationFrame(syncCaret);
       }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0df259_1px,transparent_1px),linear-gradient(to_bottom,#0df259_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.02]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0df259_1px,transparent_1px),linear-gradient(to_bottom,#0df259_1px,transparent_1px)] bg-size-[24px_24px] opacity-[0.02]" />
 
       <div className="border-accent/20 text-accent/70 mb-4 flex items-center justify-between border-b pb-3 text-xs tracking-wider uppercase">
         <div className="flex items-center gap-2">
@@ -220,7 +221,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
         <div className="text-accent/40 text-xs">Initializing Secure Environment Connection...</div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-accent font-bold">{pathString} $&gt;</span>
+            <span className="text-accent font-bold">{TERMINAL_PROMPT} $&gt;</span>
             <span className="text-text-primary">systemctl status profile-core</span>
           </div>
           <div className="text-accent mt-1 pl-4 text-xs font-semibold">
@@ -235,7 +236,8 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
           <div key={entry.id} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">
-                ~{entry.currentPath.length > 0 ? '/' + entry.currentPath.join('/') : ''} $&gt;
+                {TERMINAL_PROMPT}
+                {entry.currentPath.length > 0 ? '/' + entry.currentPath.join('/') : ''} $&gt;
               </span>
               <span className="text-text-primary">{entry.command}</span>
               <span className="text-text-secondary ml-auto text-[10px] opacity-40">[{entry.timestamp}]</span>
@@ -293,7 +295,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
             <div className="pointer-events-none flex items-center font-mono text-sm">
               <span className="text-text-primary whitespace-pre">{textBeforeCursor}</span>
               {currentChar ? (
-                <span className="bg-accent inline-block min-w-[1ch] text-center font-bold whitespace-pre text-[#030f06]">
+                <span className="bg-accent text-background-primary inline-block min-w-[1ch] text-center font-bold whitespace-pre">
                   {currentChar === ' ' ? '\u00A0' : currentChar}
                 </span>
               ) : (
