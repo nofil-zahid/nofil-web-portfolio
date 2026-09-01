@@ -6,6 +6,7 @@ import BlinkingCursor from '@/components/element/BlinkingCursor';
 import { getStoredFS, saveFS } from '@/lib/file-system';
 import { FileNode } from '@/lib/file-system/type';
 import { TerminalEntry } from './type';
+import { TERMINAL_PROMPT } from '@/constants/terminal';
 
 export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
   const [terminalInput, setTerminalInput] = useState<string>('');
@@ -189,7 +190,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
     }
   };
 
-  const pathString = `~${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
+  const pathString = `${TERMINAL_PROMPT}${currentPath.length > 0 ? '/' + currentPath.join('/') : ''}`;
 
   const textBeforeCursor = terminalInput.slice(0, cursorPosition);
   const currentChar = terminalInput[cursorPosition] ?? '';
@@ -220,7 +221,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
         <div className="text-accent/40 text-xs">Initializing Secure Environment Connection...</div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-accent font-bold">{pathString} $&gt;</span>
+            <span className="text-accent font-bold">{TERMINAL_PROMPT} $&gt;</span>
             <span className="text-text-primary">systemctl status profile-core</span>
           </div>
           <div className="text-accent mt-1 pl-4 text-xs font-semibold">
@@ -235,7 +236,8 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
           <div key={entry.id} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">
-                ~{entry.currentPath.length > 0 ? '/' + entry.currentPath.join('/') : ''} $&gt;
+                {TERMINAL_PROMPT}
+                {entry.currentPath.length > 0 ? '/' + entry.currentPath.join('/') : ''} $&gt;
               </span>
               <span className="text-text-primary">{entry.command}</span>
               <span className="text-text-secondary ml-auto text-[10px] opacity-40">[{entry.timestamp}]</span>
