@@ -198,13 +198,13 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
 
   return (
     <div
-      className="relative flex h-full w-full flex-col overflow-hidden bg-[#030f06] p-6 font-mono select-none md:p-10"
+      className="bg-background-primary relative flex h-full w-full flex-col overflow-hidden p-6 font-mono select-none md:p-10"
       onClick={() => {
         inputRef.current?.focus();
         requestAnimationFrame(syncCaret);
       }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0df259_1px,transparent_1px),linear-gradient(to_bottom,#0df259_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.02]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0df259_1px,transparent_1px),linear-gradient(to_bottom,#0df259_1px,transparent_1px)] bg-size-[24px_24px] opacity-[0.02]" />
 
       <div className="border-accent/20 text-accent/70 mb-4 flex items-center justify-between border-b pb-3 text-xs tracking-wider uppercase">
         <div className="flex items-center gap-2">
@@ -295,7 +295,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
             <div className="pointer-events-none flex items-center font-mono text-sm">
               <span className="text-text-primary whitespace-pre">{textBeforeCursor}</span>
               {currentChar ? (
-                <span className="bg-accent inline-block min-w-[1ch] text-center font-bold whitespace-pre text-[#030f06]">
+                <span className="bg-accent text-background-primary inline-block min-w-[1ch] text-center font-bold whitespace-pre">
                   {currentChar === ' ' ? '\u00A0' : currentChar}
                 </span>
               ) : (

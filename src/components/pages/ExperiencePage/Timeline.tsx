@@ -74,11 +74,11 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
   return (
     <section
       ref={containerRef}
-      className="relative mx-auto w-full max-w-[1400px] px-0 pb-[clamp(3rem,8vw,6rem)] md:px-[clamp(1rem,4vw,2rem)]"
+      className="relative mx-auto w-full max-w-350 px-0 pb-[clamp(3rem,8vw,6rem)] md:px-[clamp(1rem,4vw,2rem)]"
     >
       {/* Base Track Line */}
       <div
-        className="bg-border/40 absolute top-0 bottom-0 left-[calc(1.5rem)] w-[2px] -translate-x-1/2 md:left-1/2"
+        className="bg-border/40 absolute top-0 bottom-0 left-[calc(1.5rem)] w-0.5 -translate-x-1/2 md:left-1/2"
         aria-hidden="true"
       />
 
@@ -88,7 +88,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
           top: 0,
           height: `${tipY}px`,
         }}
-        className="from-accent/10 via-accent to-accent absolute left-[calc(1.5rem)] z-0 w-[2px] -translate-x-1/2 bg-gradient-to-b md:left-1/2"
+        className="from-accent/10 via-accent to-accent absolute left-[calc(1.5rem)] z-0 w-0.5 -translate-x-1/2 bg-linear-to-b md:left-1/2"
         aria-hidden="true"
       />
 
