@@ -83,7 +83,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, [isOpen]);
 
-  const handleEnterCommand = (rawCommand: string) => {
+  const handleEnterCommand = async (rawCommand: string) => {
     const trimmed = rawCommand.trim();
     if (!trimmed || isProcessing) return;
 
@@ -98,8 +98,6 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
       return;
     }
 
-    setIsProcessing(true);
-
     const now = new Date();
     const timestamp = now.toLocaleTimeString([], {
       hour: '2-digit',
@@ -109,9 +107,23 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
     });
 
     const currentPathSnapshot = [...currentPath];
+    const entryId = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
-    setTimeout(() => {
-      const result = executeTerminalCommand(trimmed, fileSystem, currentPathSnapshot);
+    setTerminalHistory((prev) => [
+      ...prev,
+      {
+        id: entryId,
+        command: trimmed,
+        timestamp,
+        currentPath: currentPathSnapshot,
+        output: null,
+      },
+    ]);
+
+    setIsProcessing(true);
+
+    try {
+      const result = await executeTerminalCommand(trimmed, fileSystem, currentPathSnapshot);
 
       if (result.updatedFs) {
         setFileSystem(result.updatedFs);
@@ -120,18 +132,23 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
         setCurrentPath(result.updatedPath);
       }
 
-      setTerminalHistory((prev) => [
-        ...prev,
-        {
-          id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-          command: trimmed,
-          timestamp,
-          currentPath: currentPathSnapshot,
-          output: result.output,
-        },
-      ]);
+      setTerminalHistory((prev) =>
+        prev.map((entry) => (entry.id === entryId ? { ...entry, output: result.output } : entry)),
+      );
+    } catch {
+      setTerminalHistory((prev) =>
+        prev.map((entry) =>
+          entry.id === entryId
+            ? {
+                ...entry,
+                output: <div className="my-1 pl-4 text-xs text-red-400">Execution error occurred.</div>,
+              }
+            : entry,
+        ),
+      );
+    } finally {
       setIsProcessing(false);
-    }, 80);
+    }
   };
 
   const handleHistoryNavigation = (direction: 'up' | 'down') => {
@@ -265,10 +282,10 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
               name="terminal-input"
               id="terminal-input"
               value={terminalInput}
-              disabled={isProcessing}
               autoComplete="off"
               spellCheck="false"
               onChange={(e) => {
+                if (isProcessing) return;
                 setTerminalInput(e.target.value);
                 setCursorPosition(e.target.selectionStart ?? e.target.value.length);
               }}
@@ -276,6 +293,10 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
               onKeyUp={syncCursorPosition}
               onSelect={syncCursorPosition}
               onKeyDown={(e) => {
+                if (isProcessing) {
+                  e.preventDefault();
+                  return;
+                }
                 if (e.key === 'Enter') {
                   handleEnterCommand(terminalInput);
                 } else if (e.key === 'ArrowUp') {
