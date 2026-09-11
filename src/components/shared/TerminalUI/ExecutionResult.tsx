@@ -2,11 +2,11 @@ import { resolvePath } from '@/lib/file-system';
 import { FileNode } from '@/lib/file-system/type';
 import { CommandExecutionResult } from './type';
 
-export function executeTerminalCommand(
+export async function executeTerminalCommand(
   command: string,
   fileSystem: FileNode,
   currentPath: string[],
-): CommandExecutionResult {
+): Promise<CommandExecutionResult> {
   const parts = command.trim().split(/\s+/);
   const mainCommand = parts[0]?.toLowerCase();
   const args = parts.slice(1);
@@ -22,6 +22,10 @@ export function executeTerminalCommand(
             <div className="grid grid-cols-[110px_1fr] gap-x-2 gap-y-1">
               <span className="text-accent font-bold">help</span>
               <span>Display list of available commands</span>
+              <span className="text-accent font-bold">whoami</span>
+              <span>Display current active session user</span>
+              <span className="text-accent font-bold">ip</span>
+              <span>Fetch client public IP address</span>
               <span className="text-accent font-bold">ls</span>
               <span>List directory contents</span>
               <span className="text-accent font-bold">cat [file]</span>
@@ -42,6 +46,31 @@ export function executeTerminalCommand(
           </div>
         ),
       };
+
+    case 'whoami':
+      return {
+        output: <div className="text-accent my-1 pl-4 text-xs font-semibold">nofil</div>,
+      };
+
+    case 'ip': {
+      try {
+        const response = await fetch('/api/ip');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+
+        return {
+          output: (
+            <div className="text-accent my-1 pl-4 text-xs">
+              Client IP Address: <span className="font-bold">{data.ip ?? 'unknown'}</span>
+            </div>
+          ),
+        };
+      } catch {
+        return {
+          output: <div className="my-1 pl-4 text-xs text-red-400">ip: failed to resolve client IP address.</div>,
+        };
+      }
+    }
 
     case 'pwd':
       return {
