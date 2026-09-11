@@ -250,7 +250,7 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
         </div>
 
         {terminalHistory.map((entry) => (
-          <div key={entry.id} className="flex flex-col gap-1">
+          <div key={entry.id} className="mt-2 flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">
                 {TERMINAL_PROMPT}
