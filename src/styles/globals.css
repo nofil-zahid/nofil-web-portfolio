@@ -44,12 +44,15 @@ button {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px #0d130f inset !important;
-  -webkit-text-fill-color: #f3f4f6 !important;
-  caret-color: #5ff07e;
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #030f06 inset !important;
+  -webkit-text-fill-color: #9ca3af !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+  caret-color: #5ff07e !important;
 }
 
 .terminal-cursor {
