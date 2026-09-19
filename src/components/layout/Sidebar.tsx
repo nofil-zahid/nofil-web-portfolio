@@ -17,6 +17,11 @@ export default function Sidebar() {
   const { state: isOpen, toggle } = useBooleanToggle();
   const { state: isTerminalOpen, toggle: toggleTerminal } = useBooleanToggle();
 
+  const handleHomeNavigation = () => {
+    if (pathname === routes.root) return;
+    router.push(routes.root);
+  };
+
   const { hasLoaded } = useInitialLoading();
   if (!hasLoaded) return null;
 
@@ -43,7 +48,7 @@ export default function Sidebar() {
 
         <div
           className="text-text-secondary active:text-accent cursor-pointer text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap"
-          onClick={() => router.push(routes.root)}
+          onClick={handleHomeNavigation}
         >
           Nofil Zahid
         </div>
