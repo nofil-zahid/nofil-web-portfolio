@@ -1,6 +1,29 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { stats } from '@/constants/stats-data';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+
+function AnimatedNumber({ value }: { value: number }) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.floor(latest).toLocaleString());
+  const [displayValue, setDisplayValue] = useState('0');
+
+  useEffect(() => {
+    const controls = animate(count, value, {
+      duration: 1.8,
+      ease: [0.16, 1, 0.3, 1],
+    });
+
+    const unsubscribe = rounded.on('change', (v) => setDisplayValue(v));
+
+    return () => {
+      controls.stop();
+      unsubscribe();
+    };
+  }, [value, count, rounded]);
+
+  return <span>{displayValue}</span>;
+}
 
 const Stats = () => {
   return (
@@ -10,11 +33,12 @@ const Stats = () => {
           key={stat.label}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+          transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
           className="group flex flex-col items-center lg:items-end"
         >
-          <h2 className="text-accent mb-1 text-[clamp(1.75rem,4vw,2.75rem)] leading-none font-black tracking-tighter transition-transform group-hover:translate-x-1 lg:group-hover:-translate-x-1">
-            {stat.value}+
+          <h2 className="text-accent mb-1 font-mono text-[clamp(1.75rem,4vw,2.75rem)] leading-none font-black tracking-tighter transition-transform group-hover:translate-x-1 lg:group-hover:-translate-x-1">
+            <AnimatedNumber value={stat.value} />
+            {stat.suffix}
           </h2>
           <p className="text-[9px] font-bold tracking-[0.25em] whitespace-nowrap text-gray-500 uppercase">
             {stat.label}

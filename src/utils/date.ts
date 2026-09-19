@@ -1,4 +1,6 @@
-import { format } from 'date-fns';
+import { format, differenceInMonths, differenceInYears } from 'date-fns';
+
+const CAREER_START_DATE = new Date(2024, 0, 1);
 
 export const formatDate = (date: Date | null) => {
   if (!date) return 'Present';
@@ -9,10 +11,22 @@ export const formatDateRange = (startDate: Date, endDate: Date | null = null) =>
   return `${formatDate(startDate)} — ${formatDate(endDate)}`;
 };
 
-export const myYearsOfExperience = () => {
-  const startedYear = 2024;
+export const myYearsOfExperience = (): number => {
   const currentYear = Number(format(new Date(), 'yyyy'));
-  return currentYear - startedYear;
+  const startedYear = CAREER_START_DATE.getFullYear();
+  return Math.max(0, currentYear - startedYear);
+};
+
+export const getDynamicProjectsCount = (baseProjectCount: number): number => {
+  const yearsPassed = differenceInYears(new Date(), CAREER_START_DATE);
+  const extraProjectsPerYear = yearsPassed * 2;
+  return baseProjectCount + extraProjectsPerYear;
+};
+
+export const getDynamicHoursWorked = (): number => {
+  const monthsPassed = Math.max(1, differenceInMonths(new Date(), CAREER_START_DATE));
+  const hoursPerMonth = 8 * 22;
+  return monthsPassed * hoursPerMonth;
 };
 
 export const calculateDuration = (startDate: string | Date, endDate?: string | Date): string => {
