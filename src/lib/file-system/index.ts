@@ -2,7 +2,7 @@ import { FileNode } from './type';
 import { generateUserTxt, generateContactTxt, generateProjectsTxt } from '@/constants/profile';
 import { projects } from '@/constants/projects';
 
-const FS_STORAGE_KEY = 'terminal_fs_v2';
+const FS_STORAGE_KEY = 'terminal_fs_v3';
 
 export const INITIAL_FS: FileNode = {
   name: '~',
