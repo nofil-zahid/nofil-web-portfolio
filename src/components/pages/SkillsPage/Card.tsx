@@ -28,7 +28,10 @@ export const ExpertiseCard = ({
     <div className="relative mb-6 flex items-center gap-3 md:mb-8">
       <div className="bg-accent h-6 w-0.75 shadow-[0_0_10px_var(--color-accent)] transition-all duration-300 group-hover:h-7.5" />
       <h3 className="text-xl font-black tracking-tighter text-white uppercase md:text-2xl">
-        {category.replace(/([A-Z])/g, ' $1').trim()}
+        {category
+          .replace(/_/g, ' ')
+          .replace(/([A-Z])/g, ' $1')
+          .trim()}
       </h3>
     </div>
 
