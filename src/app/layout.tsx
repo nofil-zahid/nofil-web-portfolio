@@ -3,6 +3,7 @@ import { Fira_Code, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import { ChildrenProps } from '@/types/components';
 import Providers from '@/components/providers';
+import { ABOUT } from '@/constants/profile';
 
 const firaCode = Fira_Code({
   variable: '--font-sans',
@@ -16,8 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Nofil | Portfolio',
-  description:
-    'Portfolio of Nofil Zahid — Full Stack Developer and solution-oriented engineer, building scalable web and mobile products, MVPs, and SaaS applications. Experienced in crafting intuitive interfaces and implementing robust backend systems to deliver real-world, high-impact solutions.',
+  description: ABOUT.summary[0],
   icons: {
     icon: '/favicon.ico',
   },
