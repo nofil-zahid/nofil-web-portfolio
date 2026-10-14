@@ -42,3 +42,5 @@ export const projects: ProjectCardProps[] = [
     technologies: ['Next.js', 'TypeScript', 'Slate.js', 'Tailwind CSS'],
   },
 ];
+
+export const numberOfProjects = projects.length;

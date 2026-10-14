@@ -111,6 +111,48 @@ textarea:-webkit-autofill:active {
   }
 }
 
+@keyframes terminal-glitch {
+  0%,
+  100% {
+    background-color: rgba(13, 242, 89, 0.05);
+    border-color: rgba(13, 242, 89, 0.1);
+  }
+  50% {
+    background-color: rgba(13, 242, 89, 0.15);
+    border-color: rgba(13, 242, 89, 0.4);
+    box-shadow: 0 0 8px rgba(13, 242, 89, 0.15);
+  }
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.skeleton-pulse {
+  background-color: rgba(13, 242, 89, 0.07);
+  border: 1px solid rgba(13, 242, 89, 0.15);
+  border-radius: 0px !important; /* Force hard terminal square corners */
+  animation: terminal-glitch 0.8s steps(2, start) infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adds a retro CRT raster scanline mesh overlay */
+.skeleton-pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+  background-size: 100% 3px;
+  pointer-events: none;
+}
+
 @layer utilities {
   .text-hero {
     font-size: 72px;
