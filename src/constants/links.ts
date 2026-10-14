@@ -1,5 +1,5 @@
 import { routes } from './routes';
-import { Github, Linkedin, Twitter, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, Twitter, MessageCircle, Package } from 'lucide-react';
 
 export const navLinks = [
   { name: 'Root', href: routes.root },
@@ -12,8 +12,9 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { name: 'Github', href: 'https://github.com/nofil-zahid', icon: Github },
+  { name: 'GitHub', href: 'https://github.com/nofil-zahid', icon: Github },
+  { name: 'NPM', href: 'https://www.npmjs.com/~nofil.dev', icon: Package },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/in/nofil-zahid/', icon: Linkedin },
   { name: 'Twitter', href: 'https://x.com/nofil_zahid', icon: Twitter },
-  { name: 'Whatsapp', href: 'https://wa.me/923092051143', icon: MessageCircle },
+  { name: 'WhatsApp', href: 'https://wa.me/923092051143', icon: MessageCircle },
 ];
