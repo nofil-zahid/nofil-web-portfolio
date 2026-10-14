@@ -2,12 +2,32 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Code2, ExternalLink, Code, Terminal } from 'lucide-react';
+import {
+  Code2,
+  ExternalLink,
+  Code,
+  Terminal,
+  Globe,
+  Smartphone,
+  Monitor,
+  Package,
+  Library,
+  type LucideIcon,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import Tooltip from '@/components/core/Tooltip';
 import { ProjectCardProps } from '@/types/components';
 import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 import { cn } from '@/styles/tailwind-utils';
+
+const TYPE_ICONS: Record<NonNullable<ProjectCardProps['type']>, LucideIcon> = {
+  web: Globe,
+  mobile: Smartphone,
+  desktop: Monitor,
+  package: Package,
+  library: Library,
+  cli: Terminal,
+};
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
@@ -18,10 +38,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   liveUrl = '',
   maxDescriptionLines = 3,
   maxTechTags = 4,
+  type,
 }) => {
   const { state: isLoaded, enable: setLoaded } = useBooleanToggle(false);
   const displayedTech = technologies.slice(0, maxTechTags);
   const extraTechCount = technologies.length - maxTechTags;
+  const TypeIcon = (type && TYPE_ICONS[type]) || Code;
 
   return (
     <motion.div
@@ -123,7 +145,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
-          <Code className="text-accent fill-accent/20 group-hover:fill-accent/40 h-10 w-10 transition-all duration-300" />
+          <TypeIcon className="text-accent fill-accent/20 group-hover:fill-accent/40 h-10 w-10 transition-all duration-300" />
         </motion.div>
       )}
 

@@ -36,6 +36,7 @@ export interface ProjectCardProps {
   screenshotUrl?: string;
   maxDescriptionLines?: number;
   maxTechTags?: number;
+  type?: 'web' | 'mobile' | 'desktop' | 'package' | 'library' | 'cli';
 }
 
 export interface TooltipProps {
