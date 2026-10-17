@@ -1,6 +1,5 @@
 import { ChildrenProps } from '@/types/components';
 import NavigatorStatus from '../layout/NavigatorStatus';
-import { LoadingProvider } from './LoadingProvider';
 import { EventsInterceptor } from './EventsInterceptor';
 import ServiceWorker from '../service-worker/ServiceWorker';
 import TopLoader from './TopLoader';
@@ -14,11 +13,9 @@ export default function Providers({ children }: ChildrenProps) {
       <VercelAnalytics />
       <TopLoader />
       <Toaster />
-      <LoadingProvider>
-        <ClickSparkProvider>{children}</ClickSparkProvider>
-        <ServiceWorker />
-        <NavigatorStatus />
-      </LoadingProvider>
+      <ClickSparkProvider>{children}</ClickSparkProvider>
+      <ServiceWorker />
+      <NavigatorStatus />
     </EventsInterceptor>
   );
 }

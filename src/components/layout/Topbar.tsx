@@ -1,6 +1,5 @@
 'use client';
 import Breadcrumb from './Breadcrumb';
-import { useInitialLoading } from '@/hooks/context/loading';
 import { showToast } from '@/utils/toaster';
 import { Navbar } from './Navbar';
 import Button from '../core/Button';
@@ -10,9 +9,6 @@ import { routes } from '@/constants/routes';
 const Topbar = () => {
   const pathname = usePathname();
   const router = useRouter();
-
-  const { hasLoaded } = useInitialLoading();
-  if (!hasLoaded) return null;
 
   const handleHireMe = () => {
     if (pathname === routes.ui.contact) {
