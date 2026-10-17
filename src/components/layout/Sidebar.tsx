@@ -7,7 +7,6 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 import { navLinks, socialLinks } from '@/constants/links';
 import { cn } from '@/styles/tailwind-utils';
-import { useInitialLoading } from '@/hooks/context/loading';
 import { routes } from '@/constants/routes';
 import TerminalUI from '../shared/TerminalUI';
 
@@ -21,9 +20,6 @@ export default function Sidebar() {
     if (pathname === routes.root) return;
     router.push(routes.root);
   };
-
-  const { hasLoaded } = useInitialLoading();
-  if (!hasLoaded) return null;
 
   return (
     <>
