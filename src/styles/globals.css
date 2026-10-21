@@ -32,6 +32,15 @@ button {
   cursor: pointer;
 }
 
+/* Custom Green Terminal Focus Ring for Full Keyboard Accessibility (WCAG AA) */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #00ff66 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.45) !important;
+}
+
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
