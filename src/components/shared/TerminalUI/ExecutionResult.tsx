@@ -1,12 +1,23 @@
 import { resolvePath } from '@/lib/file-system';
 import { FileNode } from '@/lib/file-system/type';
 import { CommandExecutionResult } from './type';
+import { TERMINAL_HELP_COMMANDS } from '@/constants/terminal';
+import { experiences } from '@/constants/experiences-data';
+import { formatDate } from '@/utils/date';
 
-export function executeTerminalCommand(
+const getHostLabel = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+  }
+};
+
+export async function executeTerminalCommand(
   command: string,
   fileSystem: FileNode,
   currentPath: string[],
-): CommandExecutionResult {
+): Promise<CommandExecutionResult> {
   const parts = command.trim().split(/\s+/);
   const mainCommand = parts[0]?.toLowerCase();
   const args = parts.slice(1);
@@ -17,31 +28,44 @@ export function executeTerminalCommand(
     case 'help':
       return {
         output: (
-          <div className="text-text-secondary my-1 space-y-1 pl-4 text-xs">
+          <div className="text-text-secondary my-1 space-y-1 pl-4 font-mono text-xs">
             <p className="text-accent/90 mb-1 font-semibold">AVAILABLE COMMANDS:</p>
-            <div className="grid grid-cols-[110px_1fr] gap-x-2 gap-y-1">
-              <span className="text-accent font-bold">help</span>
-              <span>Display list of available commands</span>
-              <span className="text-accent font-bold">ls</span>
-              <span>List directory contents</span>
-              <span className="text-accent font-bold">cat [file]</span>
-              <span>Read file contents</span>
-              <span className="text-accent font-bold">touch [f] [t]</span>
-              <span>Create or edit file contents</span>
-              <span className="text-accent font-bold">mkdir [dir]</span>
-              <span>Create a new directory</span>
-              <span className="text-accent font-bold">cd [dir]</span>
-              <span>Change directory</span>
-              <span className="text-accent font-bold">pwd</span>
-              <span>Print current directory path</span>
-              <span className="text-accent font-bold">rm [target]</span>
-              <span>Remove file or empty directory</span>
-              <span className="text-accent font-bold">clear / ^L</span>
-              <span>Clear screen terminal history</span>
+            <div className="grid grid-cols-[140px_1fr] gap-x-2 gap-y-1.5">
+              {TERMINAL_HELP_COMMANDS.map((item) => (
+                <div key={item.command} className="contents">
+                  <span className="text-accent font-bold">{item.command}</span>
+                  <span>{item.description}</span>
+                </div>
+              ))}
             </div>
           </div>
         ),
       };
+
+    case 'whoami':
+      return {
+        output: <div className="text-accent my-1 pl-4 text-xs font-semibold">nofil</div>,
+      };
+
+    case 'ip': {
+      try {
+        const response = await fetch('/api/ip');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+
+        return {
+          output: (
+            <div className="text-accent my-1 pl-4 text-xs">
+              Client IP Address: <span className="font-bold">{data.ip ?? 'unknown'}</span>
+            </div>
+          ),
+        };
+      } catch {
+        return {
+          output: <div className="my-1 pl-4 text-xs text-red-400">ip: failed to resolve client IP address.</div>,
+        };
+      }
+    }
 
     case 'pwd':
       return {
@@ -196,13 +220,117 @@ export function executeTerminalCommand(
       };
     }
 
+    case 'sudo': {
+      const subCommand = args[0]?.toLowerCase();
+      if (subCommand === 'hire-nofil' || subCommand === 'hire') {
+        if (typeof window !== 'undefined') {
+          setTimeout(() => {
+            window.location.href = '/contact-me';
+          }, 800);
+        }
+        return {
+          output: (
+            <div className="my-1.5 space-y-1.5 pl-4 font-mono text-xs">
+              <p className="font-bold text-[#00FF66]">[PRIVILEGE ESCALATION: ROOT ACCESS GRANTED]</p>
+              <p className="text-text-primary">
+                Superuser override authorized. Initializing direct dispatch to Nofil Zahid...
+              </p>
+              <p className="text-accent animate-pulse">&gt; Rerouting to /contact-me transmission portal...</p>
+            </div>
+          ),
+        };
+      }
+      return {
+        output: (
+          <div className="my-1 pl-4 font-mono text-xs text-red-400">
+            sudo: &apos;{args.join(' ')}&apos; permission granted for recognized routines only. Try{' '}
+            <span className="font-bold text-[#00FF66]">&apos;sudo hire-nofil&apos;</span>.
+          </div>
+        ),
+      };
+    }
+
+    case 'hire-nofil': {
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          window.location.href = '/contact-me';
+        }, 800);
+      }
+      return {
+        output: (
+          <div className="my-1.5 space-y-1.5 pl-4 font-mono text-xs">
+            <p className="font-bold text-[#00FF66]">[INCOMING TALENT DIRECTIVE]</p>
+            <p className="text-text-primary">Opening encrypted communication bridge...</p>
+            <p className="text-accent animate-pulse">&gt; Navigating to /contact-me...</p>
+          </div>
+        ),
+      };
+    }
+
+    case 'experience':
     case 'cat': {
-      const fileName = args[0];
+      const fileName = (mainCommand === 'experience' ? 'experience.txt' : args[0]) || '';
       if (!fileName) {
         return {
           output: (
             <div className="my-1 pl-4 text-xs text-red-400">
               cat: missing file argument. Usage: cat &lt;filename&gt;
+            </div>
+          ),
+        };
+      }
+
+      if (fileName.toLowerCase() === 'experience.txt' || fileName.toLowerCase() === 'experience') {
+        return {
+          output: (
+            <div className="my-2 space-y-3 pl-4 font-mono text-xs">
+              <div className="border-accent/25 border-b pb-1 font-bold tracking-wider text-[#00FF66] uppercase">
+                [STRUCTURED JOB HISTORY // KERNEL RECORD]
+              </div>
+
+              {experiences.map((exp) => {
+                const isCurrent = !exp.endDate;
+                const period = `${formatDate(exp.startDate)} - ${formatDate(exp.endDate)}`;
+                const hostLabel = exp.website ? getHostLabel(exp.website) : '';
+
+                return (
+                  <div
+                    key={`${exp.company}-${exp.role}`}
+                    className="border-accent/25 bg-background-secondary/70 rounded-lg border p-3 shadow-inner"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-[#00FF66]">{exp.company}</span>
+                        {exp.website && (
+                          <a
+                            href={exp.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-accent text-[10px] underline hover:text-white"
+                          >
+                            ({hostLabel})
+                          </a>
+                        )}
+                      </div>
+                      <span
+                        className={
+                          isCurrent
+                            ? 'bg-accent/10 text-accent rounded px-2 py-0.5 text-[10px] font-semibold'
+                            : 'rounded bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-slate-300'
+                        }
+                      >
+                        {period}
+                      </span>
+                    </div>
+                    <p className="text-text-primary mt-1 font-semibold">{exp.role}</p>
+                    <ul className="mt-2 list-disc space-y-1.5 pl-4 text-slate-300 marker:text-[#00FF66]">
+                      {exp.responsibilities.map((resp, i) => (
+                        <li key={i}>{resp}</li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           ),
         };

@@ -21,6 +21,7 @@ const ProjectsGrid = () => {
             repoUrl={project.repoUrl}
             liveUrl={project.liveUrl}
             screenshotUrl={project.screenshotUrl}
+            type={project.type}
           />
         </motion.div>
       ))}

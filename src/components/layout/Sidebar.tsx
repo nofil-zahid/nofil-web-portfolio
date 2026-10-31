@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
@@ -7,22 +8,36 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 import { navLinks, socialLinks } from '@/constants/links';
 import { cn } from '@/styles/tailwind-utils';
-import { useInitialLoading } from '@/hooks/context/loading';
 import { routes } from '@/constants/routes';
 import TerminalUI from '../shared/TerminalUI';
+import { useTerminal } from '../providers/TerminalProvider';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { state: isOpen, toggle } = useBooleanToggle();
-  const { state: isTerminalOpen, toggle: toggleTerminal } = useBooleanToggle();
+  const { state: isOpen, toggle, disable: closeMenu } = useBooleanToggle();
+  const { isTerminalOpen, toggleTerminal, closeTerminal } = useTerminal();
 
-  const { hasLoaded } = useInitialLoading();
-  if (!hasLoaded) return null;
+  // Close mobile drawer on Escape key as well
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeMenu();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, closeMenu]);
+
+  const handleHomeNavigation = () => {
+    if (pathname === routes.root) return;
+    router.push(routes.root);
+  };
 
   return (
     <>
-      <motion.div
+      <motion.aside
+        aria-label="Terminal Sidebar Rail"
         initial={false}
         animate={{
           x: isTerminalOpen ? 'calc(100vw - clamp(60px, 6vw, 90px))' : 0,
@@ -35,18 +50,20 @@ export default function Sidebar() {
       >
         <button
           onClick={() => toggle()}
-          className="text-accent cursor-pointer text-[clamp(1.5rem,2vw,2rem)] transition hover:scale-110 md:hidden"
-          aria-label="Toggle Navigation"
+          className="text-accent flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg p-2 transition hover:scale-110 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none md:hidden"
+          aria-label={isOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
 
-        <div
-          className="text-text-secondary active:text-accent cursor-pointer text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap"
-          onClick={() => router.push(routes.root)}
+        <button
+          type="button"
+          className="text-text-secondary hover:text-accent active:text-accent min-h-[44px] cursor-pointer rounded-md px-2 text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap"
+          onClick={handleHomeNavigation}
+          aria-label="Navigate to Home"
         >
           Nofil Zahid
-        </div>
+        </button>
 
         <button
           onClick={() => toggleTerminal()}
@@ -54,23 +71,28 @@ export default function Sidebar() {
             'group relative hidden h-8 w-8 cursor-pointer items-center justify-center rounded-md border font-mono transition-all duration-300 active:scale-95 md:flex',
             'border-accent bg-accent text-background-primary',
             'hover:bg-background-primary hover:text-accent',
+            'focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none',
             isTerminalOpen
               ? 'shadow-[0_0_20px_rgba(13,242,89,0.35)] hover:shadow-[0_0_25px_rgba(13,242,89,0.5)]'
               : 'hover:shadow-[0_0_20px_rgba(13,242,89,0.35)]',
           )}
-          aria-label={isTerminalOpen ? 'Close Terminal' : 'Open Terminal'}
-          title={isTerminalOpen ? 'Close Terminal (ESC)' : 'Open Terminal'}
+          aria-label={
+            isTerminalOpen
+              ? 'Close Interactive Terminal Drawer'
+              : 'Open Interactive Terminal Drawer (Press / or Ctrl+K)'
+          }
+          title={isTerminalOpen ? 'Close Terminal (ESC)' : 'Open Terminal (/ or Ctrl+K)'}
         >
           {isTerminalOpen ? (
-            <X size={16} className="text-current transition-transform duration-300 group-hover:rotate-90" />
+            <X size={18} className="text-current transition-transform duration-300 group-hover:rotate-90" />
           ) : (
-            <div className="flex items-center -space-x-1 font-mono text-xs font-black text-current">
+            <div className="flex items-center -space-x-1 font-mono text-sm font-black text-current">
               <ChevronRight
-                size={15}
+                size={16}
                 strokeWidth={3}
                 className="text-current transition-transform group-hover:translate-x-0.5"
               />
-              <span className="text-[10px] font-bold text-current">_</span>
+              <span className="text-[11px] font-bold text-current">_</span>
             </div>
           )}
         </button>
@@ -80,7 +102,7 @@ export default function Sidebar() {
         <div className="bg-background-primary border-border-glow absolute top-0 right-full h-screen w-[calc(100vw-clamp(60px,6vw,90px))] border-r">
           <TerminalUI isOpen={isTerminalOpen} />
         </div>
-      </motion.div>
+      </motion.aside>
 
       <AnimatePresence>
         {isTerminalOpen && (
@@ -89,13 +111,15 @@ export default function Sidebar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: 'easeInOut' }}
-            onClick={() => toggleTerminal()}
-            className="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm md:block"
+            onClick={() => closeTerminal()}
+            className="fixed inset-0 z-40 hidden cursor-pointer bg-black/60 backdrop-blur-sm md:block"
+            aria-label="Close Terminal Overlay"
           />
         )}
       </AnimatePresence>
 
       <aside
+        aria-label="Mobile Navigation Drawer"
         className={cn(
           'fixed z-45 flex h-screen w-full flex-col justify-between',
           'bg-background-primary text-text-primary border-border-glow border-r',
@@ -105,17 +129,17 @@ export default function Sidebar() {
           isOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        <nav className="mt-16 flex flex-col gap-[clamp(1rem,3vh,2rem)] font-mono">
+        <nav aria-label="Mobile Navigation Links" className="mt-16 flex flex-col gap-2 font-mono">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={() => toggle()}
-                className="group relative flex items-center py-1 transition-colors duration-300"
+                onClick={() => closeMenu()}
+                className="group relative flex min-h-[44px] items-center rounded-lg px-3 py-2 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
               >
-                <div className="absolute -left-6 flex w-4 items-center justify-center">
+                <div className="absolute left-0 flex w-4 items-center justify-center">
                   {active && (
                     <motion.span
                       layoutId="nav-indicator"
@@ -131,7 +155,7 @@ export default function Sidebar() {
 
                 <span
                   className={cn(
-                    'text-[clamp(0.9rem,1.2vw,1.1rem)] tracking-widest uppercase transition-all duration-300',
+                    'text-[clamp(0.95rem,1.2vw,1.15rem)] tracking-widest uppercase transition-all duration-300',
                     active
                       ? 'text-accent translate-x-2'
                       : 'text-text-secondary group-hover:text-text-primary group-hover:translate-x-1',
@@ -146,7 +170,7 @@ export default function Sidebar() {
           })}
         </nav>
 
-        <div className="text-text-secondary flex flex-col gap-3 text-sm">
+        <div className="text-text-secondary flex flex-col gap-1 text-sm">
           {socialLinks.map((link) => {
             const Icon = link.icon;
             return (
@@ -154,10 +178,12 @@ export default function Sidebar() {
                 <Link
                   href={link.href}
                   target="_blank"
-                  className="group flex items-center gap-2 transition-colors duration-200"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${link.name} profile in new tab`}
+                  className="group flex min-h-[44px] items-center gap-3 rounded-lg px-3 py-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
                 >
-                  <Icon className="text-text-secondary group-hover:text-accent h-4 w-4 transition-colors duration-200" />
-                  <span className="text-text-secondary group-hover:text-accent font-mono transition-colors duration-200">
+                  <Icon className="text-text-secondary group-hover:text-accent h-5 w-5 transition-colors duration-200" />
+                  <span className="text-text-secondary group-hover:text-accent font-mono text-sm transition-colors duration-200">
                     {link.name}
                   </span>
                 </Link>

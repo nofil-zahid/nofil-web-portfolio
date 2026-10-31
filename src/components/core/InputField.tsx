@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { InputFieldProps } from '@/types/components';
 import { cn } from '@/styles/tailwind-utils';
@@ -14,27 +14,36 @@ const InputField: React.FC<InputFieldProps> = ({
   showCounter = false,
   value,
   onChange,
+  id: customId,
   ...props
 }) => {
+  const generatedId = useId();
+  const inputId = customId || generatedId;
+  const errorId = `${inputId}-error`;
   const currentLength = typeof value === 'string' ? value.length : 0;
 
   const inputClasses = cn(
-    'w-full bg-transparent border-none py-2 sm:py-3',
-    'text-sm sm:text-base font-mono tracking-wide text-gray-400',
-    'placeholder:text-gray-500/50 focus:placeholder-accent/30',
+    'w-full bg-[#030f06] border-none py-2.5 sm:py-3.5 px-2.5',
+    'text-sm sm:text-base font-mono tracking-wide text-text-primary',
+    'placeholder:text-slate-400/60 focus:placeholder-accent/40',
     'focus:outline-none focus:ring-0',
     'transition-colors duration-300 terminal-cursor',
-    multiline && 'resize-none min-h-[80px] sm:min-h-[100px] terminal-scrollbar',
+    multiline && 'resize-none min-h-[90px] sm:min-h-[110px] terminal-scrollbar',
   );
 
   return (
-    <div className={cn('group relative mb-10 w-full', className)}>
-      <div className="mb-1 flex items-center justify-between">
+    <div className={cn('group relative mb-8 w-full', className)}>
+      <div className="mb-1.5 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-accent/60 group-focus-within:text-accent font-mono text-[10px] font-bold sm:text-xs">
-            {String(index).padStart(2, '0')}.
-          </span>
-          <label className="group-focus-within:text-accent text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase sm:text-xs">
+          {index !== undefined && (
+            <span className="text-accent/90 group-focus-within:text-accent font-mono text-[10px] font-bold sm:text-xs">
+              {String(index).padStart(2, '0')}.
+            </span>
+          )}
+          <label
+            htmlFor={inputId}
+            className="group-focus-within:text-accent text-[11px] font-bold tracking-[0.2em] text-slate-300 uppercase sm:text-xs"
+          >
             {label}
           </label>
         </div>
@@ -42,8 +51,8 @@ const InputField: React.FC<InputFieldProps> = ({
         {showCounter && maxLength && (
           <span
             className={cn(
-              'font-mono text-[9px] transition-colors duration-300',
-              currentLength >= maxLength ? 'text-red-500' : 'group-focus-within:text-accent/50 text-gray-600',
+              'font-mono text-[10px] transition-colors duration-300',
+              currentLength >= maxLength ? 'font-bold text-red-400' : 'group-focus-within:text-accent text-slate-400',
             )}
           >
             [{currentLength}/{maxLength}]
@@ -54,21 +63,27 @@ const InputField: React.FC<InputFieldProps> = ({
       <div className="relative">
         {multiline ? (
           <textarea
+            id={inputId}
             autoComplete="off"
             spellCheck={false}
             maxLength={maxLength}
             value={value}
             onChange={onChange}
+            aria-invalid={Boolean(error)}
+            aria-describedby={error ? errorId : undefined}
             className={inputClasses}
             {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
         ) : (
           <input
+            id={inputId}
             autoComplete="off"
             spellCheck={false}
             maxLength={maxLength}
             value={value}
             onChange={onChange}
+            aria-invalid={Boolean(error)}
+            aria-describedby={error ? errorId : undefined}
             className={inputClasses}
             {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
           />
@@ -91,6 +106,7 @@ const InputField: React.FC<InputFieldProps> = ({
           {error ? (
             <motion.div
               key={error}
+              id={errorId}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}

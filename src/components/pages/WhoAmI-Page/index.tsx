@@ -1,20 +1,14 @@
 'use client';
-
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Avatar from '@/components/element/Avatar';
 import SectionHeader from '@/components/shared/SectionHeader';
 import { myYearsOfExperience } from '@/utils/date';
 import { SectionHeading } from './SectionHeading';
 import { InfoCard } from './InfoCard';
-import { useResponsive } from '@/hooks/core/use-responsive';
 import { ABOUT, PROFILE } from '@/constants/profile';
+import RandomQuote from './RandomQuote';
 
 export default function WhoAmI() {
-  const [quote] = useState(() => ABOUT.quotes[Math.floor(Math.random() * ABOUT.quotes.length)]);
-
-  const { isMobile } = useResponsive();
-
   return (
     <section>
       <div className="mb-20 grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:pr-30">
@@ -32,8 +26,7 @@ export default function WhoAmI() {
         >
           <Avatar
             src="/profile.png"
-            size={isMobile ? 240 : 260}
-            className="shadow-[0_0_50px_-12px_rgba(13,242,89,0.3)]"
+            className="h-[240px] w-[240px] shadow-[0_0_50px_-12px_rgba(13,242,89,0.3)] lg:h-[260px] lg:w-[260px]"
           />
         </motion.div>
       </div>
@@ -86,10 +79,7 @@ export default function WhoAmI() {
             </div>
           </section>
 
-          <blockquote className="border-accent border-l-4 py-4 pl-6 font-mono text-sm leading-relaxed text-white/60 italic">
-            {quote ?? 'loading philosophy...'}
-            <footer className="text-accent mt-2 font-bold tracking-widest not-italic">— SYSTEM_MOTTO.txt</footer>
-          </blockquote>
+          <RandomQuote />
         </motion.div>
       </div>
     </section>

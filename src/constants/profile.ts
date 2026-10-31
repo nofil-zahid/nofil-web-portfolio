@@ -1,3 +1,7 @@
+import { experiences } from '@/constants/experiences-data';
+import { formatDate } from '@/utils/date';
+import { ExperienceItem } from '@/types/model';
+
 // ─────────────────────────────────────────────
 // Central Profile Constants
 // Single source of truth for personal data used
@@ -7,11 +11,13 @@
 // ── Identity ──────────────────────────────────
 export const PROFILE = {
   name: 'Nofil Zahid',
-  title: 'Full Stack Engineer',
-  specialization: 'Scalable Systems, API Design & Frontend Engineering',
+  title: 'Full Stack & DevOps Engineer',
+  specialization: 'Cloud Infrastructure, Distributed Backend Systems & CI/CD Pipelines',
   location: 'Lahore, Pakistan',
+  city: 'Lahore',
+  country: 'Pakistan',
   availability: 'Open to Opportunities',
-  focusArea: 'Enterprise & SaaS Applications',
+  focusArea: 'DevOps, Cloud Platform & Enterprise SaaS',
 } as const;
 
 // ── Contact ───────────────────────────────────
@@ -20,6 +26,7 @@ export const CONTACT = {
   whatsapp: '+923092051143',
   social: {
     github: 'https://github.com/nofil-zahid',
+    npm: 'https://www.npmjs.com/~nofil.dev',
     linkedin: 'https://www.linkedin.com/in/nofil-zahid/',
     twitter: 'https://x.com/nofil_zahid',
     whatsapp: 'https://wa.me/923092051143',
@@ -29,9 +36,9 @@ export const CONTACT = {
 // ── About / Overview ──────────────────────────
 export const ABOUT = {
   summary: [
-    'I am a backend-focused Full Stack Engineer, delivers practical and efficient solutions for real-world applications. I take ownership of the systems I work on from development to deployment, approaching challenges with research, analysis, and hands-on implementation to build scalable and maintainable architectures.',
-    'When a solution does not exist, I design it from the ground up by evaluating options, experimenting, and implementing the most effective approach. I focus on creating systems that are not only functional but also performant, reliable, and easy to extend.',
-    'Additionally, I have developed strong design skills to ensure that the user experience complements the backend logic, resulting in applications that are both powerful and intuitive.',
+    "I'm a Full Stack & DevOps Engineer who builds end-to-end digital solutions. I take ownership of systems from designing clean backend logic and scalable architectures to automating deployments and managing live infrastructure.",
+    'I focus on creating systems that run reliably and efficiently. By automating workflows, setting up proactive monitoring, and maintaining clean release pipelines, I make sure platforms stay stable and performant under real-world load.',
+    'While much of my focus is on backend architecture and platform automation, I pay close attention to user experience - ensuring every feature is fast, responsive, and intuitive for the end user.',
   ],
   philosophy: [
     {
@@ -44,11 +51,26 @@ export const ABOUT = {
       description:
         'I focus on solving real problems, not just writing code but ensuring performance, usability, and long-term maintainability.',
     },
+    {
+      title: 'Automate Early',
+      description:
+        'If a task needs to be done more than twice, it should be automated through version-controlled scripts and pipelines.',
+    },
+    {
+      title: 'Build for Visibility',
+      description:
+        'A system is much easier to maintain when you have clear logs, metrics, and alerts to show you what is happening under the hood.',
+    },
   ],
   quotes: [
     'The best systems solve real problems, not just technical ones.',
     "Clean architecture scales. Messy code doesn't.",
     "Performance is not optional — it's a feature.",
+    'Good infrastructure is invisible when it works.',
+    'Automation saves time and keeps environments predictable.',
+    'Keep your setup simple until complexity is actually required.',
+    'A good fix in staging is better than a quick patch in production.',
+    'Clean code and clear logs make debugging effortless.',
     'Good developers write code. Great developers design systems.',
     'Simplicity is what makes systems truly powerful.',
   ],
@@ -96,3 +118,20 @@ export const generateProjectsTxt = (
     '[SYSTEM PROJECTS]',
     ...projects.map((p) => `• ${p.title}\n  ${p.description}\n  Tech: ${p.technologies.join(', ')}`),
   ].join('\n\n');
+
+export const generateExperienceTxt = (items: ExperienceItem[] = experiences): string => {
+  const formattedItems = items.map((exp) => {
+    const companyHeader = exp.website ? `COMPANY: ${exp.company} (${exp.website})` : `COMPANY: ${exp.company}`;
+    const period = `${formatDate(exp.startDate)} - ${formatDate(exp.endDate)}`;
+    const highlights = exp.responsibilities.map((r) => `  • ${r}`).join('\n');
+
+    return [companyHeader, `ROLE:    ${exp.role}`, `PERIOD:  ${period}`, 'HIGHLIGHTS:', highlights].join('\n');
+  });
+
+  return [
+    '[WORK EXPERIENCE & JOB HISTORY]',
+    '==================================================',
+    formattedItems.join('\n--------------------------------------------------\n'),
+    '==================================================',
+  ].join('\n');
+};

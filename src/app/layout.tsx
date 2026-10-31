@@ -3,6 +3,8 @@ import { Fira_Code, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import { ChildrenProps } from '@/types/components';
 import Providers from '@/components/providers';
+import { rootMetadata } from '@/constants/seo-metadata';
+import { jsonLd } from '@/constants/json-ld';
 
 const firaCode = Fira_Code({
   variable: '--font-sans',
@@ -14,34 +16,14 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Nofil | Portfolio',
-  description:
-    'Portfolio of Nofil Zahid — Full Stack Developer and solution-oriented engineer, building scalable web and mobile products, MVPs, and SaaS applications. Experienced in crafting intuitive interfaces and implementing robust backend systems to deliver real-world, high-impact solutions.',
-  icons: {
-    icon: '/favicon.ico',
-  },
-  keywords: [
-    'Nofil Zahid',
-    'full stack developer',
-    'backend developer',
-    'portfolio',
-    'React',
-    'Next.js',
-    'Node.js',
-    'API design',
-    'scalable systems',
-    'product development',
-    '9fil',
-  ],
-  authors: [{ name: 'Nofil Zahid' }],
-  creator: 'Nofil Zahid',
-  publisher: 'Nofil Zahid',
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({ children }: Readonly<ChildrenProps>) {
   return (
     <html lang="en" className="no-scrollbar">
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      </head>
       <body className={`${firaCode.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>

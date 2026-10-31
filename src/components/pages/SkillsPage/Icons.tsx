@@ -1,11 +1,12 @@
 import { TExpertiseCategory, TExpertiseName } from '@/constants/expertise';
 import {
+  Activity,
   ArrowLeftRight,
-  Boxes,
+  Cloud,
   Code2,
   Cpu,
-  CreditCard,
   Database,
+  GitBranch,
   Layers,
   Layout,
   Network,
@@ -19,13 +20,14 @@ import {
 
 export const CategoryIcon = ({ category }: { category: TExpertiseCategory }) => {
   let Icon = Terminal;
-  if (category === 'frontend') Icon = Layout;
+  if (category === 'devops_and_cloud') Icon = Cloud;
+  if (category === 'ci/cd') Icon = GitBranch;
+  if (category === 'observability_and_monitoring') Icon = Activity;
   if (category === 'backend') Icon = Server;
-  if (category === 'databases') Icon = Database;
   if (category === 'architecture') Icon = Network;
-  if (category === 'containerization') Icon = Boxes;
-  if (category === 'payment_integrations') Icon = CreditCard;
-  if (category === 'third_party_tools') Icon = Wrench;
+  if (category === 'databases') Icon = Database;
+  if (category === 'third_party_and_payments') Icon = Wrench;
+  if (category === 'frontend') Icon = Layout;
   return <Icon size={50} className="text-accent" />;
 };
 
@@ -40,6 +42,7 @@ export const SkillIcons = ({ name }: { name: TExpertiseName }) => {
   if (n.includes('slate')) Icon = Type;
   if (n.includes('rest') || n.includes('api')) Icon = Code2;
   if (n.includes('websocket') || n.includes('web-sockets') || n.includes('websocket')) Icon = ArrowLeftRight;
+  if (n.includes('aws')) Icon = Cloud;
   if (
     n.includes('multi-tenant') ||
     n.includes('monolith') ||

@@ -142,12 +142,15 @@ const CyberCursor: React.FC<CyberCursorProps> = ({
 
       shockwavesRef.current = shockwavesRef.current.filter((wave: Shockwave) => {
         const elapsed = timestamp - wave.startTime;
+        if (elapsed < 0) return true;
         if (elapsed >= duration) return false;
 
-        const progress = elapsed / duration;
+        const progress = Math.min(Math.max(elapsed / duration, 0), 1);
         const eased = easeOut(progress);
-        const radius = eased * maxRadius;
-        const alpha = 1 - progress;
+        const radius = Math.max(0, eased * maxRadius);
+        const alpha = Math.max(0, 1 - progress);
+
+        if (radius <= 0) return true;
 
         ctx.save();
         ctx.strokeStyle = rippleColor;

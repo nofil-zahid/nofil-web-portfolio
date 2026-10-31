@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/styles/tailwind-utils';
 import { routes } from '@/constants/routes';
 import { TERMINAL_PROMPT } from '@/constants/terminal';
+import Link from 'next/link';
 
 const Breadcrumb = () => {
   const router = useRouter();
@@ -17,12 +18,12 @@ const Breadcrumb = () => {
       transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
     >
       <div className="flex items-center overflow-x-auto font-mono whitespace-nowrap text-green-500/80">
-        <span
+        <Link
           className="mr-1 cursor-pointer text-[clamp(0.75rem,2vw,1rem)] transition-all hover:text-green-500 hover:underline"
-          onClick={() => router.push(routes.root)}
+          href={routes.root}
         >
           {TERMINAL_PROMPT}
-        </span>
+        </Link>
 
         {segments.map((segment, index) => {
           const urlPath = `/${segments.slice(0, index + 1).join('/')}`;

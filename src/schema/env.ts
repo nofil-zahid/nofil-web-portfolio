@@ -1,8 +1,7 @@
 import z from 'zod';
 
 export const clientEnvSchema = z.object({
-  NEXT_PUBLIC_HOSTNAME: z.string().min(1).default('localhost'),
-  NEXT_PUBLIC_PORT: z.coerce.number().default(3000),
+  NEXT_PUBLIC_SITE_URL: z.url().optional().default('https://nofil-web-portfolio.vercel.app'),
   NEXT_PUBLIC_NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   NEXT_PUBLIC_EMAILJS_SERVICE_ID: z.string().default('default-service-id'),
   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: z.string().default('default-template-id'),
