@@ -28,7 +28,7 @@ export default function Footer() {
               aria-label={`Open ${link.name} profile in new tab`}
               className="hover:text-accent focus-visible:ring-accent rounded px-1 text-slate-400 transition-colors focus-visible:ring-2 focus-visible:outline-none"
             >
-              {link.name}
+              <link.icon className="h-4 w-4" aria-hidden="true" />
             </Link>
           ))}
         </nav>
