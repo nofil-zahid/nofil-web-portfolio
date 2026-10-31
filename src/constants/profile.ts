@@ -1,3 +1,7 @@
+import { experiences } from '@/constants/experiences-data';
+import { formatDate } from '@/utils/date';
+import { ExperienceItem } from '@/types/model';
+
 // ─────────────────────────────────────────────
 // Central Profile Constants
 // Single source of truth for personal data used
@@ -111,3 +115,20 @@ export const generateProjectsTxt = (
     '[SYSTEM PROJECTS]',
     ...projects.map((p) => `• ${p.title}\n  ${p.description}\n  Tech: ${p.technologies.join(', ')}`),
   ].join('\n\n');
+
+export const generateExperienceTxt = (items: ExperienceItem[] = experiences): string => {
+  const formattedItems = items.map((exp) => {
+    const companyHeader = exp.website ? `COMPANY: ${exp.company} (${exp.website})` : `COMPANY: ${exp.company}`;
+    const period = `${formatDate(exp.startDate)} - ${formatDate(exp.endDate)}`;
+    const highlights = exp.responsibilities.map((r) => `  • ${r}`).join('\n');
+
+    return [companyHeader, `ROLE:    ${exp.role}`, `PERIOD:  ${period}`, 'HIGHLIGHTS:', highlights].join('\n');
+  });
+
+  return [
+    '[WORK EXPERIENCE & JOB HISTORY]',
+    '==================================================',
+    formattedItems.join('\n--------------------------------------------------\n'),
+    '==================================================',
+  ].join('\n');
+};

@@ -6,6 +6,7 @@ import TopLoader from './TopLoader';
 import Toaster from './Toaster';
 import VercelAnalytics from './VercelAnalytics';
 import ClickSparkProvider from './CS-Provider';
+import { TerminalProvider } from './TerminalProvider';
 
 export default function Providers({ children }: ChildrenProps) {
   return (
@@ -13,7 +14,9 @@ export default function Providers({ children }: ChildrenProps) {
       <VercelAnalytics />
       <TopLoader />
       <Toaster />
-      <ClickSparkProvider>{children}</ClickSparkProvider>
+      <TerminalProvider>
+        <ClickSparkProvider>{children}</ClickSparkProvider>
+      </TerminalProvider>
       <ServiceWorker />
       <NavigatorStatus />
     </EventsInterceptor>

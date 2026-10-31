@@ -44,3 +44,20 @@ export const projects: ProjectCardProps[] = [
 ];
 
 export const numberOfProjects = projects.length;
+
+export const getProjectSlug = (title: string): string =>
+  title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
+
+export const findProjectByIdOrSlug = (idOrSlug: string) => {
+  const decoded = decodeURIComponent(idOrSlug).toLowerCase();
+  return projects.find(
+    (p, index) =>
+      getProjectSlug(p.title) === decoded ||
+      p.title.toLowerCase() === decoded ||
+      String(index) === decoded ||
+      String(index + 1) === decoded,
+  );
+};

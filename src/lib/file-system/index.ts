@@ -1,8 +1,8 @@
 import { FileNode } from './type';
-import { generateUserTxt, generateContactTxt, generateProjectsTxt } from '@/constants/profile';
+import { generateUserTxt, generateContactTxt, generateProjectsTxt, generateExperienceTxt } from '@/constants/profile';
 import { projects } from '@/constants/projects';
 
-const FS_STORAGE_KEY = 'terminal_fs_v3';
+const FS_STORAGE_KEY = 'terminal_fs_v5';
 
 export const INITIAL_FS: FileNode = {
   name: '~',
@@ -13,6 +13,12 @@ export const INITIAL_FS: FileNode = {
       type: 'file',
       isReadOnly: true,
       content: generateUserTxt(),
+    },
+    'experience.txt': {
+      name: 'experience.txt',
+      type: 'file',
+      isReadOnly: true,
+      content: generateExperienceTxt(),
     },
     'projects.txt': {
       name: 'projects.txt',
@@ -33,7 +39,12 @@ export const getStoredFS = (): FileNode => {
   if (typeof window === 'undefined') return INITIAL_FS;
   try {
     const data = localStorage.getItem(FS_STORAGE_KEY);
-    return data ? JSON.parse(data) : INITIAL_FS;
+    if (!data) return INITIAL_FS;
+    const parsed = JSON.parse(data);
+    if (parsed?.children && !parsed.children['experience.txt']) {
+      parsed.children['experience.txt'] = INITIAL_FS.children!['experience.txt'];
+    }
+    return parsed;
   } catch {
     return INITIAL_FS;
   }
