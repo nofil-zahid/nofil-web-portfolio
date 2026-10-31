@@ -8,10 +8,12 @@ export const routes = Object.freeze({
     contact: '/contact-me',
     expertise: '/expertise',
     experience: '/experience',
-    icons: (slug: string, color?: string) => `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ''}`,
   },
   api: {
     health: '/api/health',
     ip: '/api/ip',
+  },
+  thirdParty: {
+    icons: (slug: string, color?: string) => `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ''}`,
   },
 });
