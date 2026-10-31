@@ -27,7 +27,12 @@ function AnimatedNumber({ value }: { value: number }) {
 
 const Stats = () => {
   return (
-    <div className="order-2 mt-8 flex w-full flex-row flex-wrap items-center justify-center gap-6 border-t border-white/10 pt-6 text-center sm:gap-10 lg:mt-0 lg:w-auto lg:flex-col lg:items-end lg:justify-start lg:gap-10 lg:border-t-0 lg:border-r lg:pt-0 lg:pr-8 lg:text-right">
+    <div
+      role="region"
+      aria-label="Professional Statistics"
+      className="order-2 mt-8 flex w-full flex-row flex-wrap items-center justify-center gap-6 border-t border-white/10 pt-6 text-center sm:gap-10 lg:mt-0 lg:w-auto lg:flex-col lg:items-end lg:justify-start lg:gap-10 lg:border-t-0 lg:border-r lg:pt-0 lg:pr-8 lg:text-right"
+    >
+      <h2 className="sr-only">Key Statistics</h2>
       {stats.map((stat, index) => (
         <motion.div
           key={stat.label}
@@ -35,11 +40,15 @@ const Stats = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
           className="group flex flex-col items-center lg:items-end"
+          aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
         >
-          <h2 className="text-accent mb-1 font-mono text-[clamp(1.75rem,4vw,2.75rem)] leading-none font-black tracking-tighter transition-transform group-hover:translate-x-1 lg:group-hover:-translate-x-1">
+          <div
+            className="text-accent mb-1 font-mono text-[clamp(1.75rem,4vw,2.75rem)] leading-none font-black tracking-tighter transition-transform group-hover:translate-x-1 lg:group-hover:-translate-x-1"
+            aria-hidden="true"
+          >
             <AnimatedNumber value={stat.value} />
             {stat.suffix}
-          </h2>
+          </div>
           <p className="text-[10px] font-bold tracking-[0.25em] whitespace-nowrap text-slate-300 uppercase">
             {stat.label}
           </p>

@@ -9,8 +9,13 @@ import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
 import { navLinks, socialLinks } from '@/constants/links';
 import { cn } from '@/styles/tailwind-utils';
 import { routes } from '@/constants/routes';
-import TerminalUI from '../shared/TerminalUI';
+import dynamic from 'next/dynamic';
 import { useTerminal } from '../providers/TerminalProvider';
+
+const TerminalUI = dynamic(() => import('../shared/TerminalUI'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -50,15 +55,17 @@ export default function Sidebar() {
       >
         <button
           onClick={() => toggle()}
-          className="text-accent flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg p-2 transition hover:scale-110 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none md:hidden"
+          className="text-accent flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-lg p-2 transition hover:scale-110 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none md:hidden"
           aria-label={isOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation-drawer"
         >
-          {isOpen ? <X size={26} /> : <Menu size={26} />}
+          {isOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
         </button>
 
         <button
           type="button"
-          className="text-text-secondary hover:text-accent active:text-accent min-h-[44px] cursor-pointer rounded-md px-2 text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap"
+          className="text-text-secondary hover:text-accent active:text-accent min-h-11 cursor-pointer rounded-md px-2 text-[clamp(0.8rem,1.5vw,1.25rem)] font-medium tracking-[clamp(0.15em,0.5vw,0.25em)] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none active:scale-95 md:absolute md:top-1/2 md:-translate-y-1/2 md:-rotate-90 md:whitespace-nowrap"
           onClick={handleHomeNavigation}
           aria-label="Navigate to Home"
         >
@@ -81,12 +88,18 @@ export default function Sidebar() {
               ? 'Close Interactive Terminal Drawer'
               : 'Open Interactive Terminal Drawer (Press / or Ctrl+K)'
           }
+          aria-expanded={isTerminalOpen}
+          aria-controls="terminal-drawer"
           title={isTerminalOpen ? 'Close Terminal (ESC)' : 'Open Terminal (/ or Ctrl+K)'}
         >
           {isTerminalOpen ? (
-            <X size={18} className="text-current transition-transform duration-300 group-hover:rotate-90" />
+            <X
+              size={18}
+              className="text-current transition-transform duration-300 group-hover:rotate-90"
+              aria-hidden="true"
+            />
           ) : (
-            <div className="flex items-center -space-x-1 font-mono text-sm font-black text-current">
+            <div className="flex items-center -space-x-1 font-mono text-sm font-black text-current" aria-hidden="true">
               <ChevronRight
                 size={16}
                 strokeWidth={3}
@@ -97,9 +110,14 @@ export default function Sidebar() {
           )}
         </button>
 
-        <div className="block w-5 md:hidden" />
+        <div className="block w-5 md:hidden" aria-hidden="true" />
 
-        <div className="bg-background-primary border-border-glow absolute top-0 right-full h-screen w-[calc(100vw-clamp(60px,6vw,90px))] border-r">
+        <div
+          id="terminal-drawer"
+          role="region"
+          aria-label="Interactive Terminal Drawer"
+          className="bg-background-primary border-border-glow absolute top-0 right-full h-screen w-[calc(100vw-clamp(60px,6vw,90px))] border-r"
+        >
           <TerminalUI isOpen={isTerminalOpen} />
         </div>
       </motion.aside>
@@ -119,7 +137,9 @@ export default function Sidebar() {
       </AnimatePresence>
 
       <aside
+        id="mobile-navigation-drawer"
         aria-label="Mobile Navigation Drawer"
+        aria-hidden={!isOpen}
         className={cn(
           'fixed z-45 flex h-screen w-full flex-col justify-between',
           'bg-background-primary text-text-primary border-border-glow border-r',
@@ -137,7 +157,7 @@ export default function Sidebar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => closeMenu()}
-                className="group relative flex min-h-[44px] items-center rounded-lg px-3 py-2 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
+                className="group relative flex min-h-11 items-center rounded-lg px-3 py-2 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
               >
                 <div className="absolute left-0 flex w-4 items-center justify-center">
                   {active && (
@@ -180,7 +200,7 @@ export default function Sidebar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Open ${link.name} profile in new tab`}
-                  className="group flex min-h-[44px] items-center gap-3 rounded-lg px-3 py-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
+                  className="group flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
                 >
                   <Icon className="text-text-secondary group-hover:text-accent h-5 w-5 transition-colors duration-200" />
                   <span className="text-text-secondary group-hover:text-accent font-mono text-sm transition-colors duration-200">

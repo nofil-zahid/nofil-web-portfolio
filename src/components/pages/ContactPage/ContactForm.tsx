@@ -91,6 +91,7 @@ const ContactForm = () => {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <h2 className="sr-only">Send a Message</h2>
         <InputField
           index="01"
           label="Your Name"

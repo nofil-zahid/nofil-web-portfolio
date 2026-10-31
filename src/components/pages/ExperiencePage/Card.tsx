@@ -19,13 +19,15 @@ const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, en
       className="bg-background-secondary/80 w-full rounded-[clamp(1rem,2vw,1.5rem)] border border-[#2a3c30] p-[clamp(1.2rem,3vw,2rem)] transition-colors hover:border-[#5ff07e]/40"
     >
       <div className="mb-[clamp(1rem,3vw,1.5rem)]">
-        <h3 className="mb-2 text-[clamp(1.1rem,3vw,1.7rem)] font-bold text-gray-100">{role}</h3>
+        <h2 className="mb-2 text-[clamp(1.1rem,3vw,1.7rem)] font-bold text-gray-100">{role}</h2>
 
         <div className="flex flex-col items-start gap-2">
           <Link
             href={website ?? '#'}
             target="_blank"
-            className="text-accent text-[clamp(.7rem,2vw,.95rem)] font-bold tracking-[0.15em] uppercase hover:underline"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${company} website in new tab`}
+            className="text-accent focus-visible:ring-accent text-[clamp(.7rem,2vw,.95rem)] font-bold tracking-[0.15em] uppercase hover:underline focus-visible:ring-1 focus-visible:outline-none"
           >
             {company}
           </Link>

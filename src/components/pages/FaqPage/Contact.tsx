@@ -21,15 +21,15 @@ const Contact = () => {
       className="border-border-glow bg-background-secondary hover:border-accent/40 mx-auto mt-12 flex w-full max-w-3xl flex-col items-center justify-between gap-8 rounded-2xl border p-8 transition-colors md:flex-row"
     >
       <div className="text-center md:text-left">
-        <h3 className="text-text-primary mb-2 text-xl font-bold">Still have questions?</h3>
+        <h2 className="text-text-primary mb-2 text-xl font-bold">Still have questions?</h2>
 
-        <p className="text-text-secondary max-w-[400px] text-sm md:text-base">
+        <p className="text-text-secondary max-w-100 text-sm md:text-base">
           If you couldnt find what you were looking for, feel free to reach out directly.
         </p>
       </div>
 
       <Button onClick={handleContactMe} customClass="shrink-0">
-        <Mail size={18} />
+        <Mail size={18} aria-hidden="true" />
         Contact Me
       </Button>
     </motion.div>

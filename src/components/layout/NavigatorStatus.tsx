@@ -26,7 +26,7 @@ export default function NavigatorStatus() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed right-4 bottom-4 z-9999">
+    <div className="pointer-events-none fixed right-4 bottom-8 z-9999">
       <AnimatePresence>
         {hoveredUrl && !isMobile && (
           <motion.div

@@ -202,13 +202,14 @@ const CyberCursor: React.FC<CyberCursorProps> = ({
 
   return (
     <div className="relative h-full w-full" onClick={handleClick}>
-      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 z-50" />
+      <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 z-50" />
       {children}
 
       {mounted && !window.matchMedia('(pointer: coarse)').matches && (
         <>
           {/* Outer Trailing Reticle */}
           <motion.div
+            aria-hidden="true"
             className="pointer-events-none fixed top-0 left-0 z-9999 flex h-9 w-9 items-center justify-center"
             style={{
               x: cursorX,
@@ -246,6 +247,7 @@ const CyberCursor: React.FC<CyberCursorProps> = ({
 
           {/* Inner Sharp Crosshair */}
           <motion.div
+            aria-hidden="true"
             className="text-accent pointer-events-none fixed top-0 left-0 z-10000 flex h-4 w-4 items-center justify-center"
             style={{
               x: mousePosition.x,
