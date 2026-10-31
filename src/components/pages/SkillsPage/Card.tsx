@@ -21,18 +21,24 @@ export const ExpertiseCard = ({
     transition={{ delay: order * 0.1, duration: 0.5 }}
     className="group bg-background-secondary/40 hover:border-accent/20 relative overflow-hidden rounded-2xl border border-white/5 p-6 backdrop-blur-sm transition-colors duration-500 md:p-8"
   >
-    <div className="absolute -top-1 -right-1 p-2 opacity-5 transition-opacity duration-500 group-hover:opacity-10">
+    <div
+      className="absolute -top-1 -right-1 p-2 opacity-5 transition-opacity duration-500 group-hover:opacity-10"
+      aria-hidden="true"
+    >
       <CategoryIcon category={category} />
     </div>
 
     <div className="relative mb-6 flex items-center gap-3 md:mb-8">
-      <div className="bg-accent h-6 w-0.75 shadow-[0_0_10px_var(--color-accent)] transition-all duration-300 group-hover:h-7.5" />
-      <h3 className="text-xl font-black tracking-tighter text-white uppercase md:text-2xl">
+      <div
+        className="bg-accent h-6 w-0.75 shadow-[0_0_10px_var(--color-accent)] transition-all duration-300 group-hover:h-7.5"
+        aria-hidden="true"
+      />
+      <h2 className="text-xl font-black tracking-tighter text-white uppercase md:text-2xl">
         {category
           .replace(/_/g, ' ')
           .replace(/([A-Z])/g, ' $1')
           .trim()}
-      </h3>
+      </h2>
     </div>
 
     <div className="relative z-10 flex flex-wrap gap-3">

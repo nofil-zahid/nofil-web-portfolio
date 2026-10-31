@@ -27,6 +27,7 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          aria-hidden="true"
           className="mb-6 flex items-center font-mono"
         >
           <span className="text-accent mr-2 text-[9px] font-bold opacity-80 select-none">ID_</span>
@@ -64,7 +65,10 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
 
       <div className={cn('relative mt-1 flex gap-3', isCenter ? 'flex-col items-center' : 'flex-row items-start')}>
         {!isCenter && (
-          <div className="text-accent/70 flex flex-col border-r border-white/10 pt-1.5 pr-3 font-mono text-[9px] select-none">
+          <div
+            aria-hidden="true"
+            className="text-accent/70 flex flex-col border-r border-white/10 pt-1.5 pr-3 font-mono text-[9px] select-none"
+          >
             <span>ln</span>
             <span>01</span>
           </div>
@@ -76,7 +80,9 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
             isCenter ? 'text-center' : 'text-left',
           )}
         >
-          <span className="text-accent/80 mr-1.5 font-mono text-xs">{'//'}</span>
+          <span aria-hidden="true" className="text-accent/80 mr-1.5 font-mono text-xs">
+            {'//'}
+          </span>
           {description}
         </p>
       </div>

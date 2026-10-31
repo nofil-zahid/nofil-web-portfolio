@@ -26,7 +26,7 @@ export default function WhoAmI() {
         >
           <Avatar
             src="/profile.png"
-            className="h-[240px] w-[240px] shadow-[0_0_50px_-12px_rgba(13,242,89,0.3)] lg:h-[260px] lg:w-[260px]"
+            className="h-60 w-60 shadow-[0_0_50px_-12px_rgba(13,242,89,0.3)] lg:h-65 lg:w-65"
           />
         </motion.div>
       </div>
@@ -55,7 +55,7 @@ export default function WhoAmI() {
                   key={item.title}
                   className="bg-background-secondary/50 hover:bg-accent/5 rounded-xl border border-white/5 p-6 transition-colors"
                 >
-                  <h4 className="mb-2 font-bold text-white">{item.title}</h4>
+                  <h3 className="mb-2 text-sm font-bold text-white">{item.title}</h3>
                   <p className="text-text-secondary text-xs">{item.description}</p>
                 </div>
               ))}

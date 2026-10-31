@@ -30,7 +30,10 @@ const BiometricAvatar = ({ src = '/profile.png', size, className }: BiometricAva
 
         <div className="bg-background-secondary relative h-full w-full overflow-hidden">
           {!isLoaded && (
-            <div className="bg-background-primary/95 absolute inset-0 z-30 flex flex-col items-center justify-center font-mono select-none">
+            <div
+              aria-hidden="true"
+              className="bg-background-primary/95 absolute inset-0 z-30 flex flex-col items-center justify-center font-mono select-none"
+            >
               <div className="border-accent/30 absolute inset-2 animate-[spin_10s_linear_infinite] rounded-full border border-dashed" />
               <div className="border-accent/40 absolute h-4 w-4 rounded-full border" />
 
@@ -52,19 +55,21 @@ const BiometricAvatar = ({ src = '/profile.png', size, className }: BiometricAva
 
           <Image
             src={src}
-            alt="System User Authorized"
+            alt="Nofil Zahid - Full Stack & DevOps Engineer Profile Photo"
             fill
             priority
+            loading="eager"
             onLoad={() => enable()}
             className={cn(
               'object-cover opacity-70 brightness-90 contrast-125 grayscale transition-all duration-500 ease-in-out group-hover:opacity-100 group-hover:brightness-100 group-hover:grayscale-0',
               !isLoaded && 'opacity-0',
             )}
-            sizes={size ? `${size}px` : '(max-width: 1024px) 240px, 260px'}
+            sizes={size ? `${size}px` : '(max-width: 768px) 240px, 260px'}
           />
 
           {isLoaded && (
             <motion.div
+              aria-hidden="true"
               animate={{ top: ['-10%', '110%'] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
               className="bg-accent/60 absolute left-0 z-10 h-[1.5px] w-full shadow-[0_0_12px_var(--color-accent)]"

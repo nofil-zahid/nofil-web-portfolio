@@ -56,11 +56,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View ${title} source repository on GitHub`}
             whileHover={{ y: -2 }}
-            className="hover:text-accent transition-colors"
+            className="hover:text-accent focus-visible:ring-accent rounded p-0.5 transition-colors focus-visible:ring-2 focus-visible:outline-none"
           >
             <Tooltip content="Repository URL">
-              <Code2 size={22} />
+              <Code2 size={22} aria-hidden="true" />
             </Tooltip>
           </motion.a>
         )}
@@ -69,11 +70,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={liveUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View live deployment of ${title}`}
             whileHover={{ y: -2 }}
-            className="hover:text-accent transition-colors"
+            className="hover:text-accent focus-visible:ring-accent rounded p-0.5 transition-colors focus-visible:ring-2 focus-visible:outline-none"
           >
             <Tooltip content="Live URL">
-              <ExternalLink size={22} />
+              <ExternalLink size={22} aria-hidden="true" />
             </Tooltip>
           </motion.a>
         )}
@@ -85,7 +87,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           whileHover={{ scale: 1.02 }}
         >
           {!isLoaded && (
-            <div className="bg-background-primary/95 absolute inset-0 z-20 flex flex-col items-center justify-center font-mono select-none">
+            <div
+              aria-hidden="true"
+              className="bg-background-primary/95 absolute inset-0 z-20 flex flex-col items-center justify-center font-mono select-none"
+            >
               <div className="border-accent/50 absolute top-2 left-2 h-3 w-3 border-t-2 border-l-2" />
               <div className="border-accent/50 absolute top-2 right-2 h-3 w-3 border-t-2 border-r-2" />
               <div className="border-accent/50 absolute bottom-2 left-2 h-3 w-3 border-b-2 border-l-2" />
@@ -103,7 +108,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               <motion.div
                 animate={{ top: ['0%', '100%'] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="bg-accent/80 absolute left-0 z-30 h-[2px] w-full shadow-[0_0_12px_#0df259]"
+                className="bg-accent/80 absolute left-0 z-30 h-0.5 w-full shadow-[0_0_12px_#0df259]"
               />
 
               <div className="z-10 flex flex-col items-center gap-1.5">
@@ -118,10 +123,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
           <Image
             src={screenshotUrl}
-            alt={`${title} screenshot`}
+            alt={`${title} project preview`}
             width={500}
             height={500}
             priority={false}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 340px"
             onLoad={() => setLoaded()}
             className={cn(
               'h-40 w-full object-cover transition-all duration-500',
@@ -130,6 +136,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           />
 
           <div
+            aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-20"
             style={{
               backgroundImage: 'linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.4) 50%)',
@@ -145,11 +152,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
-          <TypeIcon className="text-accent fill-accent/20 group-hover:fill-accent/40 h-10 w-10 transition-all duration-300" />
+          <TypeIcon
+            className="text-accent fill-accent/20 group-hover:fill-accent/40 h-10 w-10 transition-all duration-300"
+            aria-hidden="true"
+          />
         </motion.div>
       )}
 
-      <h3 className="text-text-primary group-hover:text-accent mb-3 text-2xl font-bold transition-colors">{title}</h3>
+      <h2 className="text-text-primary group-hover:text-accent mb-3 text-2xl font-bold transition-colors">{title}</h2>
 
       <p className={`text-text-secondary mb-6 grow pb-5 leading-relaxed line-clamp-${maxDescriptionLines}`}>
         {description}
