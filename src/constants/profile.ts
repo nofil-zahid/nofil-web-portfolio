@@ -14,6 +14,8 @@ export const PROFILE = {
   title: 'Full Stack & DevOps Engineer',
   specialization: 'Cloud Infrastructure, Distributed Backend Systems & CI/CD Pipelines',
   location: 'Lahore, Pakistan',
+  city: 'Lahore',
+  country: 'Pakistan',
   availability: 'Open to Opportunities',
   focusArea: 'DevOps, Cloud Platform & Enterprise SaaS',
 } as const;
@@ -24,6 +26,7 @@ export const CONTACT = {
   whatsapp: '+923092051143',
   social: {
     github: 'https://github.com/nofil-zahid',
+    npm: 'https://www.npmjs.com/~nofil.dev',
     linkedin: 'https://www.linkedin.com/in/nofil-zahid/',
     twitter: 'https://x.com/nofil_zahid',
     whatsapp: 'https://wa.me/923092051143',

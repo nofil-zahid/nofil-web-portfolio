@@ -1,4 +1,5 @@
 import { routes } from './routes';
+import { CONTACT } from './profile';
 import { Github, Linkedin, Twitter, MessageCircle, Package } from 'lucide-react';
 
 export const navLinks = [
@@ -12,9 +13,11 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/nofil-zahid', icon: Github },
-  { name: 'NPM', href: 'https://www.npmjs.com/~nofil.dev', icon: Package },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/nofil-zahid/', icon: Linkedin },
-  { name: 'Twitter', href: 'https://x.com/nofil_zahid', icon: Twitter },
-  { name: 'WhatsApp', href: 'https://wa.me/923092051143', icon: MessageCircle },
+  { name: 'GitHub', href: CONTACT.social.github, icon: Github },
+  { name: 'NPM', href: CONTACT.social.npm, icon: Package },
+  { name: 'LinkedIn', href: CONTACT.social.linkedin, icon: Linkedin },
+  { name: 'Twitter', href: CONTACT.social.twitter, icon: Twitter },
+  { name: 'WhatsApp', href: CONTACT.social.whatsapp, icon: MessageCircle },
 ];
+
+export const sameAsLinks = [CONTACT.social.github, CONTACT.social.linkedin, CONTACT.social.twitter, CONTACT.social.npm];
