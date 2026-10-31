@@ -1,4 +1,4 @@
-import { format, differenceInMonths, differenceInYears } from 'date-fns';
+import { format, differenceInDays, differenceInYears } from 'date-fns';
 
 const CAREER_START_DATE = new Date(2024, 0, 1);
 
@@ -24,9 +24,9 @@ export const getDynamicProjectsCount = (baseProjectCount: number): number => {
 };
 
 export const getDynamicHoursWorked = (): number => {
-  const monthsPassed = Math.max(1, differenceInMonths(new Date(), CAREER_START_DATE));
-  const hoursPerMonth = 8 * 22;
-  return monthsPassed * hoursPerMonth;
+  const daysPassed = Math.max(1, differenceInDays(new Date(), CAREER_START_DATE));
+  const hoursPerDay = 6;
+  return daysPassed * hoursPerDay;
 };
 
 export const calculateDuration = (startDate: string | Date, endDate?: string | Date): string => {
