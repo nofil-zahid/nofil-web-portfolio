@@ -3,7 +3,7 @@ import { routes } from '@/constants/routes';
 import { ABOUT, PROFILE, CONTACT } from '@/constants/profile';
 import { envVars } from '@/config/env';
 
-export const SITE_URL = envVars.NEXT_PUBLIC_SITE_URL || 'https://nofil.dev';
+export const SITE_URL = envVars.NEXT_PUBLIC_SITE_URL;
 export const SITE_NAME = `${PROFILE.name} Portfolio`;
 export const SITE_TITLE = `${PROFILE.name} | ${PROFILE.title}`;
 export const SITE_DESCRIPTION = `Interactive terminal portfolio of ${PROFILE.name}, ${PROFILE.title}.`;
