@@ -1,0 +1,106 @@
+# Nofil Zahid — Portfolio & Technical Profile
+
+> Interactive portfolio and technical knowledge base for Nofil Zahid, a Full Stack & DevOps Engineer specializing in scalable cloud platforms, distributed backend systems, and automated CI/CD pipelines.
+
+## Profile Summary
+
+- **Name**: Nofil Zahid
+- **Title**: Full Stack & DevOps Engineer
+- **Specialization**: Cloud Infrastructure, Distributed Backend Systems & CI/CD Pipelines
+- **Location**: Lahore, Pakistan
+- **Availability**: Open to Opportunities
+- **Focus Area**: DevOps, Cloud Platform & Enterprise SaaS
+- **Primary Website**: https://nofil-web-portfolio.vercel.app
+
+## Core Architecture & Engineering Philosophy
+
+- **Scalable by Design**: Clean architecture and modular systems designed to handle high complexity and distributed loads.
+- **Problem-Driven Development**: Building purposeful software with a strong focus on real-world reliability, performance, and long-term maintainability.
+- **Automate Early**: Automating manual tasks through version-controlled scripts, Docker containers, and robust CI/CD pipelines.
+- **Build for Visibility**: Implementing clear observability with proactive telemetry, logging, metrics, and alerting to ensure systems are easy to monitor and debug.
+
+## Site Pages & Navigation
+
+- [Home](https://nofil-web-portfolio.vercel.app/): Landing overview with interactive developer terminal, system stats, quick commands, and featured highlights.
+- [Who Am I](https://nofil-web-portfolio.vercel.app/who-am-i): Professional background, engineering philosophy, motto generator, and personal overview.
+- [Expertise](https://nofil-web-portfolio.vercel.app/expertise): Detailed technical competencies across DevOps, Cloud, Backend, Observability, and Frontend stacks.
+- [Experience](https://nofil-web-portfolio.vercel.app/experience): Employment history, roles, responsibilities, and key achievements at tech firms.
+- [Projects](https://nofil-web-portfolio.vercel.app/projects): Portfolio of production applications, developer tools, CLI utilities, and open-source contributions.
+- [Contact](https://nofil-web-portfolio.vercel.app/contact-me): Communication endpoints and direct contact form.
+- [FAQs](https://nofil-web-portfolio.vercel.app/faqs): Answers to frequently asked questions regarding technical stack, code quality, availability, and response times.
+
+## Technical Expertise
+
+### DevOps & Cloud Infrastructure
+- **Containerization & Orchestration**: Kubernetes, Docker, Docker Compose, Helm
+- **GitOps & Deployment**: ArgoCD, Terraform, Ansible
+- **Cloud Platforms**: Amazon Web Services (AWS)
+
+### CI/CD Pipelines
+- GitHub Actions, GitLab CI/CD, Jenkins
+
+### Observability & Telemetry
+- Prometheus, Grafana, Grafana Loki
+
+### Backend & API Engineering
+- **Runtimes & Frameworks**: Node.js, Express.js, NestJS
+- **APIs & Protocols**: RESTful APIs, WebSockets
+- **Architectural Paradigms**: Multi-Tenant SaaS, Microservices, Scalable Monoliths
+
+### Databases & Storage
+- PostgreSQL (multi-tenant schemas, connection pooling), MySQL, MongoDB
+
+### Frontend Engineering
+- **Languages & Frameworks**: TypeScript, React, Next.js (App Router, SSR)
+- **Styling & Motion**: Tailwind CSS, Framer Motion, Material UI (MUI)
+- **State & Editors**: Redux Toolkit, Slate.js
+
+### Third-Party & Payment Integrations
+- Stripe, PayPal Multi-Party API, Firebase (Auth, Firestore, Storage), Vercel
+
+## Featured Projects
+
+- [Crontab Text Explainer](https://nofil-zahid.github.io/crontab-text-explainer/): Open-source developer tool for visually interpreting, building, and explaining cron expressions. Built with React, TypeScript, and Vite. Source: https://github.com/nofil-zahid/crontab-text-explainer
+- [SayBack](https://www.npmjs.com/package/sayback): Developer CLI tool that animates terminal output with a retro typewriter character-cycling effect. Distributed via npm. Source: https://github.com/nofil-zahid/sayback
+- [DineDynaty](https://github.com/nofil-zahid/restaurant-management-system): Comprehensive mobile Restaurant Management System streamlining tables, reservations, and inventory. Built with Flutter and Firebase.
+- [ClassHub](https://nofil-web-portfolio.vercel.app/projects/classhub): Role-based learning management system featuring real-time messaging, automated grading checks with Gemini API & Copyleaks API, and file tracking. Built with React, Express, MySQL, and Firebase.
+- [Docly](https://nofil-web-portfolio.vercel.app/projects/docly): Extensible web document editor supporting rich-text blocks, keyboard shortcuts, and dynamic formatting. Built with Next.js, TypeScript, Slate.js, and Tailwind CSS.
+
+## Work Experience
+
+### Associate Software Engineer — STACK360 (Jul 2025 – Present)
+- Designed and built a multi-tenant SaaS architecture using Next.js and Express.js.
+- Implemented PostgreSQL multi-schema architecture for complete tenant data isolation and scalable request routing.
+- Integrated multi-party PayPal payment flows for subscription-based SaaS billing.
+- Spearheaded UI component architectures and Firebase service integrations.
+
+### MERN Stack Developer — Directorate of IT, GCUL (Nov 2023 – Jul 2025)
+- Engineered full-stack modules and secured internal RESTful APIs for university management systems (HRM, SFC, ORUP, SRMS, and LMS).
+- Built interactive HR reporting dashboards for academic and administrative staff.
+- Implemented student clearance pipelines with automated fee and challan verification.
+- Developed and deployed the departmental Dak Management System for tracking official physical file transitions.
+
+## Key FAQs
+
+- **What is your primary tech stack?**
+  TypeScript across the entire stack. Next.js/React on the frontend; Node.js with Express or NestJS paired with PostgreSQL on the backend; Docker, Kubernetes, and GitHub Actions for infrastructure.
+- **Do you handle end-to-end development?**
+  Yes, from system architecture and database design to frontend UX and automated production deployments.
+- **How do you ensure code quality?**
+  Strict TypeScript typing, automated linting and formatting (ESLint, Prettier), Git commit hooks (Husky, lint-staged), and CI/CD validation before deployment.
+- **Are you available for contract or full-time roles?**
+  Yes, available for select contract projects and full-time opportunities.
+
+## Communication Endpoints
+
+- **Email**: nofilzahid.se@gmail.com
+- **WhatsApp**: https://wa.me/923092051143 (+923092051143)
+- **GitHub**: https://github.com/nofil-zahid
+- **LinkedIn**: https://www.linkedin.com/in/nofil-zahid/
+- **npm Profile**: https://www.npmjs.com/~nofil.dev
+- **X (Twitter)**: https://x.com/nofil_zahid
+
+## Optional / Additional Resources
+
+- [Resume / CV](https://nofil-web-portfolio.vercel.app/cv3-nofil.pdf): Downloadable PDF curriculum vitae.
+- [Sitemap](https://nofil-web-portfolio.vercel.app/sitemap.xml): Full XML sitemap for search crawlers.
