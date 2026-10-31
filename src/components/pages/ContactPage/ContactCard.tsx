@@ -50,22 +50,23 @@ const ContactCard = () => {
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col">
-              <p className="mb-0.5 truncate text-[10px] font-medium tracking-[0.2em] text-gray-500 uppercase">
+              <p className="mb-0.5 truncate text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase">
                 Direct Protocol
               </p>
               <button
                 type="button"
                 onClick={handleCopy}
-                className="relative flex min-w-0 cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-left font-mono text-[clamp(0.9rem,1.4vw,1.05rem)] tracking-tighter text-gray-100 focus:outline-none"
+                className="relative flex min-w-0 cursor-pointer items-center gap-1 rounded border-none bg-transparent p-0 text-left font-mono text-[clamp(0.9rem,1.4vw,1.05rem)] tracking-tighter text-gray-100 focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
                 title="Click to copy email address"
+                aria-label={`Copy email address ${email}`}
               >
-                <span className="text-accent/40 hidden shrink-0 text-[9px] font-bold sm:inline">copy:</span>
+                <span className="text-accent/80 hidden shrink-0 text-[10px] font-bold sm:inline">copy:</span>
                 <span className="relative flex flex-1 items-center gap-2 truncate">
                   <span className="truncate">{email}</span>
                   {copied ? (
                     <Check className="text-accent h-3.5 w-3.5 shrink-0 animate-pulse" />
                   ) : (
-                    <Copy className="group-hover/email:text-accent h-3.5 w-3.5 shrink-0 text-gray-500 opacity-0 transition-colors group-hover/email:opacity-100" />
+                    <Copy className="group-hover/email:text-accent h-3.5 w-3.5 shrink-0 text-slate-400 opacity-60 transition-colors group-hover/email:opacity-100" />
                   )}
                   <span className="bg-accent absolute -bottom-1 left-0 h-px w-0 shadow-[0_0_8px_#5ff07e] transition-all duration-300 group-hover/email:w-full" />
                 </span>
@@ -78,7 +79,7 @@ const ContactCard = () => {
               <MapPin className="text-accent h-[clamp(1.1rem,2vw,1.3rem)] w-[clamp(1.1rem,2vw,1.3rem)]" />
             </div>
             <div>
-              <p className="mb-0.5 text-[10px] font-medium tracking-[0.2em] text-gray-500 uppercase">Location</p>
+              <p className="mb-0.5 text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase">Location</p>
               <p className="text-[clamp(0.9rem,1.4vw,1.05rem)] font-medium text-gray-100">{PROFILE.location}</p>
             </div>
           </div>
@@ -88,7 +89,7 @@ const ContactCard = () => {
               <Terminal className="text-accent h-[clamp(1.1rem,2vw,1.3rem)] w-[clamp(1.1rem,2vw,1.3rem)]" />
             </div>
             <div className="min-w-0">
-              <p className="mb-1.5 text-[10px] font-medium tracking-[0.2em] text-gray-500 uppercase">Social</p>
+              <p className="mb-1.5 text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase">Social</p>
               <div className="flex flex-wrap gap-x-4 gap-y-2 text-[clamp(0.85rem,1.4vw,1rem)] text-gray-100">
                 {socialLinks.map((link) => (
                   <a
@@ -96,7 +97,8 @@ const ContactCard = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center font-mono transition-all"
+                    aria-label={`Open ${link.name} profile`}
+                    className="group flex min-h-[44px] items-center rounded px-1 font-mono transition-all focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
                   >
                     <span className="text-accent -translate-x-1 text-[0.8em] opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
                       [

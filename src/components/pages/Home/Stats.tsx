@@ -40,7 +40,7 @@ const Stats = () => {
             <AnimatedNumber value={stat.value} />
             {stat.suffix}
           </h2>
-          <p className="text-[9px] font-bold tracking-[0.25em] whitespace-nowrap text-gray-500 uppercase">
+          <p className="text-[10px] font-bold tracking-[0.25em] whitespace-nowrap text-slate-300 uppercase">
             {stat.label}
           </p>
         </motion.div>

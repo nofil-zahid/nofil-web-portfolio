@@ -33,7 +33,7 @@ export const SkillTag = ({ name, icon, index }: { name: TExpertiseName; icon?: T
       <span className="opacity-80 transition-opacity group-hover:opacity-100">
         {icon ? (
           <Image
-            src={routes.ui.icons(icon, isDarkIcon ? 'fff' : undefined)}
+            src={routes.thirdParty.icons(icon, isDarkIcon ? 'fff' : undefined)}
             height={14}
             width={14}
             alt={`${name} icon`}
