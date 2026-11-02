@@ -1,7 +1,11 @@
-import { Metadata } from 'next';
+import type { Metadata, MetadataRoute } from 'next';
 import { routes } from '@/constants/routes';
 import { ABOUT, PROFILE, CONTACT } from '@/constants/profile';
 import { envVars } from '@/config/env';
+
+type PageMetadata = Metadata & {
+  sitemap: Pick<MetadataRoute.Sitemap[number], 'changeFrequency' | 'priority'>;
+};
 
 export const SITE_URL = envVars.NEXT_PUBLIC_SITE_URL;
 export const SITE_NAME = `${PROFILE.name} Portfolio`;
@@ -66,7 +70,7 @@ export const rootMetadata: Metadata = {
   },
 };
 
-export const pageMetadata: Record<string, Metadata> = {
+const metadata: Record<string, PageMetadata> = {
   [routes.root]: {
     title: 'Home',
     description:
@@ -74,7 +78,12 @@ export const pageMetadata: Record<string, Metadata> = {
     alternates: {
       canonical: routes.root,
     },
+    sitemap: {
+      changeFrequency: 'monthly',
+      priority: 1.0,
+    },
   },
+
   [routes.ui.whoAmI]: {
     title: 'Who Am I',
     description:
@@ -82,31 +91,12 @@ export const pageMetadata: Record<string, Metadata> = {
     alternates: {
       canonical: routes.ui.whoAmI,
     },
-  },
-  [routes.ui.faqs]: {
-    title: 'FAQs',
-    description:
-      'Frequently asked questions regarding technical stack, platform architecture, dev methodology, and hiring availability.',
-    alternates: {
-      canonical: routes.ui.faqs,
+    sitemap: {
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
   },
-  [routes.ui.projects]: {
-    title: 'Projects',
-    description:
-      'Featured full-stack applications, CLI utilities, mobile platforms, and open-source systems engineered by Nofil Zahid.',
-    alternates: {
-      canonical: routes.ui.projects,
-    },
-  },
-  [routes.ui.contact]: {
-    title: 'Contact Me',
-    description:
-      'Initialize secure transmission and get in touch with Nofil Zahid for full-stack engineering roles, DevOps contracts, and consulting.',
-    alternates: {
-      canonical: routes.ui.contact,
-    },
-  },
+
   [routes.ui.expertise]: {
     title: 'Expertise',
     description:
@@ -114,7 +104,12 @@ export const pageMetadata: Record<string, Metadata> = {
     alternates: {
       canonical: routes.ui.expertise,
     },
+    sitemap: {
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
   },
+
   [routes.ui.experience]: {
     title: 'Experience',
     description:
@@ -122,5 +117,63 @@ export const pageMetadata: Record<string, Metadata> = {
     alternates: {
       canonical: routes.ui.experience,
     },
+    sitemap: {
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+  },
+
+  [routes.ui.projects]: {
+    title: 'Projects',
+    description:
+      'Featured full-stack applications, CLI utilities, mobile platforms, and open-source systems engineered by Nofil Zahid.',
+    alternates: {
+      canonical: routes.ui.projects,
+    },
+    sitemap: {
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+  },
+
+  [routes.ui.contact]: {
+    title: 'Contact Me',
+    description:
+      'Initialize secure transmission and get in touch with Nofil Zahid for full-stack engineering roles, DevOps contracts, and consulting.',
+    alternates: {
+      canonical: routes.ui.contact,
+    },
+    sitemap: {
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
+  },
+
+  [routes.ui.faqs]: {
+    title: 'FAQs',
+    description:
+      'Frequently asked questions regarding technical stack, platform architecture, dev methodology, and hiring availability.',
+    alternates: {
+      canonical: routes.ui.faqs,
+    },
+    sitemap: {
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
   },
 };
+
+const pageEntries = Object.entries(metadata).map(([route, { sitemap, ...page }]) => ({
+  route,
+  page,
+  sitemap,
+}));
+
+export const pageMetadata: Record<string, Metadata> = Object.fromEntries(
+  pageEntries.map(({ route, page }) => [route, page]),
+);
+
+export const staticSitemapRoutes: MetadataRoute.Sitemap = pageEntries.map(({ route, sitemap }) => ({
+  url: new URL(route, SITE_URL).toString(),
+  ...sitemap,
+}));
