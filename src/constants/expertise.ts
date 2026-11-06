@@ -1,60 +1,37 @@
-export const expertise = {
-  devops_and_cloud: [
-    { name: 'Kubernetes', icon: 'kubernetes' },
-    { name: 'Helm', icon: 'helm' },
-    { name: 'ArgoCD', icon: 'argo' },
-    { name: 'Terraform', icon: 'terraform' },
-    { name: 'Ansible', icon: 'ansible' },
-    { name: 'Docker', icon: 'docker' },
-    { name: 'Docker Compose', icon: 'docker' },
-    { name: 'AWS' },
+export interface ISkillItem {
+  readonly name: string;
+  readonly icon?: string;
+  readonly category: 'production' | 'project';
+}
+
+export const TECHNICAL_TOOLKIT: Record<string, readonly ISkillItem[]> = {
+  'Backend & Databases': [
+    { name: 'Node.js', icon: 'nodedotjs', category: 'production' },
+    { name: 'Express.js', icon: 'express', category: 'production' },
+    { name: 'NestJS', icon: 'nestjs', category: 'project' },
+    { name: 'PostgreSQL', icon: 'postgresql', category: 'production' },
+    { name: 'MongoDB', icon: 'mongodb', category: 'production' },
+    { name: 'MySQL', icon: 'mysql', category: 'production' },
   ],
-  'ci/cd': [
-    { name: 'GitHub Actions', icon: 'githubactions' },
-    { name: 'GitLab CI/CD', icon: 'gitlab' },
-    { name: 'Jenkins', icon: 'jenkins' },
+  'Frontend Architecture': [
+    { name: 'TypeScript', icon: 'typescript', category: 'production' },
+    { name: 'React', icon: 'react', category: 'production' },
+    { name: 'Next.js', icon: 'nextdotjs', category: 'production' },
+    { name: 'Tailwind CSS', icon: 'tailwindcss', category: 'production' },
+    { name: 'Redux Toolkit', icon: 'redux', category: 'production' },
+    { name: 'Framer Motion', icon: 'framer', category: 'production' },
   ],
-  observability_and_monitoring: [
-    { name: 'Prometheus', icon: 'prometheus' },
-    { name: 'Grafana', icon: 'grafana' },
-    { name: 'Loki', icon: 'grafana' },
-  ],
-  backend: [
-    { name: 'Node.js', icon: 'nodedotjs' },
-    { name: 'Express.js', icon: 'express' },
-    { name: 'NestJS', icon: 'nestjs' },
-    { name: 'REST APIs' },
-    { name: 'WebSockets' },
-  ],
-  architecture: [
-    { name: 'Multi-Tenant SaaS Systems' },
-    { name: 'Microservices Architecture' },
-    { name: 'Scalable Web Architecture' },
-    { name: 'Monolithic Architecture' },
-  ],
-  databases: [
-    { name: 'PostgreSQL', icon: 'postgresql' },
-    { name: 'MySQL', icon: 'mysql' },
-    { name: 'MongoDB', icon: 'mongodb' },
-  ],
-  third_party_and_payments: [
-    { name: 'Stripe', icon: 'stripe' },
-    { name: 'PayPal API', icon: 'paypal' },
-    { name: 'Firebase', icon: 'firebase' },
-    { name: 'Vercel', icon: 'vercel' },
-  ],
-  frontend: [
-    { name: 'TypeScript', icon: 'typescript' },
-    { name: 'React', icon: 'react' },
-    { name: 'Next.js', icon: 'nextdotjs' },
-    { name: 'Redux Toolkit', icon: 'redux' },
-    { name: 'Tailwind CSS', icon: 'tailwindcss' },
-    { name: 'Slate.js' },
-    { name: 'Framer Motion', icon: 'framer' },
-    { name: 'MUI', icon: 'mui' },
+  'Cloud, DevOps & Automation': [
+    { name: 'Docker', icon: 'docker', category: 'production' },
+    { name: 'Docker Compose', icon: 'docker', category: 'production' },
+    { name: 'GitHub Actions', icon: 'githubactions', category: 'production' },
+    { name: 'Kubernetes', icon: 'kubernetes', category: 'project' },
+    { name: 'Helm', icon: 'helm', category: 'project' },
+    { name: 'ArgoCD', icon: 'argo', category: 'project' },
+    { name: 'Terraform', icon: 'terraform', category: 'project' },
   ],
 } as const;
 
-export type TExpertiseCategory = keyof typeof expertise;
-export type TExpertiseName = (typeof expertise)[TExpertiseCategory][number]['name'];
-export type TExpertiseIcon = Extract<(typeof expertise)[TExpertiseCategory][number], { icon: string }>['icon'];
+export type TExpertiseCategory = keyof typeof TECHNICAL_TOOLKIT;
+export type TExpertiseName = (typeof TECHNICAL_TOOLKIT)[TExpertiseCategory][number]['name'];
+export type TExpertiseIcon = Extract<(typeof TECHNICAL_TOOLKIT)[TExpertiseCategory][number], { icon: string }>['icon'];
