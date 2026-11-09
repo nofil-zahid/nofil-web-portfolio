@@ -47,11 +47,6 @@ export const ABOUT = {
         'Understand the business workflow first, then choose the simplest architecture that solves the actual problem.',
     },
     {
-      title: 'Design for Growth',
-      description:
-        'Build modular systems with clear boundaries, allowing new features and business requirements to evolve without unnecessary rewrites.',
-    },
-    {
       title: 'Reliability Over Shortcuts',
       description:
         'Prioritize data integrity, predictable behavior, and proper validation over quick implementations that create long-term problems.',
