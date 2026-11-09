@@ -21,14 +21,14 @@ export interface ICapability {
 export const CAPABILITIES: readonly ICapability[] = [
   {
     id: '01',
-    title: 'SaaS Architecture & Multi-Tenancy',
+    title: 'Scalable SaaS & System Architecture',
     problemStatement:
-      'Designing web platforms that serve multiple business client tenants safely while maintaining strict data boundaries and clean routing logic.',
+      'I help businesses turn complex product requirements into scalable platforms. From handling multiple clients within a single application to keeping their data secure and operations independent, I focus on building architectures that grow without becoming difficult to manage.',
     outcomes: [
-      'PostgreSQL multi-schema tenant data isolation models',
-      'Tenant-aware application middleware and route shielding',
-      'Multi-party PayPal payment subscription billing workflows',
-      'Scalable multi-client database connection strategies',
+      'Multi-tenant SaaS architectures with isolated client data and business operations',
+      'Tenant-aware routing, middleware, and database management',
+      'Integrated subscription billing and multi-party payment workflows',
+      'Architecture decisions that balance scalability, security, and infrastructure costs',
     ],
     techStack: [
       { name: 'Next.js', icon: 'nextdotjs' },
@@ -39,14 +39,14 @@ export const CAPABILITIES: readonly ICapability[] = [
   },
   {
     id: '02',
-    title: 'Backend Engineering & Workflow Systems',
+    title: 'Backend Systems & Business Automation',
     problemStatement:
-      'Building robust REST APIs, server-side data operations, and business rules to handle administrative and institutional processes reliably.',
+      'I turn business processes into reliable software systems. Whether it involves managing institutional operations, automating administrative workflows, or connecting multiple services, I focus on reducing manual effort and making everyday operations more efficient.',
     outcomes: [
-      'REST API design, routing, and controller architectures',
-      'Institutional workflows (clearance processing, HRM, dashboards)',
-      'Third-party service integrations including Firebase and webhooks',
-      'Transactional database management across relational and document stores',
+      'Business-driven REST APIs and maintainable backend architectures',
+      'Automated institutional workflows, including HRM, clearance processing, and reporting',
+      'Third-party integrations, webhooks, and cross-platform communication',
+      'Reliable data processing, validation, and transactional database operations',
     ],
     techStack: [
       { name: 'Node.js', icon: 'nodedotjs' },
@@ -58,14 +58,14 @@ export const CAPABILITIES: readonly ICapability[] = [
   },
   {
     id: '03',
-    title: 'Deployment & Infrastructure Automation',
+    title: 'DevOps & Delivery Automation',
     problemStatement:
-      'Standardizing application execution and delivery pipelines to make deployments consistent, reproducible, and easily traceable.',
+      'Getting an application working locally is only part of the job. I focus on making software easier to build, test, deploy, and maintain by automating repetitive engineering tasks and establishing consistent delivery workflows.',
     outcomes: [
-      'Containerized application environments using Docker and Compose',
-      'Automated CI/CD pipelines enforcing formatting, linting, and build checks',
-      'Secure release workflows with conditional branch automation',
-      'OIDC-authenticated package publishing pipelines without static tokens',
+      'Reproducible development and production environments using containerization',
+      'Automated CI/CD pipelines for code quality, validation, and application builds',
+      'Secure deployment and release workflows with branch-based automation',
+      'Tokenless package publishing and authentication using OpenID Connect (OIDC)',
     ],
     techStack: [
       { name: 'Docker', icon: 'docker' },
@@ -77,14 +77,14 @@ export const CAPABILITIES: readonly ICapability[] = [
   },
   {
     id: '04',
-    title: 'Full-Stack Product Engineering',
+    title: 'End-to-End Product Engineering',
     problemStatement:
-      'Translating product designs and requirements into responsive, type-safe web applications with optimized user interactions.',
+      'I work across the entire application lifecycle, turning ideas and business requirements into functional, user-friendly software. My focus goes beyond making interfaces look good; I care about how the frontend, backend, and data layers work together as one maintainable product.',
     outcomes: [
-      'Dynamic metadata systems and structured schema implementations',
-      'Accessible, responsive layouts with custom terminal UI elements',
-      'Client-side state management and asynchronous data fetching',
-      'Component-driven architecture built for long-term maintainability',
+      'Full-stack application development from requirements to production',
+      'Responsive, accessible interfaces built around real user needs',
+      'Efficient application state management and asynchronous data handling',
+      'Reusable components and maintainable architectures that support product evolution',
     ],
     techStack: [
       { name: 'TypeScript', icon: 'typescript' },
@@ -96,14 +96,14 @@ export const CAPABILITIES: readonly ICapability[] = [
   },
   {
     id: '05',
-    title: 'Reliability & System Observability Patterns',
+    title: 'System Reliability & Infrastructure Engineering',
     problemStatement:
-      'Applying cloud orchestration tooling and observability stacks to monitor system health and evaluate architecture trade-offs.',
+      'I approach infrastructure with the bigger picture in mind: how a system behaves under load, where failures can happen, and what it takes to keep applications dependable. I explore infrastructure strategies and architectural trade-offs to build systems that are easier to operate and scale.',
     outcomes: [
-      'Container orchestration setup using Kubernetes and Helm',
-      'Infrastructure-as-Code setups and configuration management',
-      'Metrics collection and log aggregation using Prometheus, Grafana, and Loki',
-      'Evaluations of microservice vs. monolithic trade-offs for target workloads',
+      'Evaluating monolithic and microservice architectures against real application requirements',
+      'Infrastructure automation and environment configuration practices',
+      'Monitoring and observability strategies for application health and performance',
+      'Exploring container orchestration, deployment automation, and distributed system operations',
     ],
     techStack: [
       { name: 'Kubernetes', icon: 'kubernetes' },
@@ -114,6 +114,6 @@ export const CAPABILITIES: readonly ICapability[] = [
       { name: 'Grafana', icon: 'grafana' },
     ],
     learningNote:
-      'Active focus area: Developing deeper operational expertise through hands-on cloud automation projects.',
+      'Continuously building hands-on expertise in cloud infrastructure, orchestration, and production observability.',
   },
 ] as const;
