@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { RefreshCw } from 'lucide-react';
 import { ABOUT } from '@/constants/profile';
 
@@ -16,9 +17,17 @@ export default function RandomQuote() {
   const currentQuote = ABOUT.quotes[quoteIndex];
 
   return (
-    <blockquote className="border-accent bg-background-secondary/30 relative flex min-h-[140px] flex-col justify-between rounded-r-xl border-l-4 p-5 font-mono text-sm">
-      <div className="flex-1 pb-4">
-        <p className="leading-relaxed text-white/70 italic">&quot;{currentQuote ?? 'loading philosophy...'}&quot;</p>
+    <blockquote className="border-accent bg-background-secondary/30 relative flex min-h-[185px] flex-col justify-between rounded-r-xl border-l-4 p-5 font-mono text-sm transition-[min-height] duration-200 sm:min-h-[160px] md:min-h-[140px]">
+      <div className="flex flex-1 items-center pb-4">
+        <motion.p
+          key={quoteIndex}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="leading-relaxed text-white/70 italic"
+        >
+          &quot;{currentQuote ?? 'loading philosophy...'}&quot;
+        </motion.p>
       </div>
 
       <div className="flex items-center justify-between gap-2 border-t border-white/5 pt-3 not-italic">
