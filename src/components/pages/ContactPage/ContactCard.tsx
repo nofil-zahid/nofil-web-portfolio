@@ -89,8 +89,8 @@ const ContactCard = () => {
               <Terminal className="text-accent h-[clamp(1.1rem,2vw,1.3rem)] w-[clamp(1.1rem,2vw,1.3rem)]" />
             </div>
             <div className="min-w-0">
-              <p className="mb-1.5 text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase">Social</p>
-              <div className="flex flex-wrap gap-x-4 gap-y-2 text-[clamp(0.85rem,1.4vw,1rem)] text-gray-100">
+              <p className="mb-1 text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase md:mb-1.5">Social</p>
+              <div className="flex flex-wrap text-[clamp(0.85rem,1.4vw,1rem)] text-gray-100">
                 {socialLinks.map((link) => (
                   <a
                     key={link.name}
@@ -98,7 +98,7 @@ const ContactCard = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Open ${link.name} profile`}
-                    className="group flex min-h-[44px] items-center rounded px-1 font-mono transition-all focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none"
+                    className="group flex min-h-[30px] items-center rounded px-1 font-mono transition-all focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none md:min-h-[44px]"
                   >
                     <span className="text-accent -translate-x-1 text-[0.8em] opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
                       [
