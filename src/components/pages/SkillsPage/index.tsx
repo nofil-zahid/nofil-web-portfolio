@@ -1,23 +1,27 @@
+import React from 'react';
+import { ExpertiseCard } from './ExpertiseCard';
+import { CAPABILITIES } from '@/constants/capabilities';
 import SectionHeader from '@/components/shared/SectionHeader';
-import { expertise, TExpertiseCategory } from '@/constants/expertise';
-import { ExpertiseCard } from './Card';
+import TechnicalInventory from './TechnicalInventory';
 
-const SkillsPage = () => {
+export const ExpertisePage: React.FC = () => {
   return (
     <section>
       <SectionHeader
-        title="Skill Manifest"
-        tag="System_Operational"
-        description="A comprehensive manifest of architectural capabilities and technical proficiencies developed through complex system design and engineering protocols."
+        title="Engineering Expertise"
+        tag="SYSTEMS_ENGINEERED_FOR_REAL_WORLD"
+        description="Architecting full-stack web applications, multi-tenant backend systems, and automated deployment pipelines focused on reliability and business requirements."
       />
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-        {Object.entries(expertise).map(([category, skills], index) => (
-          <ExpertiseCard key={category} order={index} category={category as TExpertiseCategory} skills={skills} />
+      <div className="mb-20 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+        {CAPABILITIES.map((expertise, index) => (
+          <ExpertiseCard key={expertise.id} expertise={expertise} index={index} />
         ))}
       </div>
+
+      <TechnicalInventory />
     </section>
   );
 };
 
-export default SkillsPage;
+export const SkillsPage = ExpertisePage;

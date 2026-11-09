@@ -39,7 +39,7 @@ export default function WhoAmI() {
           viewport={{ once: true }}
         >
           <section>
-            <SectionHeading title="Overview" subtitle="Profile_Summary" />
+            <SectionHeading title="Overview" />
             <div className="text-text-secondary space-y-4 leading-relaxed">
               {ABOUT.summary.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
@@ -48,7 +48,7 @@ export default function WhoAmI() {
           </section>
 
           <section>
-            <SectionHeading title="Development Philosophy" subtitle="Protocol_Approach" />
+            <SectionHeading title="Development Philosophy" />
             <div className="grid gap-6 sm:grid-cols-2">
               {ABOUT.philosophy.map((item) => (
                 <div
@@ -70,7 +70,7 @@ export default function WhoAmI() {
           viewport={{ once: true }}
         >
           <section className="bg-background-secondary/80 rounded-2xl border border-white/5 p-5 md:p-8">
-            <SectionHeading title="Professional Overview" subtitle="Key Highlights" />
+            <SectionHeading title="Professional Overview" />
             <div className="grid grid-cols-2 gap-x-4 gap-y-8 pr-8 md:pr-0">
               <InfoCard label="Experience" value={`${myYearsOfExperience()} Years`} />
               <InfoCard label="Availability" value={PROFILE.availability} />

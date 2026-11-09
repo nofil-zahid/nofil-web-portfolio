@@ -22,7 +22,7 @@ export const Navbar = () => {
               'rounded-t-lg border-t border-r border-l',
               'focus-visible:ring-2 focus-visible:ring-[#00FF66] focus-visible:outline-none',
               isActive
-                ? 'bg-background-primary text-accent border-border-glow z-10 translate-y-px shadow-[0_-2px_10px_rgba(13,242,89,0.1)]'
+                ? 'text-accent border-border-glow z-10 translate-y-px bg-[var(--color-background-primary)]'
                 : 'text-text-secondary hover:text-text-primary hover:bg-background-secondary/70 border-transparent',
             )}
           >

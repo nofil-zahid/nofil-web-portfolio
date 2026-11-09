@@ -4,7 +4,21 @@ import { string } from '@/utils';
 import { SectionHeaderProps } from '@/types/components';
 import { cn } from '@/styles/tailwind-utils';
 import BlinkingCursor from '../element/BlinkingCursor';
-import { headerChildVariant, sectionContainer } from '@/styles/motion-framer-utils';
+
+const sectionContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const headerChildVariant = {
+  hidden: { opacity: 0, display: 'none' },
+  visible: { opacity: 1, display: 'inline-block' },
+};
 
 const SectionHeader = ({ title, description, tag, align = 'left', className = '' }: SectionHeaderProps) => {
   const isCenter = align === 'center';
@@ -31,18 +45,18 @@ const SectionHeader = ({ title, description, tag, align = 'left', className = ''
           className="mb-6 flex items-center font-mono"
         >
           <span className="text-accent mr-2 text-[9px] font-bold opacity-80 select-none">ID_</span>
-          <div className="bg-accent/5 border-accent/60 flex border-l px-2.5 py-1 backdrop-blur-sm">
+          <div className="bg-accent/5 border-accent/60 flex items-center border-l px-2.5 py-1 backdrop-blur-sm">
             {tag.split('').map((char, index) => (
               <motion.span
                 key={index}
                 variants={headerChildVariant}
                 className="text-accent text-[10px] font-bold tracking-[0.2em] uppercase"
               >
-                {char}
+                {char === ' ' ? '\u00A0' : char}
               </motion.span>
             ))}
+            <BlinkingCursor />
           </div>
-          <BlinkingCursor />
         </motion.div>
       )}
 

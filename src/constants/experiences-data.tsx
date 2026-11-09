@@ -13,7 +13,7 @@ export const experiences: ExperienceItem[] = [
       'Designed and implemented a multi-tenant SaaS architecture using Next.js and Express.js.',
       'Implemented PostgreSQL multi-schema strategy for tenant data isolation and scalable routing.',
       'Integrated multi-party PayPal payment flow for subscription-based SaaS billing.',
-      'Contributed to client projects with UI enhancements, Firebase integrations, and improved styling systems.',
+      'Engineered structured document editing workflows using Slate.js, alongside client UI features and Firebase integrations.',
     ],
     icon: Code,
   },
