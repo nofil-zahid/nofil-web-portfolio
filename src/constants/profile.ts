@@ -36,34 +36,35 @@ export const CONTACT = {
 // ── About / Overview ──────────────────────────
 export const ABOUT = {
   summary: [
-    "I'm a Full Stack & DevOps Engineer who builds end-to-end digital solutions. I take ownership of systems from designing clean backend logic and scalable architectures to automating deployments and managing live infrastructure.",
-    'I focus on creating systems that run reliably and efficiently. By automating workflows, setting up proactive monitoring, and maintaining clean release pipelines, I make sure platforms stay stable and performant under real-world load.',
-    'While much of my focus is on backend architecture and platform automation, I pay close attention to user experience - ensuring every feature is fast, responsive, and intuitive for the end user.',
+    'I build end-to-end software products, from backend architecture and database design to user interfaces, integrations, and production deployments. My work focuses on turning business requirements into maintainable, scalable applications.',
+    'I work across application architecture, business process automation, and delivery infrastructure, with particular attention to data integrity, system reliability, and efficient resource utilization.',
+    'My engineering approach combines backend-focused problem solving with product thinking, ensuring that systems are not only technically sound but also practical for the people and businesses using them.',
   ],
   philosophy: [
     {
-      title: 'Scalable by Design',
+      title: 'Business-First Engineering',
       description:
-        'I build systems with growth in mind, focusing on clean architecture and modular design that can handle real-world complexity.',
+        'Understand the business workflow first, then choose the simplest architecture that solves the actual problem.',
     },
     {
-      title: 'Problem-Driven Development',
+      title: 'Reliability Over Shortcuts',
       description:
-        'I focus on solving real problems, not just writing code but ensuring performance, usability, and long-term maintainability.',
+        'Prioritize data integrity, predictable behavior, and proper validation over quick implementations that create long-term problems.',
     },
     {
-      title: 'Automate Early',
+      title: 'Automate Repetitive Work',
       description:
-        'If a task needs to be done more than twice, it should be automated through version-controlled scripts and pipelines.',
+        'Replace error-prone manual processes with scripts, pipelines, and repeatable workflows wherever automation adds value.',
     },
     {
-      title: 'Build for Visibility',
+      title: 'Visibility Before Guesswork',
       description:
-        'A system is much easier to maintain when you have clear logs, metrics, and alerts to show you what is happening under the hood.',
+        'Use meaningful logs, metrics, and monitoring to understand system behavior and diagnose problems with evidence.',
     },
   ],
   quotes: [
     'The best systems solve real problems, not just technical ones.',
+    'Choose the simplest architecture that reliably solves the problem, leaving room to scale.',
     "Clean architecture scales. Messy code doesn't.",
     "Performance is not optional — it's a feature.",
     'Good infrastructure is invisible when it works.',
