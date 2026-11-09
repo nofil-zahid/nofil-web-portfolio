@@ -22,6 +22,7 @@ export const TECHNICAL_TOOLKIT = {
     { name: 'Framer Motion', icon: 'framer', category: 'production' },
   ],
   'Cloud, DevOps & Automation': [
+    { name: 'Linux', icon: 'linux', category: 'production' },
     { name: 'Docker', icon: 'docker', category: 'production' },
     { name: 'Docker Compose', icon: 'docker', category: 'production' },
     { name: 'GitHub Actions', icon: 'githubactions', category: 'production' },

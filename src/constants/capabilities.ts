@@ -60,12 +60,12 @@ export const CAPABILITIES: readonly ICapability[] = [
     id: '03',
     title: 'DevOps & Delivery Automation',
     problemStatement:
-      'Getting an application working locally is only part of the job. I focus on making software easier to build, test, deploy, and maintain by automating repetitive engineering tasks and establishing consistent delivery workflows.',
+      'I streamline software delivery through containerization, CI/CD pipelines, and automated release workflows. My focus is on making development environments consistent, deployments repeatable, and software releases more reliable.',
     outcomes: [
-      'Reproducible development and production environments using containerization',
+      'Reproducible development and deployment environments using containerization',
       'Automated CI/CD pipelines for code quality, validation, and application builds',
-      'Secure deployment and release workflows with branch-based automation',
-      'Tokenless package publishing and authentication using OpenID Connect (OIDC)',
+      'Branch-based deployment strategies and automated release workflows',
+      'Version-controlled infrastructure configuration and deployment automation',
     ],
     techStack: [
       { name: 'Docker', icon: 'docker' },
@@ -96,14 +96,14 @@ export const CAPABILITIES: readonly ICapability[] = [
   },
   {
     id: '05',
-    title: 'System Reliability & Infrastructure Engineering',
+    title: 'Cloud Infrastructure & Reliability',
     problemStatement:
-      'I approach infrastructure with the bigger picture in mind: how a system behaves under load, where failures can happen, and what it takes to keep applications dependable. I explore infrastructure strategies and architectural trade-offs to build systems that are easier to operate and scale.',
+      'I approach deployment and infrastructure with reliability, resource efficiency, and maintainability in mind. My focus is on understanding how applications run in production, managing deployment environments, and building infrastructure that can evolve with application demands.',
     outcomes: [
-      'Evaluating monolithic and microservice architectures against real application requirements',
-      'Infrastructure automation and environment configuration practices',
-      'Monitoring and observability strategies for application health and performance',
-      'Exploring container orchestration, deployment automation, and distributed system operations',
+      'Containerized application environments and service orchestration',
+      'Infrastructure as Code for repeatable and consistent environments',
+      'Deployment health checks, monitoring, and centralized logging',
+      'Resource planning and infrastructure optimization for varying workloads',
     ],
     techStack: [
       { name: 'Kubernetes', icon: 'kubernetes' },
@@ -113,7 +113,5 @@ export const CAPABILITIES: readonly ICapability[] = [
       { name: 'Prometheus', icon: 'prometheus' },
       { name: 'Grafana', icon: 'grafana' },
     ],
-    learningNote:
-      'Continuously building hands-on expertise in cloud infrastructure, orchestration, and production observability.',
   },
 ] as const;
