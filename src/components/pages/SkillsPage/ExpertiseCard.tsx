@@ -1,17 +1,20 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, CheckCircle2, ShieldAlert, Terminal } from 'lucide-react';
+import { CheckCircle2, ShieldAlert, Terminal } from 'lucide-react';
 import { ICapability } from '@/constants/capabilities';
+import { routes } from '@/constants/routes';
 
-interface CapabilityCardProps {
-  readonly capability: ICapability;
+const DARK_ICONS = new Set(['express', 'vercel', 'nextdotjs']);
+
+interface ExpertiseCardProps {
+  readonly expertise: ICapability;
   readonly index: number;
 }
 
-export const CapabilityCard: React.FC<CapabilityCardProps> = ({ capability, index }) => {
+export const ExpertiseCard: React.FC<ExpertiseCardProps> = ({ expertise, index }) => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -27,18 +30,15 @@ export const CapabilityCard: React.FC<CapabilityCardProps> = ({ capability, inde
         <div className="mb-4 flex items-center justify-between border-b border-white/5 pb-3">
           <div className="flex items-center gap-2 font-mono text-xs text-[#0df259]">
             <Terminal className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>{capability.id}</span>
+            <span>{expertise.id}</span>
           </div>
-          <span className="rounded-md border border-[#0df259]/20 bg-[#0df259]/5 px-2 py-0.5 font-mono text-[10px] tracking-wider text-[#0df259] uppercase">
-            {capability.categoryTag}
-          </span>
         </div>
 
         {/* Title & Problem Statement */}
         <h3 className="mb-3 text-xl font-bold tracking-tight text-white transition-colors group-hover:text-[#0df259] md:text-2xl">
-          {capability.title}
+          {expertise.title}
         </h3>
-        <p className="mb-6 font-sans text-sm leading-relaxed text-gray-300">{capability.problemStatement}</p>
+        <p className="mb-6 font-sans text-sm leading-relaxed text-gray-300">{expertise.problemStatement}</p>
 
         {/* Deliverables / Engineering Outcomes */}
         <div className="mb-6">
@@ -46,7 +46,7 @@ export const CapabilityCard: React.FC<CapabilityCardProps> = ({ capability, inde
             Engineering Outcomes
           </h4>
           <ul className="space-y-2.5">
-            {capability.outcomes.map((outcome, idx) => (
+            {expertise.outcomes.map((outcome, idx) => (
               <li key={idx} className="flex items-start gap-2.5 text-xs text-gray-200 md:text-sm">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0df259]" aria-hidden="true" />
                 <span className="leading-normal">{outcome}</span>
@@ -60,41 +60,42 @@ export const CapabilityCard: React.FC<CapabilityCardProps> = ({ capability, inde
       <div className="mt-auto border-t border-white/5 pt-4">
         {/* Tech Stack Chips */}
         <div className="mb-4 flex flex-wrap gap-1.5">
-          {capability.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-md border border-white/10 bg-[#030f06] px-2 py-1 font-mono text-xs text-gray-300 transition-colors group-hover:border-[#0df259]/30"
-            >
-              {tech}
-            </span>
-          ))}
+          {expertise.techStack.map((tech) => {
+            const name = typeof tech === 'string' ? tech : tech.name;
+            const icon = typeof tech === 'string' ? undefined : tech.icon;
+            const isDarkIcon = icon ? DARK_ICONS.has(icon) : false;
+
+            return (
+              <span
+                key={name}
+                className="flex items-center gap-1.5 rounded-md border border-white/10 bg-[#030f06] px-2 py-1 font-mono text-xs text-gray-300 transition-colors group-hover:border-[#0df259]/30"
+              >
+                {icon && (
+                  <Image
+                    src={routes.thirdParty.icons(icon, isDarkIcon ? 'fff' : undefined)}
+                    alt={`${name} icon`}
+                    width={13}
+                    height={13}
+                    className="h-3.5 w-3.5 object-contain"
+                    unoptimized
+                  />
+                )}
+                <span>{name}</span>
+              </span>
+            );
+          })}
         </div>
 
-        {/* Experience Proof Links */}
-        {capability.proof.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <span className="font-mono text-[11px] text-gray-400">Verified Proof:</span>
-            {capability.proof.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.href}
-                className="transition-underline inline-flex items-center gap-1.5 font-mono text-xs text-[#0df259] hover:underline focus-visible:ring-2 focus-visible:ring-[#0df259] focus-visible:outline-none"
-              >
-                <span>{item.label}</span>
-                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </Link>
-            ))}
-          </div>
-        )}
-
         {/* Active Learning Note */}
-        {capability.learningNote && (
+        {expertise.learningNote && (
           <div className="mt-2 flex items-start gap-2 rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-2.5 font-mono text-xs text-yellow-200/90">
             <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-yellow-500" aria-hidden="true" />
-            <span className="leading-tight">{capability.learningNote}</span>
+            <span className="leading-tight">{expertise.learningNote}</span>
           </div>
         )}
       </div>
     </motion.article>
   );
 };
+
+export const CapabilityCard = ExpertiseCard;
