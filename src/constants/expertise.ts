@@ -4,7 +4,7 @@ export interface ISkillItem {
   readonly category: 'production' | 'project';
 }
 
-export const TECHNICAL_TOOLKIT: Record<string, readonly ISkillItem[]> = {
+export const TECHNICAL_TOOLKIT = {
   'Backend & Databases': [
     { name: 'Node.js', icon: 'nodedotjs', category: 'production' },
     { name: 'Express.js', icon: 'express', category: 'production' },
