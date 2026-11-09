@@ -4,7 +4,7 @@ import { socialLinks } from '@/constants/links';
 
 export default function Footer() {
   return (
-    <footer className="border-border-glow bg-background-secondary/40 mt-10 border-t py-3 font-mono text-xs text-slate-400">
+    <footer className="border-border-glow bg-background-secondary/40 mt-10 mt-auto border-t py-3 font-mono text-xs text-slate-400">
       <div className="flex flex-col items-center justify-between gap-4 px-[clamp(1.2rem,3vw,2.5rem)] md:flex-row">
         <div className="hidden items-center gap-2 md:flex">
           <span
