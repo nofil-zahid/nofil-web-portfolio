@@ -9,7 +9,7 @@ export const ExpertisePage: React.FC = () => {
     <section>
       <SectionHeader
         title="Engineering Expertise"
-        tag="SYSTEMS_ENGINEERED_FOR_REAL_WORLD"
+        tag="SYSTEMS_IN_ACTION"
         description="Architecting full-stack web applications, multi-tenant backend systems, and automated deployment pipelines focused on reliability and business requirements."
       />
 
