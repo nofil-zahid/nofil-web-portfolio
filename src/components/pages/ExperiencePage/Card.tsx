@@ -32,11 +32,11 @@ const ExperienceCard: React.FC<ExperienceItem> = ({ role, company, startDate, en
             {company}
           </Link>
 
-          <div className="bg-accent/10 text-accent flex items-center gap-2 rounded-md px-3 py-1 font-mono text-[clamp(.7rem,2vw,.9rem)] font-medium">
-            <span>{dateRange}</span>
-            <span className="text-accent/50 font-sans text-xs">|</span>
-            <span className="font-sans tracking-wide text-gray-400">{duration}</span>
-          </div>
+          <div className="bg-accent/10 text-accent flex w-full sm:w-fit flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 rounded-md px-3 py-2 font-mono text-xs sm:text-[clamp(.7rem,2vw,.9rem)] font-medium">
+  <span className="whitespace-nowrap">{dateRange}</span>
+  <span className="text-accent/50 font-sans text-xs hidden sm:inline">|</span>
+  <span className="font-sans tracking-wide text-gray-400 whitespace-nowrap">{duration}</span>
+</div>
         </div>
       </div>
 
