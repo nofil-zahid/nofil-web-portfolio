@@ -275,12 +275,16 @@ export default function TerminalUI({ isOpen = false }: { isOpen?: boolean }) {
           <span className="text-accent font-bold">{pathString} $&gt;</span>
 
           <div className="relative flex flex-1 items-center">
+            <label htmlFor="terminal-input" className="sr-only">
+              Terminal command input
+            </label>
             {/* Native transparent input for input handling & selection */}
             <input
               ref={inputRef}
               type="text"
               name="terminal-input"
               id="terminal-input"
+              aria-label="Terminal command input"
               value={terminalInput}
               autoComplete="off"
               spellCheck="false"

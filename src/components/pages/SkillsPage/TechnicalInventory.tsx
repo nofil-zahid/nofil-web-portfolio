@@ -26,12 +26,14 @@ export default function TechnicalInventory() {
                   <span>{item.name}</span>
                   {item.category === 'production' ? (
                     <span
+                      role="img"
                       title="Used in commercial software projects"
                       className="h-1.5 w-1.5 rounded-full bg-[#0df259]"
                       aria-label="Commercial experience indicator"
                     />
                   ) : (
                     <span
+                      role="img"
                       title="Used in projects & hands-on exploration"
                       className="h-1.5 w-1.5 rounded-full bg-yellow-400"
                       aria-label="Active development indicator"
@@ -46,11 +48,11 @@ export default function TechnicalInventory() {
 
       <div className="mt-6 flex items-center justify-end gap-4 font-mono text-xs text-gray-400">
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-[#0df259]" />
+          <span className="h-2 w-2 rounded-full bg-[#0df259]" aria-hidden="true" />
           <span>Commercial Production</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-yellow-400" />
+          <span className="h-2 w-2 rounded-full bg-yellow-400" aria-hidden="true" />
           <span>Projects & Exploration</span>
         </div>
       </div>
