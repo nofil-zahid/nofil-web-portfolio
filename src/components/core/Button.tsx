@@ -2,14 +2,7 @@ import { Loader2 } from 'lucide-react';
 import { ButtonProps } from '@/types/components';
 import { cn } from '@/styles/tailwind-utils';
 
-const Button = ({
-  children,
-  isLoading = false,
-  loadingText,
-  disabled,
-  customClass = '',
-  ...props
-}: ButtonProps) => {
+const Button = ({ children, isLoading = false, loadingText, disabled, customClass = '', ...props }: ButtonProps) => {
   return (
     <button
       className={cn(
@@ -19,12 +12,7 @@ const Button = ({
       disabled={disabled || isLoading}
       {...props}
     >
-      <span
-        className={cn(
-          'flex items-center justify-center gap-1.5 text-current sm:gap-2',
-          isLoading && 'invisible',
-        )}
-      >
+      <span className={cn('flex items-center justify-center gap-1.5 text-current sm:gap-2', isLoading && 'invisible')}>
         {children}
       </span>
 

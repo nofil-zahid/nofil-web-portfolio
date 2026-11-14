@@ -60,9 +60,7 @@ const InputField: React.FC<InputFieldProps> = ({
             aria-live="polite"
             className={cn(
               'font-mono text-[10px] transition-colors duration-300',
-              currentLength >= maxLength
-                ? 'font-bold text-red-400'
-                : 'group-focus-within:text-accent text-slate-400',
+              currentLength >= maxLength ? 'font-bold text-red-400' : 'group-focus-within:text-accent text-slate-400',
             )}
           >
             [{currentLength}/{maxLength}]
@@ -73,7 +71,7 @@ const InputField: React.FC<InputFieldProps> = ({
       <div className="relative">
         {multiline ? (
           <textarea
-            {...props as React.TextareaHTMLAttributes<HTMLTextAreaElement>}
+            {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
             {...accessibilityProps}
             value={value}
             onChange={onChange}
@@ -82,7 +80,7 @@ const InputField: React.FC<InputFieldProps> = ({
           />
         ) : (
           <input
-            {...props as React.InputHTMLAttributes<HTMLInputElement>}
+            {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
             {...accessibilityProps}
             value={value}
             onChange={onChange}
