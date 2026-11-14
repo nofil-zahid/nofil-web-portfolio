@@ -1,91 +1,128 @@
 'use client';
 
-import z from 'zod';
-import { useState } from 'react';
-import { ArrowRight, Loader2 } from 'lucide-react';
+import { ChangeEvent, SyntheticEvent, useRef, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import emailJs from '@emailjs/browser';
 import Button from '@/components/core/Button';
 import InputField from '@/components/core/InputField';
-import { ContactFormValues, contactSchema, MESSAGE_MAX_LENGTH } from '@/schema/form';
+import {
+  ContactField,
+  ContactFormValues,
+  contactSchema,
+  EMAIL_LOCAL_MAX_LENGTH,
+  MESSAGE_MAX_LENGTH,
+  NAME_MAX_LENGTH,
+} from '@/schema/form';
 import { envVars } from '@/config/env';
-import { useBooleanToggle } from '@/hooks/core/use-boolean-toggle';
+import { showToast } from '@/utils/toaster';
+
+const INITIAL_FORM: ContactFormValues = {
+  name: '',
+  email: '',
+  message: '',
+};
 
 const ContactForm = () => {
-  const [form, setForm] = useState<ContactFormValues>({ name: '', email: '', message: '' });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [streamStatus, setStreamStatus] = useState<'idle' | 'streaming' | 'success' | 'error'>('idle');
+  const [form, setForm] = useState<ContactFormValues>(INITIAL_FORM);
+  const [errors, setErrors] = useState<Partial<Record<ContactField, string>>>({});
+  const [touched, setTouched] = useState<Partial<Record<ContactField, boolean>>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { state: isSubmitting, enable: startSubmitting, disable: stopSubmitting } = useBooleanToggle();
+  const submitLock = useRef(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const normalizedValue = name === 'email' ? value.toLowerCase() : value.replace(/(\r?\n){3,}/g, '\n\n');
 
-    setForm((prev) => ({ ...prev, [name]: normalizedValue }));
-    setTouched((prev) => ({ ...prev, [name]: true }));
+    if (!Object.prototype.hasOwnProperty.call(contactSchema.shape, name)) return;
 
-    const fieldSchema = contactSchema.shape[name as keyof typeof contactSchema.shape];
-    const result = fieldSchema.safeParse(normalizedValue);
+    const field = name as ContactField;
+    const normalizedValue =
+      field === 'email'
+        ? value.toLowerCase()
+        : field === 'name'
+          ? value.normalize('NFC')
+          : value.replace(/\r\n?/g, '\n');
+
+    setForm((prev) => ({ ...prev, [field]: normalizedValue }));
+    setTouched((prev) => ({ ...prev, [field]: true }));
+
+    const result = contactSchema.shape[field].safeParse(normalizedValue);
 
     setErrors((prev) => ({
       ...prev,
-      [name]: result.success ? '' : result.error.issues[0].message,
+      [field]: result.success ? '' : (result.error.issues[0]?.message ?? 'Invalid input'),
     }));
   };
 
-  const handleError = (result: z.ZodSafeParseError<typeof form>) => {
-    const formattedErrors: Record<string, string> = {};
-    const touchedFields: Record<string, boolean> = {};
-    result.error.issues.forEach((issue) => {
-      const field = issue.path[0] as string;
-      formattedErrors[field] = issue.message;
-      touchedFields[field] = true;
-    });
-    setErrors(formattedErrors);
-    setTouched((prev) => ({ ...prev, ...touchedFields }));
-  };
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const handleSendEmail = async () => {
-    startSubmitting();
-    setStreamStatus('streaming');
+    if (submitLock.current) return;
+
+    const result = contactSchema.safeParse(form);
+
+    if (!result.success) {
+      const nextErrors: Partial<Record<ContactField, string>> = {};
+      const nextTouched: Partial<Record<ContactField, boolean>> = {};
+
+      for (const issue of result.error.issues) {
+        const field = issue.path[0];
+
+        if (typeof field !== 'string' || !Object.prototype.hasOwnProperty.call(contactSchema.shape, field)) {
+          continue;
+        }
+
+        const key = field as ContactField;
+
+        nextErrors[key] ??= issue.message;
+        nextTouched[key] = true;
+      }
+
+      setErrors(nextErrors);
+      setTouched((prev) => ({ ...prev, ...nextTouched }));
+
+      showToast({
+        text: 'Please check the highlighted fields and try again.',
+        type: 'error',
+      });
+      return;
+    }
+
+    submitLock.current = true;
+    setIsSubmitting(true);
 
     try {
-      const res = await emailJs.send(
+      const response = await emailJs.send(
         envVars.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         envVars.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        form,
+        result.data,
         envVars.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
       );
 
-      await new Promise((r) => setTimeout(r, 1900));
-
-      if (res.status === 200 || res.text === 'OK') {
-        setForm({ name: '', email: '', message: '' });
-        setTouched({});
-        setErrors({});
-        setStreamStatus('success');
-      } else {
-        setStreamStatus('error');
+      if (response.status !== 200) {
+        throw new Error(`EmailJS returned status ${response.status}`);
       }
+
+      setForm(INITIAL_FORM);
+      setErrors({});
+      setTouched({});
+
+      showToast({
+        text: `Thanks for reaching out! I've received your message and will get back to you as soon as I can.`,
+        type: 'success',
+      });
     } catch (error) {
-      console.error(error);
-      setStreamStatus('error');
+      if (envVars.NEXT_PUBLIC_NODE_ENV === 'development') {
+        console.error('Contact form submission failed:', error);
+      }
+      showToast({
+        text: 'Something went wrong while sending your message. Please try again or email me directly using the address below.',
+        type: 'error',
+      });
     } finally {
-      stopSubmitting();
+      submitLock.current = false;
+      setIsSubmitting(false);
     }
-  };
-
-  const handleSubmit = async (e: React.SubmitEvent) => {
-    e.preventDefault();
-    if (isSubmitting) return;
-
-    const result = contactSchema.safeParse(form);
-    if (!result.success) {
-      handleError(result);
-      return;
-    }
-    await handleSendEmail();
   };
 
   return (
@@ -93,6 +130,7 @@ const ContactForm = () => {
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <h2 className="sr-only">Send a Message</h2>
         <InputField
+          id="contact-name"
           index="01"
           label="Your Name"
           name="name"
@@ -101,10 +139,12 @@ const ContactForm = () => {
           onChange={handleChange}
           error={touched.name ? errors.name : undefined}
           disabled={isSubmitting}
+          maxLength={NAME_MAX_LENGTH}
           spellCheck={false}
           autoComplete="off"
         />
         <InputField
+          id="contact-email"
           index="02"
           label="Your Email"
           name="email"
@@ -113,10 +153,12 @@ const ContactForm = () => {
           onChange={handleChange}
           error={touched.email ? errors.email : undefined}
           disabled={isSubmitting}
+          maxLength={EMAIL_LOCAL_MAX_LENGTH}
           spellCheck={false}
-          autoComplete="off"
+          autoComplete="email"
         />
         <InputField
+          id="contact-msg"
           index="03"
           label="Your Message"
           name="message"
@@ -133,23 +175,9 @@ const ContactForm = () => {
         />
 
         <div className="flex w-full justify-start pt-2">
-          <Button
-            type="submit"
-            isLoading={isSubmitting}
-            disabled={isSubmitting || streamStatus === 'streaming'}
-            customClass="w-full sm:w-auto"
-          >
-            {isSubmitting ? (
-              <>
-                Transmitting...
-                <Loader2 size={18} className="animate-spin" />
-              </>
-            ) : (
-              <>
-                Initialize Transmission
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </>
-            )}
+          <Button type="submit" isLoading={isSubmitting} loadingText="Sending..." customClass="w-full sm:w-auto">
+            Send Message
+            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </form>
