@@ -1,10 +1,9 @@
-import React from 'react';
 import { ExpertiseCard } from './ExpertiseCard';
 import { CAPABILITIES } from '@/constants/capabilities';
 import SectionHeader from '@/components/shared/SectionHeader';
 import TechnicalInventory from './TechnicalInventory';
 
-export const ExpertisePage: React.FC = () => {
+export default function ExpertisePage() {
   return (
     <section>
       <SectionHeader
@@ -22,6 +21,4 @@ export const ExpertisePage: React.FC = () => {
       <TechnicalInventory />
     </section>
   );
-};
-
-export const SkillsPage = ExpertisePage;
+}

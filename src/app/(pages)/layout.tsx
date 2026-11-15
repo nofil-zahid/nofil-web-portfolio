@@ -19,7 +19,7 @@ export default function PageLayout({ children }: ChildrenProps) {
         <main
           id="main-content"
           tabIndex={-1}
-          className="w-full p-[clamp(1.2rem,3vw,2.5rem)] pt-[clamp(60px,8vw,70px)] focus:outline-none md:pt-[clamp(70px,8vw,80px)]"
+          className="w-full flex-1 p-[clamp(1.2rem,3vw,2.5rem)] pt-[clamp(60px,8vw,70px)] focus:outline-none md:pt-[clamp(70px,8vw,80px)]"
         >
           <Outlet>{children}</Outlet>
         </main>

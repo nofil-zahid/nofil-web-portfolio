@@ -1,4 +1,4 @@
-import FaqPage from '@/components/pages/FaqPage';
+import { FAQsPage as FaqPage } from '@/components/pages';
 import { Metadata } from 'next';
 import { pageMetadata } from '@/constants/seo-metadata';
 import { routes } from '@/constants/routes';
