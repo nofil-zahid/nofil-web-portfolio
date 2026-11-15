@@ -1,106 +1,210 @@
-# Nofil Zahid — Portfolio & Technical Profile
+# Nofil Zahid — Full-Stack & DevOps Engineer
 
-> Interactive portfolio and technical knowledge base for Nofil Zahid, a Full Stack & DevOps Engineer specializing in scalable cloud platforms, distributed backend systems, and automated CI/CD pipelines.
+> Comprehensive technical profile, architecture philosophy, career history, and project portfolio of Nofil Zahid, a Full-Stack & DevOps Engineer based in Lahore, Pakistan, specializing in scalable cloud platforms, distributed backend systems, and automated CI/CD pipelines.
 
 ## Profile Summary
 
 - **Name**: Nofil Zahid
-- **Title**: Full Stack & DevOps Engineer
+- **Title**: Full-Stack & DevOps Engineer
 - **Specialization**: Cloud Infrastructure, Distributed Backend Systems & CI/CD Pipelines
 - **Location**: Lahore, Pakistan
-- **Availability**: Open to Opportunities
-- **Focus Area**: DevOps, Cloud Platform & Enterprise SaaS
+- **Availability**: Open to Opportunities (Full-time & High-impact Contracts)
 - **Primary Website**: https://nofil-web-portfolio.vercel.app
-
-## Core Architecture & Engineering Philosophy
-
-- **Scalable by Design**: Clean architecture and modular systems designed to handle high complexity and distributed loads.
-- **Problem-Driven Development**: Building purposeful software with a strong focus on real-world reliability, performance, and long-term maintainability.
-- **Automate Early**: Automating manual tasks through version-controlled scripts, Docker containers, and robust CI/CD pipelines.
-- **Build for Visibility**: Implementing clear observability with proactive telemetry, logging, metrics, and alerting to ensure systems are easy to monitor and debug.
-
-## Site Pages & Navigation
-
-- [Home](https://nofil-web-portfolio.vercel.app/): Landing overview with interactive developer terminal, system stats, quick commands, and featured highlights.
-- [Who Am I](https://nofil-web-portfolio.vercel.app/who-am-i): Professional background, engineering philosophy, motto generator, and personal overview.
-- [Expertise](https://nofil-web-portfolio.vercel.app/expertise): Detailed technical competencies across DevOps, Cloud, Backend, Observability, and Frontend stacks.
-- [Experience](https://nofil-web-portfolio.vercel.app/experience): Employment history, roles, responsibilities, and key achievements at tech firms.
-- [Projects](https://nofil-web-portfolio.vercel.app/projects): Portfolio of production applications, developer tools, CLI utilities, and open-source contributions.
-- [Contact](https://nofil-web-portfolio.vercel.app/contact-me): Communication endpoints and direct contact form.
-- [FAQs](https://nofil-web-portfolio.vercel.app/faqs): Answers to frequently asked questions regarding technical stack, code quality, availability, and response times.
-
-## Technical Expertise
-
-### DevOps & Cloud Infrastructure
-- **Containerization & Orchestration**: Kubernetes, Docker, Docker Compose, Helm
-- **GitOps & Deployment**: ArgoCD, Terraform, Ansible
-- **Cloud Platforms**: Amazon Web Services (AWS)
-
-### CI/CD Pipelines
-- GitHub Actions, GitLab CI/CD, Jenkins
-
-### Observability & Telemetry
-- Prometheus, Grafana, Grafana Loki
-
-### Backend & API Engineering
-- **Runtimes & Frameworks**: Node.js, Express.js, NestJS
-- **APIs & Protocols**: RESTful APIs, WebSockets
-- **Architectural Paradigms**: Multi-Tenant SaaS, Microservices, Scalable Monoliths
-
-### Databases & Storage
-- PostgreSQL (multi-tenant schemas, connection pooling), MySQL, MongoDB
-
-### Frontend Engineering
-- **Languages & Frameworks**: TypeScript, React, Next.js (App Router, SSR)
-- **Styling & Motion**: Tailwind CSS, Framer Motion, Material UI (MUI)
-- **State & Editors**: Redux Toolkit, Slate.js
-
-### Third-Party & Payment Integrations
-- Stripe, PayPal Multi-Party API, Firebase (Auth, Firestore, Storage), Vercel
-
-## Featured Projects
-
-- [Crontab Text Explainer](https://nofil-zahid.github.io/crontab-text-explainer/): Open-source developer tool for visually interpreting, building, and explaining cron expressions. Built with React, TypeScript, and Vite. Source: https://github.com/nofil-zahid/crontab-text-explainer
-- [SayBack](https://www.npmjs.com/package/sayback): Developer CLI tool that animates terminal output with a retro typewriter character-cycling effect. Distributed via npm. Source: https://github.com/nofil-zahid/sayback
-- [DineDynaty](https://github.com/nofil-zahid/restaurant-management-system): Comprehensive mobile Restaurant Management System streamlining tables, reservations, and inventory. Built with Flutter and Firebase.
-- [ClassHub](https://nofil-web-portfolio.vercel.app/projects/classhub): Role-based learning management system featuring real-time messaging, automated grading checks with Gemini API & Copyleaks API, and file tracking. Built with React, Express, MySQL, and Firebase.
-- [Docly](https://nofil-web-portfolio.vercel.app/projects/docly): Extensible web document editor supporting rich-text blocks, keyboard shortcuts, and dynamic formatting. Built with Next.js, TypeScript, Slate.js, and Tailwind CSS.
-
-## Work Experience
-
-### Associate Software Engineer — STACK360 (Jul 2025 – Present)
-- Designed and built a multi-tenant SaaS architecture using Next.js and Express.js.
-- Implemented PostgreSQL multi-schema architecture for complete tenant data isolation and scalable request routing.
-- Integrated multi-party PayPal payment flows for subscription-based SaaS billing.
-- Spearheaded UI component architectures and Firebase service integrations.
-
-### MERN Stack Developer — Directorate of IT, GCUL (Nov 2023 – Jul 2025)
-- Engineered full-stack modules and secured internal RESTful APIs for university management systems (HRM, SFC, ORUP, SRMS, and LMS).
-- Built interactive HR reporting dashboards for academic and administrative staff.
-- Implemented student clearance pipelines with automated fee and challan verification.
-- Developed and deployed the departmental Dak Management System for tracking official physical file transitions.
-
-## Key FAQs
-
-- **What is your primary tech stack?**
-  TypeScript across the entire stack. Next.js/React on the frontend; Node.js with Express or NestJS paired with PostgreSQL on the backend; Docker, Kubernetes, and GitHub Actions for infrastructure.
-- **Do you handle end-to-end development?**
-  Yes, from system architecture and database design to frontend UX and automated production deployments.
-- **How do you ensure code quality?**
-  Strict TypeScript typing, automated linting and formatting (ESLint, Prettier), Git commit hooks (Husky, lint-staged), and CI/CD validation before deployment.
-- **Are you available for contract or full-time roles?**
-  Yes, available for select contract projects and full-time opportunities.
-
-## Communication Endpoints
-
 - **Email**: nofilzahid.se@gmail.com
 - **WhatsApp**: https://wa.me/923092051143 (+923092051143)
 - **GitHub**: https://github.com/nofil-zahid
 - **LinkedIn**: https://www.linkedin.com/in/nofil-zahid/
-- **npm Profile**: https://www.npmjs.com/~nofil.dev
+- **npm**: https://www.npmjs.com/~nofil.dev
 - **X (Twitter)**: https://x.com/nofil_zahid
 
-## Optional / Additional Resources
+## Professional Overview
 
-- [Resume / CV](https://nofil-web-portfolio.vercel.app/cv3-nofil.pdf): Downloadable PDF curriculum vitae.
-- [Sitemap](https://nofil-web-portfolio.vercel.app/sitemap.xml): Full XML sitemap for search crawlers.
+Nofil Zahid builds end-to-end software products, from backend architecture and database design to user interfaces, integrations, and production deployments. His work focuses on turning business requirements into maintainable, scalable applications.
+
+Working across application architecture, business process automation, and delivery infrastructure, Nofil pays particular attention to data integrity, system reliability, and efficient resource utilization. His engineering approach combines backend-focused problem solving with product thinking, ensuring that systems are not only technically sound but also practical for the people and businesses using them.
+
+## Engineering Philosophy & Core Principles
+
+1. **Business-First Engineering**: Understand the business workflow first, then choose the simplest architecture that solves the actual problem. Choose the simplest architecture that reliably solves the problem, leaving room to scale.
+2. **Reliability Over Shortcuts**: Prioritize data integrity, predictable behavior, and proper validation over quick implementations that create long-term debt. A good fix in staging is better than a quick patch in production.
+3. **Automate Repetitive Work**: Replace error-prone manual processes with scripts, pipelines, and repeatable workflows wherever automation adds value. Automation saves time and keeps environments predictable.
+4. **Visibility Before Guesswork**: Use meaningful logs, metrics, and monitoring to understand system behavior and diagnose problems with evidence. Clean code and clear logs make debugging effortless.
+
+## Technical Skills & Toolchain
+
+### Full-Stack & Backend Engineering
+- **Languages & Runtimes**: TypeScript, JavaScript, Node.js, Python, SQL, Bash
+- **Frontend Frameworks & Libraries**: React, Next.js (App Router, SSR, SSG), React Native, Redux Toolkit, Slate.js, Framer Motion
+- **Styling**: Tailwind CSS, Material UI (MUI), Responsive UI/UX Design
+- **Backend Frameworks**: Express.js, NestJS
+- **Databases & ORMs**: PostgreSQL (Multi-Schema Tenant Isolation, Connection Pooling), MySQL, MongoDB, Firebase (Firestore, Auth, Storage), Prisma, Sequelize
+- **APIs & Protocols**: RESTful APIs, WebSockets, Webhooks, PayPal Multi-Party API, Stripe
+
+### DevOps, Cloud & Delivery Automation
+- **Containerization & Orchestration**: Docker, Docker Compose, Kubernetes, Helm
+- **CI/CD & GitOps**: GitHub Actions, GitLab CI/CD, Jenkins, ArgoCD
+- **Infrastructure as Code (IaC) & Config Management**: Terraform, Ansible
+- **Cloud Platforms & Hosting**: Amazon Web Services (AWS), Vercel, Linux Server Administration
+- **Observability & Monitoring**: Prometheus, Grafana, Grafana Loki
+
+## Core Capabilities
+
+### 1. Scalable SaaS & System Architecture
+- **Problem Statement**: Turning complex product requirements into scalable platforms. From handling multiple clients within a single application to keeping their data secure and operations independent, building architectures that grow without becoming difficult to manage.
+- **Key Outcomes**:
+  - Multi-tenant SaaS architectures with isolated client data and business operations.
+  - Tenant-aware routing, middleware, and database management.
+  - Integrated subscription billing and multi-party payment workflows.
+  - Architectural decisions that balance scalability, security, and infrastructure costs.
+- **Tech Stack**: Next.js, Express.js, PostgreSQL, PayPal API.
+
+### 2. Backend Systems & Business Automation
+- **Problem Statement**: Turning business processes into reliable software systems. Managing institutional operations, automating administrative workflows, or connecting multiple services to reduce manual effort and improve everyday operations.
+- **Key Outcomes**:
+  - Business-driven REST APIs and maintainable backend architectures.
+  - Automated institutional workflows, including HRM, clearance processing, and reporting.
+  - Third-party integrations, webhooks, and cross-platform communication.
+  - Reliable data processing, validation, and transactional database operations.
+- **Tech Stack**: Node.js, Express.js, NestJS, PostgreSQL, MongoDB.
+
+### 3. DevOps & Delivery Automation
+- **Problem Statement**: Streamlining software delivery through containerization, CI/CD pipelines, and automated release workflows to make development environments consistent, deployments repeatable, and releases reliable.
+- **Key Outcomes**:
+  - Reproducible development and deployment environments using containerization.
+  - Automated CI/CD pipelines for code quality, validation, and application builds.
+  - Branch-based deployment strategies and automated release workflows.
+  - Version-controlled infrastructure configuration and deployment automation.
+- **Tech Stack**: Docker, GitHub Actions, Docker Compose, Linux, Vercel.
+
+### 4. End-to-End Product Engineering
+- **Problem Statement**: Working across the entire application lifecycle, turning ideas and business requirements into functional, user-friendly software that ensures the frontend, backend, and data layers work together as one maintainable product.
+- **Key Outcomes**:
+  - Full-stack application development from requirements to production.
+  - Responsive, accessible interfaces built around real user needs.
+  - Efficient application state management and asynchronous data handling.
+  - Reusable components and maintainable architectures that support product evolution.
+- **Tech Stack**: TypeScript, React, Next.js, Tailwind CSS, Redux Toolkit.
+
+### 5. Cloud Infrastructure & Reliability
+- **Problem Statement**: Approaching deployment and infrastructure with reliability, resource efficiency, and maintainability in mind, understanding how applications run in production and building infrastructure that evolves with demand.
+- **Key Outcomes**:
+  - Containerized application environments and service orchestration.
+  - Infrastructure as Code for repeatable and consistent environments.
+  - Deployment health checks, monitoring, and centralized logging.
+  - Resource planning and infrastructure optimization for varying workloads.
+- **Tech Stack**: Kubernetes, Helm, ArgoCD, Terraform, Prometheus, Grafana.
+
+## Technical Toolkit
+
+### Backend & Databases
+- **Node.js**: Production
+- **Express.js**: Production
+- **NestJS**: Project
+- **PostgreSQL**: Production
+- **MongoDB**: Production
+- **MySQL**: Production
+
+### Frontend Architecture
+- **TypeScript**: Production
+- **React**: Production
+- **Next.js**: Production
+- **Tailwind CSS**: Production
+- **Redux Toolkit**: Production
+- **Framer Motion**: Production
+
+### Cloud, DevOps & Automation
+- **Linux**: Production
+- **Docker**: Production
+- **Docker Compose**: Production
+- **GitHub Actions**: Production
+- **Kubernetes**: Project
+- **Helm**: Project
+- **ArgoCD**: Project
+- **Terraform**: Project
+
+## Professional Work Experience
+
+### Associate Software Engineer — STACK360
+*July 2025 – Present | Lahore, Pakistan (https://stack360.co/)*
+- Designed and implemented a multi-tenant SaaS architecture using Next.js and Express.js.
+- Implemented PostgreSQL multi-schema strategy for tenant data isolation and scalable routing.
+- Integrated multi-party PayPal payment flow for subscription-based SaaS billing.
+- Engineered structured document editing workflows using Slate.js, alongside client UI features and Firebase integrations.
+
+### MERN Stack Developer — Directorate of Information Technology, GCUL
+*November 2023 – July 2025 | Lahore, Pakistan (https://gcu.edu.pk/directorate-IT.php)*
+- Developed full-stack features and secure RESTful APIs across university management systems including HRM, SFC, ORUP, SRMS, and LMS.
+- Built interactive HR reporting dashboards for academic and administrative staff.
+- Implemented final-year student Clearance Module with automated challan and fee verification in the SFC system.
+- Improved alumni membership management with data export and editing tools in ORUP.
+- Enhanced data handling and operational workflows in SRMS.
+- Built and deployed the departmental Dak Management System for tracking official physical file transitions.
+
+## Featured Projects & Portfolio
+
+### 1. Crontab Text Explainer
+- **Category**: Web Application / Developer Tool
+- **Description**: An open-source tool that helps developers and system administrators understand and generate cron expressions. It provides interactive explanations, visualizations, and random cron expression generation.
+- **Tech Stack**: React, TypeScript, Vite
+- **Repository**: https://github.com/nofil-zahid/crontab-text-explainer
+- **Live Demo**: https://nofil-zahid.github.io/crontab-text-explainer/
+
+### 2. SayBack
+- **Category**: CLI Utility / Developer Tool
+- **Description**: A developer CLI tool that animates terminal text output with a retro character-cycling typewriter effect. Distributed publicly via npm.
+- **Tech Stack**: Node.js, TypeScript
+- **Repository**: https://github.com/nofil-zahid/sayback
+- **Package**: https://www.npmjs.com/package/sayback
+
+### 3. ClassHub
+- **Category**: Web Application / Academic LMS
+- **Description**: A role-based learning management platform supporting assignments, quizzes, project tracking, and feedback. Includes real-time chat, notifications, email alerts, file sharing, and automated grading integrity verification with Gemini API and CopyLeaks API.
+- **Tech Stack**: React, Express.js, MySQL, Firebase, Gemini API, CopyLeaks API
+- **Live URL**: https://nofil-web-portfolio.vercel.app/projects
+
+### 4. Docly
+- **Category**: Web Application / Rich Text Editor
+- **Description**: A modern web-based document editor built using Slate.js supporting rich text formatting, custom blocks, and dynamic content editing. Designed for flexible document structuring, keyboard shortcuts, and real-time content manipulation.
+- **Tech Stack**: Next.js, TypeScript, Slate.js, Tailwind CSS
+- **Live URL**: https://nofil-web-portfolio.vercel.app/projects
+
+### 5. DineDynaty
+- **Category**: Mobile Application / Enterprise System
+- **Description**: A comprehensive mobile Restaurant Management System built using Flutter and Firebase, designed to streamline operations including managing tables, reservations, inventory, and customer interactions.
+- **Tech Stack**: Flutter, Firebase (Auth, Firestore, Storage)
+- **Repository**: https://github.com/nofil-zahid/restaurant-management-system
+
+## Frequently Asked Questions (FAQs)
+
+### What is your primary tech stack?
+My core stack is built on TypeScript across the full lifecycle — React and Next.js on the frontend, paired with Node.js, Express, or NestJS and PostgreSQL on the backend. However, I treat tools as means to an end: I select technologies based on business constraints, data complexity, and operational costs rather than personal preference.
+
+### Do you handle end-to-end project development?
+Yes. I take complete ownership of the engineering lifecycle: understanding existing business workflows, designing relational and multi-tenant data models, implementing secure APIs, crafting responsive UIs, and establishing automated CI/CD and containerized deployments.
+
+### How do you approach code quality and testing?
+I enforce automated quality gates early. This includes strict TypeScript type safety, ESLint and Prettier for consistent formatting, pre-commit checks with Husky, and automated CI pipelines (GitHub Actions) that catch regressions, lint errors, and build issues before code reaches staging or production.
+
+### How do you write scalable and maintainable code?
+By avoiding premature complexity and designing with clear separation of concerns. I keep architectures as simple as possible to solve the immediate business problem while enforcing modular boundaries (such as PostgreSQL multi-schema tenant isolation), decoupled service layers, and observable systems that are easy to debug and maintain.
+
+### How do you choose the right architecture for a project?
+I evaluate architectures against actual business requirements, team capacity, and infrastructure budget rather than following industry trends. I prefer straightforward, maintainable architectures that reliably solve the operational challenge over unnecessary microservices or over-engineered infrastructure.
+
+### Are you available for freelance or full-time roles?
+Yes. I am currently open to high-impact software engineering roles, DevOps contracts, and consulting engagements.
+
+### How long does it take for you to respond?
+I usually respond within 1 to 2 business days. For urgent inquiries, reaching out via LinkedIn or WhatsApp is fastest.
+
+## Site Navigation & Canonical URLs
+
+- **Root / Terminal**: https://nofil-web-portfolio.vercel.app/
+- **Who Am I**: https://nofil-web-portfolio.vercel.app/who-am-i
+- **Expertise**: https://nofil-web-portfolio.vercel.app/expertise
+- **Experience**: https://nofil-web-portfolio.vercel.app/experience
+- **Projects**: https://nofil-web-portfolio.vercel.app/projects
+- **Contact**: https://nofil-web-portfolio.vercel.app/contact-me
+- **FAQs**: https://nofil-web-portfolio.vercel.app/faqs
+- **Curriculum Vitae (PDF)**: https://nofil-web-portfolio.vercel.app/cv3-nofil.pdf
+- **XML Sitemap**: https://nofil-web-portfolio.vercel.app/sitemap.xml

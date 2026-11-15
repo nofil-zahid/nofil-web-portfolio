@@ -49,6 +49,7 @@ export interface TooltipProps {
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   customClass?: string;
   isLoading?: boolean;
+  loadingText?: string;
 }
 
 export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {

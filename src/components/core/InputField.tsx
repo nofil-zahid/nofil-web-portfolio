@@ -18,7 +18,7 @@ const InputField: React.FC<InputFieldProps> = ({
   ...props
 }) => {
   const generatedId = useId();
-  const inputId = customId || generatedId;
+  const inputId = customId || `field-${generatedId}`;
   const errorId = `${inputId}-error`;
   const currentLength = typeof value === 'string' ? value.length : 0;
 
@@ -31,6 +31,12 @@ const InputField: React.FC<InputFieldProps> = ({
     multiline && 'resize-none min-h-[90px] sm:min-h-[110px] terminal-scrollbar',
   );
 
+  const accessibilityProps = {
+    id: inputId,
+    'aria-invalid': Boolean(error),
+    'aria-describedby': error ? errorId : undefined,
+  };
+
   return (
     <div className={cn('group relative mb-8 w-full', className)}>
       <div className="mb-1.5 flex items-center justify-between">
@@ -40,6 +46,7 @@ const InputField: React.FC<InputFieldProps> = ({
               {String(index).padStart(2, '0')}.
             </span>
           )}
+
           <label
             htmlFor={inputId}
             className="group-focus-within:text-accent text-[11px] font-bold tracking-[0.2em] text-slate-300 uppercase sm:text-xs"
@@ -50,6 +57,7 @@ const InputField: React.FC<InputFieldProps> = ({
 
         {showCounter && maxLength && (
           <span
+            aria-live="polite"
             className={cn(
               'font-mono text-[10px] transition-colors duration-300',
               currentLength >= maxLength ? 'font-bold text-red-400' : 'group-focus-within:text-accent text-slate-400',
@@ -63,29 +71,21 @@ const InputField: React.FC<InputFieldProps> = ({
       <div className="relative">
         {multiline ? (
           <textarea
-            id={inputId}
-            autoComplete="off"
-            spellCheck={false}
-            maxLength={maxLength}
+            {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+            {...accessibilityProps}
             value={value}
             onChange={onChange}
-            aria-invalid={Boolean(error)}
-            aria-describedby={error ? errorId : undefined}
+            maxLength={maxLength}
             className={inputClasses}
-            {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
         ) : (
           <input
-            id={inputId}
-            autoComplete="off"
-            spellCheck={false}
-            maxLength={maxLength}
+            {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+            {...accessibilityProps}
             value={value}
             onChange={onChange}
-            aria-invalid={Boolean(error)}
-            aria-describedby={error ? errorId : undefined}
+            maxLength={maxLength}
             className={inputClasses}
-            {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
           />
         )}
       </div>
@@ -103,7 +103,7 @@ const InputField: React.FC<InputFieldProps> = ({
 
       <div className="mt-1 overflow-hidden">
         <AnimatePresence mode="wait">
-          {error ? (
+          {error && (
             <motion.div
               key={error}
               id={errorId}
@@ -116,7 +116,7 @@ const InputField: React.FC<InputFieldProps> = ({
                 {`> ERROR: ${error}`}
               </p>
             </motion.div>
-          ) : null}
+          )}
         </AnimatePresence>
       </div>
     </div>

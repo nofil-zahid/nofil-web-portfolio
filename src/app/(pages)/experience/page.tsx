@@ -1,4 +1,4 @@
-import Experience from '@/components/pages/ExperiencePage';
+import { ExperiencePage as Experience } from '@/components/pages';
 import { Metadata } from 'next';
 import { pageMetadata } from '@/constants/seo-metadata';
 import { routes } from '@/constants/routes';

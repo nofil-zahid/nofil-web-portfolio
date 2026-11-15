@@ -1,4 +1,4 @@
-import ProjectPage from '@/components/pages/ProjectsPage';
+import { ProjectsPage as ProjectPage } from '@/components/pages';
 import { Metadata } from 'next';
 import { pageMetadata } from '@/constants/seo-metadata';
 import { routes } from '@/constants/routes';

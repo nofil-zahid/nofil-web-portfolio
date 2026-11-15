@@ -1,15 +1,14 @@
-import React from 'react';
 import { ExpertiseCard } from './ExpertiseCard';
 import { CAPABILITIES } from '@/constants/capabilities';
 import SectionHeader from '@/components/shared/SectionHeader';
 import TechnicalInventory from './TechnicalInventory';
 
-export const ExpertisePage: React.FC = () => {
+export default function ExpertisePage() {
   return (
     <section>
       <SectionHeader
         title="Engineering Expertise"
-        tag="SYSTEMS_ENGINEERED_FOR_REAL_WORLD"
+        tag="SYSTEMS_IN_ACTION"
         description="Architecting full-stack web applications, multi-tenant backend systems, and automated deployment pipelines focused on reliability and business requirements."
       />
 
@@ -22,6 +21,4 @@ export const ExpertisePage: React.FC = () => {
       <TechnicalInventory />
     </section>
   );
-};
-
-export const SkillsPage = ExpertisePage;
+}

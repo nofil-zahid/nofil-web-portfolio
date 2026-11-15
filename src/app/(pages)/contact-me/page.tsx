@@ -1,4 +1,4 @@
-import ContactPage from '@/components/pages/ContactPage';
+import { ContactMePage as ContactPage } from '@/components/pages';
 import { Metadata } from 'next';
 import { pageMetadata } from '@/constants/seo-metadata';
 import { routes } from '@/constants/routes';
