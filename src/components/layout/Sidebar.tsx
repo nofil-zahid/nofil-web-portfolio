@@ -140,6 +140,7 @@ export default function Sidebar() {
         id="mobile-navigation-drawer"
         aria-label="Mobile Navigation Drawer"
         aria-hidden={!isOpen}
+        {...(!isOpen ? { inert: true } : {})}
         className={cn(
           'fixed z-45 flex h-screen w-full flex-col justify-between',
           'bg-background-primary text-text-primary border-border-glow border-r',
