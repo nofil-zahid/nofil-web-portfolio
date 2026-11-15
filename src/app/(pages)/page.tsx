@@ -21,12 +21,12 @@ export default async function HomePage() {
       <Home />
       <Suspense
         fallback={
-          <div className="text-accent/50 animate-pulse py-12 text-center font-mono text-xs tracking-widest uppercase">
+          <div className="text-accent/50 block animate-pulse py-12 text-center font-mono text-xs tracking-widest uppercase md:hidden">
             Loading modules...
           </div>
         }
       >
-        <SectionLayout>
+        <SectionLayout className="block md:hidden">
           <WhoAmIPage />
           <ExpertisePage />
           <ProjectsPage />
