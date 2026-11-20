@@ -64,17 +64,25 @@ This is a personal portfolio website designed to be fast, responsive, and aesthe
 ```text
 nofil-web-portfolio/
 ├── .github/workflows/      # CI pipelines
-├── public/                 # Static public assets (images, fonts, etc.)
+├── public/                 # Static public assets, icons, llms.txt, and llm.txt
 ├── src/
 │   ├── app/                # Next.js App Router endpoints & layouts
-│   ├── components/         # Organized React UI components
-│   ├── config/             # Configuration files
-│   ├── schema/             # Validation schemas (e.g., Zod env schemas)
-│   ├── constants/          # Static, app-wide values
-│   ├── helpers/            # Reusable helper functions
-│   ├── hooks/              # Custom React Hooks
-│   ├── lib/                # Wrappers around 3rd party libraries
-│   ├── styles/             # Global stylesheets
+│   │   ├── (pages)/        # Portfolio page routes & layouts
+│   │   │   ├── (home)/     # Root landing page (/) & dedicated loading skeleton
+│   │   │   ├── contact-me/ # Contact page & message form
+│   │   │   ├── experience/ # Career history & timeline
+│   │   │   ├── expertise/  # Engineering capabilities & toolkit
+│   │   │   ├── faqs/       # Frequently asked questions
+│   │   │   ├── projects/   # Project list & dynamic [id] case studies
+│   │   │   └── who-am-i/   # Background & engineering philosophy
+│   │   └── api/            # API route handlers (/health, /ip)
+│   ├── components/         # Organized React UI components (layout, pages, shared)
+│   ├── config/             # Environment and runtime configurations
+│   ├── constants/          # Static app constants (data, routes, metadata, profile)
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Wrappers around 3rd-party libraries
+│   ├── schema/             # Validation schemas (Zod form & env schemas)
+│   ├── styles/             # Global stylesheets and Tailwind utilities
 │   ├── types/              # Abstract TypeScript types/interfaces
 │   └── utils/              # Self-contained pure utility functions
 ├── .nvmrc                  # Node.js version pin
