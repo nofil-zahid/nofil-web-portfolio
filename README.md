@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Nofil — Personal Portfolio</h1>
   <p>
-    A modern, performant personal portfolio website built to showcase projects, experience, and expertise.
+    A terminal-inspired developer portfolio built with Next.js, showcasing Nofil Zahid’s projects, expertise, experience, and professional journey.
   </p>
 
   <!-- Badges -->
@@ -28,7 +28,7 @@
 
 ## 🧐 About
 
-This is a personal portfolio website designed to be fast, responsive, and aesthetically pleasing. Built with the latest front-end technologies, it serves as a digital resume and a demonstration of modern web development practices, including App Router architecture, strict type checking, and fluid animations.
+This is a modern, responsive personal portfolio for Nofil Zahid, a full-stack developer. Built with Next.js App Router, React, TypeScript, and Tailwind CSS, it presents professional experience, technical expertise, projects, and ways to get in touch through a distinctive terminal-inspired interface. The portfolio combines a persistent navigation shell, responsive layouts, animated transitions, and an interactive terminal to create an experience that feels both polished and technical.
 
 ---
 
